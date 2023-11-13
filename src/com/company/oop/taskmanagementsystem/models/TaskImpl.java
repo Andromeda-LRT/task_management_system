@@ -33,13 +33,10 @@ public abstract class TaskImpl implements Task {
 
     // TODO add list of Logger class here
 
-    private Status status;
-
-    public TaskImpl(int id, String title, String description, Status status) {
+    public TaskImpl(int id, String title, String description) {
         setId(id);
         setTitle(title);
         setDescription(description);
-        setStatus(status);
     }
 
     @Override
@@ -55,11 +52,6 @@ public abstract class TaskImpl implements Task {
     @Override
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public Status getStatus() {
-        return status;
     }
 
     private void setId(int id) {
@@ -80,9 +72,5 @@ public abstract class TaskImpl implements Task {
                 DESCRIPTION_MAX_LENGTH,
                 DESCRIPTION_LENGTH_ERR);
         this.description = description;
-    }
-
-    private void setStatus(Status status) {
-        this.status = status;
     }
 }
