@@ -21,8 +21,7 @@ public abstract class TaskImpl implements Task {
             "Description must be between %s and %s characters long!",
             DESCRIPTION_MIN_LENGTH,
             DESCRIPTION_MAX_LENGTH);
-
-
+    
     private int id;
 
     private String title;
@@ -37,6 +36,7 @@ public abstract class TaskImpl implements Task {
         setId(id);
         setTitle(title);
         setDescription(description);
+        setStatus();
     }
 
     @Override
@@ -73,4 +73,6 @@ public abstract class TaskImpl implements Task {
                 DESCRIPTION_LENGTH_ERR);
         this.description = description;
     }
+
+    protected abstract void setStatus();
 }
