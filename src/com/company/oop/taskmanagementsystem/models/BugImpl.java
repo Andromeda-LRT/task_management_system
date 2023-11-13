@@ -2,9 +2,10 @@ package com.company.oop.taskmanagementsystem.models;
 
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
+import com.company.oop.taskmanagementsystem.models.enums.Severity;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
 
-import javax.print.attribute.standard.Severity;
+
 import java.util.ArrayList;
 import java.util.List;
 
