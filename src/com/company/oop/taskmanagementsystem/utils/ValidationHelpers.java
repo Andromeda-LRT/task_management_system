@@ -6,4 +6,10 @@ public class ValidationHelpers {
             throw new IllegalArgumentException(message);
         }
     }
+
+    public static void validateEmptyString(String value, String message) {
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }
