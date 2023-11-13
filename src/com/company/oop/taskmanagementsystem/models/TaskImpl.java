@@ -4,6 +4,7 @@ import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -21,6 +22,7 @@ public abstract class TaskImpl implements Task {
             "Description must be between %s and %s characters long!",
             DESCRIPTION_MIN_LENGTH,
             DESCRIPTION_MAX_LENGTH);
+    private static final String TASK_CREATED = "Task created:";
 
     private int id;
 
@@ -28,15 +30,22 @@ public abstract class TaskImpl implements Task {
 
     private String description;
     private Status status;
+
     // TODO add list of comments here
 
-    // TODO add list of Logger class here
+    private final List<LoggerImpl> historyOfChanges = new ArrayList<>();
 
     public TaskImpl(int id, String title, String description, Status status) {
         setId(id);
         setTitle(title);
         setDescription(description);
         setStatus(status);
+
+        logChange(String.format("%s %s", TASK_CREATED, print()));
+    }
+
+    protected void logChange(String change) {
+        historyOfChanges.add(new LoggerImpl(change));
     }
 
     @Override
@@ -56,6 +65,11 @@ public abstract class TaskImpl implements Task {
 
     public Status getStatus() {
         return status;
+    }
+
+    @Override
+    public List<LoggerImpl> getHistoryOfChanges() {
+        return new ArrayList<>(historyOfChanges);
     }
 
     private void setId(int id) {
@@ -78,7 +92,12 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    private void setStatus(Status status) {
+    protected void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public String print() {
+        return String.format("'%s', [%s | %s]", title, status, description);
     }
 }
