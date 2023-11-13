@@ -22,18 +22,15 @@ public abstract class TaskImpl implements Task {
             DESCRIPTION_MIN_LENGTH,
             DESCRIPTION_MAX_LENGTH);
 
-
     private int id;
 
     private String title;
 
     private String description;
-
+    private Status status;
     // TODO add list of comments here
 
     // TODO add list of Logger class here
-
-    private Status status;
 
     public TaskImpl(int id, String title, String description, Status status) {
         setId(id);
@@ -57,7 +54,6 @@ public abstract class TaskImpl implements Task {
         return description;
     }
 
-    @Override
     public Status getStatus() {
         return status;
     }

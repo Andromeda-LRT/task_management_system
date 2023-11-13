@@ -12,4 +12,10 @@ public class ValidationHelpers {
             throw new IllegalArgumentException(message);
         }
     }
+
+    public static void validateIntIsNotNegative(int value, String message) {
+        if (value < 0) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }
