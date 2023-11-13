@@ -1,13 +1,18 @@
 package com.company.oop.taskmanagementsystem.models.contracts;
 
+import com.company.oop.taskmanagementsystem.models.LoggerImpl;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
 
-public interface Task extends Identifiable{
+import java.util.List;
+
+public interface Task extends Identifiable, Printable{
     String getTitle();
 
     String getDescription();
 
     Status getStatus();
 
-    // TODO create list of Logger class
+    List<LoggerImpl> getHistoryOfChanges();
+
+    // TODO add method for list of comments
 }
