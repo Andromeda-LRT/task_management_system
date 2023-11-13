@@ -9,10 +9,9 @@ import static java.lang.String.format;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
     private int rating;
-    private Status status;
 
     public FeedbackImpl(int id, String title, String description, int rating) {
-        super(id, title, description);
+        super(id, title, description, Status.NEW);
         setRating(rating);
     }
 
@@ -24,15 +23,5 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private void setRating(int rating) {
         ValidationHelpers.validateIntIsNotNegative(rating, Constants.NEGATIVE_RATING_ERROR);
         this.rating = rating;
-    }
-
-    @Override
-    protected void setStatus() {
-        this.status = Status.NEW;
-    }
-
-    @Override
-    public Status getStatus() {
-        return status;
     }
 }

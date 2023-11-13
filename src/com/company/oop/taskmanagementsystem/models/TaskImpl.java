@@ -21,22 +21,22 @@ public abstract class TaskImpl implements Task {
             "Description must be between %s and %s characters long!",
             DESCRIPTION_MIN_LENGTH,
             DESCRIPTION_MAX_LENGTH);
-    
+
     private int id;
 
     private String title;
 
     private String description;
-
+    private Status status;
     // TODO add list of comments here
 
     // TODO add list of Logger class here
 
-    public TaskImpl(int id, String title, String description) {
+    public TaskImpl(int id, String title, String description, Status status) {
         setId(id);
         setTitle(title);
         setDescription(description);
-        setStatus();
+        setStatus(status);
     }
 
     @Override
@@ -52,6 +52,10 @@ public abstract class TaskImpl implements Task {
     @Override
     public String getDescription() {
         return description;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     private void setId(int id) {
@@ -74,5 +78,7 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    protected abstract void setStatus();
+    private void setStatus(Status status) {
+        this.status = status;
+    }
 }
