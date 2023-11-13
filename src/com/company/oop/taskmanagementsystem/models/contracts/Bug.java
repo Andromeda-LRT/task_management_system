@@ -6,7 +6,7 @@ import com.company.oop.taskmanagementsystem.models.enums.Severity;
 
 import java.util.List;
 
-public interface Bug extends Printable {
+public interface Bug extends Identifiable, Printable {
    List<String> getStepsToReproduce();
 
    Priority getPriority();

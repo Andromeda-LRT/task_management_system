@@ -12,6 +12,9 @@ import java.util.List;
 public class BugImpl extends TaskImpl implements Bug {
 
     private static final Member NOBODY = new Member("NO ASSIGNEE");
+    private static final String NEW_ASSIGNEE = "Bug was assigned to: %s";
+    private static final String CHANGED_ASSIGNEE = "Bug assignee was changed to: %s";
+    private static final String NEW_COMMENT = "Invalid status of bug! Status should be Active or Done!";
 
 
     private final List<String> stepsToReproduce;
@@ -31,6 +34,22 @@ public class BugImpl extends TaskImpl implements Bug {
         this.assignee = NOBODY;
     }
 
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public void setSeverity(Severity severity) {
+        this.severity = severity;
+    }
+
+    public void setAssignee(Member assignee) {
+        if(assignee.getName().equalsIgnoreCase(NOBODY.getName())) {
+            logChange(String.format(NEW_ASSIGNEE, assignee.getName()));
+        }else{
+            logChange(String.format(CHANGED_ASSIGNEE, assignee.getName()));
+        }
+        this.assignee = assignee;
+    }
 
     @Override
     public List<String> getStepsToReproduce() {

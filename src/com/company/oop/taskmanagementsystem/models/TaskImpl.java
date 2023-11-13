@@ -92,7 +92,7 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    private void setStatus(Status status) {
+    protected void setStatus(Status status) {
         this.status = status;
     }
 
