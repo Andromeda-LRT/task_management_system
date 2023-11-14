@@ -26,7 +26,7 @@ public class Constants {
     public static final String NEW_ASSIGNEE = "%s was assigned to: %s";
     public static final String CHANGED_ASSIGNEE = "%s assignee was changed to: %s";
     public static final String STATUS_IS_ALREADY_SET_TO_DONE =
-            "Cannot advance status, because %s status is already set to Done";
+            "Cannot advance status, because %s status is already set to Done.";
     public static final String STATUS_CHANGED = "%s status changed from %s to %s.";
     public static final String CANNOT_ADVANCE_STATUS =
             "Cannot advance status, because %s status is already set to %s.";
