@@ -11,10 +11,8 @@ public interface Task extends Identifiable, Printable{
     String getDescription();
 
     Status getStatus();
+
     List<Comment> getComments();
-    // TODO create list of Logger class
 
     List<LoggerImpl> getHistoryOfChanges();
-
-    // TODO add method for list of comments
 }

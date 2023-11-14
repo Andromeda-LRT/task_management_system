@@ -1,6 +1,9 @@
 package com.company.oop.taskmanagmentsystem.models;
 
+import com.company.oop.taskmanagementsystem.models.BugImpl;
+import com.company.oop.taskmanagementsystem.models.CommentImpl;
 import com.company.oop.taskmanagementsystem.models.FeedbackImpl;
+import com.company.oop.taskmanagementsystem.models.contracts.Comment;
 import com.company.oop.taskmanagementsystem.models.contracts.Feedback;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
@@ -8,6 +11,8 @@ import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class FeedbackImplTests {
     FeedbackImpl feedback;
@@ -55,6 +60,16 @@ public class FeedbackImplTests {
                 () -> Assertions.assertEquals(TestsConstants.VALID_DESCRIPTION, feedback.getDescription()),
                 () -> Assertions.assertEquals(Status.NEW, feedback.getStatus()),
                 () -> Assertions.assertEquals(TestsConstants.VALID_RATING, feedback.getRating()));
+    }
+
+    @Test
+    public void addComment_Should_AddCommentToList() {
+
+        Comment comment = new CommentImpl("User1", "This is a test comment.");
+        feedback.addComment(comment);
+        List<Comment> comments = feedback.getComments();
+
+        Assertions.assertTrue(comments.contains(comment));
     }
 
     //TODO add tests regarding comments and history

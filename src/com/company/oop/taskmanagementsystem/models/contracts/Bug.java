@@ -5,11 +5,13 @@ import com.company.oop.taskmanagementsystem.models.enums.Severity;
 
 import java.util.List;
 
-public interface Bug extends Identifiable, Printable, Prioritizeable {
+public interface Bug extends Identifiable, Printable, Prioritizeable, Task {
    List<String> getStepsToReproduce();
 
    Severity getSeverity();
+
    void increaseSeverity();
+
    void lowerSeverity();
 
    MemberImpl getAssignee();
