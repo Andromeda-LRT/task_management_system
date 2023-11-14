@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BugImpl extends TaskImpl implements Bug {
 
-    private static final Member NOBODY = new Member("NO ASSIGNEE");
+    private static final MemberImpl NOBODY = new MemberImpl("NO ASSIGNEE");
     private static final String NEW_ASSIGNEE = "Bug was assigned to: %s";
     private static final String CHANGED_ASSIGNEE = "Bug assignee was changed to: %s";
     private static final String NEW_COMMENT =
@@ -34,7 +34,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     private Severity severity;
 
-    private Member assignee;
+    private MemberImpl assignee;
 
     public BugImpl(int id, String title, String description,
                    List<String> stepsToReproduce, Priority priority, Severity severity) {
@@ -53,7 +53,7 @@ public class BugImpl extends TaskImpl implements Bug {
         this.severity = severity;
     }
 
-    public void setAssignee(Member assignee) {
+    public void setAssignee(MemberImpl assignee) {
         if (assignee.getName().equalsIgnoreCase(NOBODY.getName())) {
             logChange(String.format(NEW_ASSIGNEE, assignee.getName()));
         } else {
@@ -146,7 +146,7 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
-    public Member getAssignee() {
+    public MemberImpl getAssignee() {
         return assignee;
     }
 

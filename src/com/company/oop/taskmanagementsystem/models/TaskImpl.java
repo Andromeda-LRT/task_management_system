@@ -28,9 +28,7 @@ public abstract class TaskImpl implements Task {
     private static final String TASK_CREATED = "Task created:";
 
     private int id;
-
     private String title;
-
     private String description;
     private List<Comment> comments;
     private Status status;
