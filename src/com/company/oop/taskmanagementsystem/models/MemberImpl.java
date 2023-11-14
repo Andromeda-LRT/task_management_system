@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsystem.models;
 
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class MemberImpl implements com.company.oop.taskmanagementsystem.models.contracts.Member {
+public class MemberImpl implements Member {
     private static final int NAME_MIN_LENGTH = 5;
     private static final int NAME_MAX_LENGTH = 15;
     private static final String NAME_LENGTH_ERROR = format(
