@@ -7,7 +7,7 @@ public class Constants {
     public static final String FEEDBACK = "Feedback";
     public static final String NEGATIVE_RATING_ERROR = "The rating should be a positive number.";
     public static final String STATUS_IS_ALREADY_SET_TO_NEW =
-            "Cannot advance status, because %s status is already set to New";
+            "Cannot revert status, because %s status is already set to New";
 // ----------------------------------------------------------------------------------------------------
 //                               BUG CONSTANTS
 // ----------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ public class Constants {
 // ----------------------------------------------------------------------------------------------------
     public static final String STORY = "Story";
     public static final String STATUS_IS_ALREADY_SET_TO_NOT_DONE =
-            "Cannot advance status, because %s status is already set to Not Done";
+            "Cannot revert status, because %s status is already set to Not Done";
 // ----------------------------------------------------------------------------------------------------
 //                               COMMON CONSTANTS
 // ----------------------------------------------------------------------------------------------------
