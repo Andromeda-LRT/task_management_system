@@ -15,7 +15,7 @@ public enum Priority {
             case HIGH:
                 return "High";
             default:
-                return "Unknown";
+                throw new UnsupportedOperationException("There is no such priority.");
         }
     }
 }

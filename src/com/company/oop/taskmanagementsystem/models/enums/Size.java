@@ -15,7 +15,7 @@ public enum Size {
             case LARGE:
                 return "Large";
             default:
-                return "Unknown";
+                throw new UnsupportedOperationException("There is no such size.");
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsystem.models;
 
+import com.company.oop.taskmanagementsystem.models.contracts.Comment;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
@@ -12,6 +13,8 @@ import static java.lang.String.format;
 public abstract class TaskImpl implements Task {
     private static final int TITLE_MIN_LENGTH = 10;
     private static final int TITLE_MAX_LENGTH = 100;
+    private final static String COMMENT_HEADER = "--COMMENTS--";
+    public static final String NO_COMMENTS_MESSAGE = "--NO COMMENTS--";
     private static final String TITLE_LENGTH_ERR = format(
             "Title must be between %s and %s characters long!",
             TITLE_MIN_LENGTH,
@@ -29,9 +32,9 @@ public abstract class TaskImpl implements Task {
     private String title;
 
     private String description;
+    private List<Comment> comments;
     private Status status;
 
-    // TODO add list of comments here
 
     private final List<LoggerImpl> historyOfChanges = new ArrayList<>();
 
@@ -40,8 +43,8 @@ public abstract class TaskImpl implements Task {
         setTitle(title);
         setDescription(description);
         setStatus(status);
-
-        logChange(String.format("%s %s", TASK_CREATED, print()));
+        //todo to discuss implementation of print method first
+        //logChange(String.format("%s %s", TASK_CREATED, print()));
     }
 
     protected void logChange(String change) {
@@ -65,6 +68,10 @@ public abstract class TaskImpl implements Task {
 
     public Status getStatus() {
         return status;
+    }
+    @Override
+    public List<Comment> getComments(){
+        return new ArrayList<>(comments);
     }
 
     @Override
@@ -95,9 +102,27 @@ public abstract class TaskImpl implements Task {
     protected void setStatus(Status status) {
         this.status = status;
     }
+    protected abstract void advanceStatus();
+    protected abstract void revertStatus();
 
     @Override
-    public String print() {
-        return String.format("'%s', [%s | %s]", title, status, description);
+    public String print(){
+        StringBuilder output = new StringBuilder();
+
+        if (comments.isEmpty()){
+            output.append(NO_COMMENTS_MESSAGE).append(System.lineSeparator());
+        } else {
+            output.append(COMMENT_HEADER).append(System.lineSeparator());
+            for (Comment comment : comments) {
+                output.append(comment.print())
+                        .append(System.lineSeparator());
+            }
+        }
+        return output.toString();
     }
+        //todo to discuss implementation of print method
+//    @Override
+//    public String print() {
+//        return String.format("'%s', [%s | %s]", title, status, description);
+//    }
 }
