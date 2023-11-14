@@ -15,6 +15,8 @@ public class MemberImpl implements com.company.oop.taskmanagementsystem.models.c
             "The name must be between %s and %s characters long!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
+    private static final String TASK_ASSIGNED = "Task %s was assigned to %s";
+    private static final String TASK_UNASSIGNED = "Task %s was unassigned from %s";
     private String name;
     private List<TaskImpl> taskList;
     private List<LoggerImpl> activityHistory;
@@ -49,9 +51,16 @@ public class MemberImpl implements com.company.oop.taskmanagementsystem.models.c
 
     public void addTask(TaskImpl task){
         taskList.add(task);
+        logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
     }
 
     public void removeTask(TaskImpl task){
         taskList.remove(task);
+        logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
+
+    }
+
+    private void logChange(String change) {
+        activityHistory.add(new LoggerImpl(change));
     }
 }

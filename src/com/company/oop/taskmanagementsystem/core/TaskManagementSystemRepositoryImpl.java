@@ -11,25 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
-    private int nextInt;
-    private List<MemberImpl> members;
+    private int nextId;
+    private final List members = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
-        nextInt = 0;
-        this.members = new ArrayList<>();
+        nextId = 0;
     }
 
     public Feedback createFeedback(String title, String description, int rating ){
-        return new FeedbackImpl(++nextInt, title, description, rating);
+        return new FeedbackImpl(++nextId, title, description, rating);
     }
 
     public Bug createBug(String title, String description,
                          ArrayList<String> stepsToReproduce, Priority priority, Severity severity){
-        return new BugImpl(++nextInt, title, description, stepsToReproduce, priority, severity);
+        return new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity);
     }
 
     public Story createStory(String title, String description, Priority priority, Size size){
-        return new StoryImpl(++nextInt, title, description, priority, size);
+        return new StoryImpl(++nextId, title, description, priority, size);
     }
 
     public Member createMember(String name){
