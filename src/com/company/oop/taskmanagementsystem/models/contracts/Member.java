@@ -4,7 +4,7 @@ import com.company.oop.taskmanagementsystem.models.LoggerImpl;
 
 import java.util.List;
 
-public interface Person {
+public interface Member {
     String getName();
 
     List<Task> getListOfTasks();
