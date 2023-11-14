@@ -78,11 +78,14 @@ public class BugImpl extends TaskImpl implements Bug {
             case LOW:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_INCREASED_FROM_LOW_TO_MEDIUM, BUG_FOR_CONSTANTS));
+                break;
             case MEDIUM:
                 setPriority(Priority.HIGH);
                 logChange(String.format(Constants.PRIORITY_INCREASED_FROM_MEDIUM_TO_HIGH, BUG_FOR_CONSTANTS));
+                break;
             case HIGH:
                 logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_HIGH, BUG_FOR_CONSTANTS));
+                break;
         }
     }
 
@@ -92,11 +95,14 @@ public class BugImpl extends TaskImpl implements Bug {
             case HIGH:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_LOWERED_FROM_HIGH_TO_MEDIUM, BUG_FOR_CONSTANTS));
+                break;
             case MEDIUM:
                 setPriority(Priority.HIGH);
                 logChange(String.format(Constants.PRIORITY_LOWERED_FROM_MEDIUM_TO_LOW, BUG_FOR_CONSTANTS));
+                break;
             case LOW:
                 logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_LOW, BUG_FOR_CONSTANTS));
+                break;
         }
     }
 
@@ -111,11 +117,14 @@ public class BugImpl extends TaskImpl implements Bug {
             case MINOR:
                 setSeverity(Severity.MAJOR);
                 logChange(String.format(Constants.SEVERITY_INCREASED_FROM_MINOR_TO_MAJOR, BUG_FOR_CONSTANTS));
+                break;
             case MAJOR:
                 setSeverity(Severity.CRITICAL);
                 logChange(String.format(Constants.SEVERITY_INCREASED_FROM_MAJOR_TO_CRITICAL, BUG_FOR_CONSTANTS));
+                break;
             case CRITICAL:
                 logChange(String.format(Constants.SEVERITY_ALREADY_AT_CRITICAL, BUG_FOR_CONSTANTS));
+                break;
         }
     }
 
@@ -125,11 +134,14 @@ public class BugImpl extends TaskImpl implements Bug {
             case CRITICAL:
                 setSeverity(Severity.MAJOR);
                 logChange(String.format(Constants.SEVERITY_DECREASED_FROM_CRITICAL_TO_MAJOR, BUG_FOR_CONSTANTS));
+                break;
             case MAJOR:
                 setSeverity(Severity.MINOR);
                 logChange(String.format(Constants.SEVERITY_DECREASED_FROM_MAJOR_TO_MINOR, BUG_FOR_CONSTANTS));
+                break;
             case MINOR:
                 logChange(String.format(Constants.SEVERITY_ALREADY_AT_MINOR, BUG_FOR_CONSTANTS));
+                break;
         }
     }
 

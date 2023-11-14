@@ -27,8 +27,9 @@ public class StoryImpl extends TaskImpl implements Story {
 
     private Priority priority;
     private Size size;
-    public StoryImpl(int id, String title, String description, Status status, Priority priority, Size size){
-        super(id, title, description, status);
+    //todo to fix id logic and status
+    public StoryImpl(int id, String title, String description, Priority priority, Size size){
+        super(id, title, description, Status.NOT_DONE);
         setPriority(priority);
         setSize(size);
     }
@@ -95,11 +96,14 @@ public class StoryImpl extends TaskImpl implements Story {
             case LOW:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_INCREASED_FROM_LOW_TO_MEDIUM, STORY_FOR_CONSTANTS));
+                break;
             case MEDIUM:
                 setPriority(Priority.HIGH);
                 logChange(String.format(Constants.PRIORITY_INCREASED_FROM_MEDIUM_TO_HIGH, STORY_FOR_CONSTANTS));
+                break;
             case HIGH:
                 logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_HIGH, STORY_FOR_CONSTANTS));
+                break;
         }
     }
 
@@ -109,11 +113,14 @@ public class StoryImpl extends TaskImpl implements Story {
             case HIGH:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_LOWERED_FROM_HIGH_TO_MEDIUM, STORY_FOR_CONSTANTS));
+                break;
             case MEDIUM:
                 setPriority(Priority.HIGH);
                 logChange(String.format(Constants.PRIORITY_LOWERED_FROM_MEDIUM_TO_LOW, STORY_FOR_CONSTANTS));
+                break;
             case LOW:
                 logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_LOW, STORY_FOR_CONSTANTS));
+                break;
         }
     }
     @Override
@@ -122,11 +129,14 @@ public class StoryImpl extends TaskImpl implements Story {
             case SMALL:
                 setSize(Size.MEDIUM);
                 logChange(Constants.SIZE_INCREASED_FROM_SMALL_TO_MEDIUM);
+                break;
             case MEDIUM:
                 setSize(Size.LARGE);
                 logChange(Constants.SIZE_INCREASED_FROM_MEDIUM_TO_LARGE);
+                break;
             case LARGE:
                 logChange(Constants.SIZE_ALREADY_SET_TO_LARGE);
+                break;
         }
     }
 
@@ -136,11 +146,14 @@ public class StoryImpl extends TaskImpl implements Story {
             case LARGE:
                 setSize(Size.MEDIUM);
                 logChange(Constants.SIZE_DECREASED_FROM_LARGE_TO_MEDIUM);
+                break;
             case MEDIUM:
                 setSize(Size.SMALL);
                 logChange(Constants.SIZE_DECREASED_FROM_MEDIUM_TO_SMALL);
+                break;
             case SMALL:
                 logChange(Constants.SIZE_ALREADY_SET_TO_SMALL);
+                break;
         }
     }
     @Override
