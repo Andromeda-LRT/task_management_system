@@ -25,12 +25,13 @@ public abstract class TaskImpl implements Task {
             "Description must be between %s and %s characters long!",
             DESCRIPTION_MIN_LENGTH,
             DESCRIPTION_MAX_LENGTH);
-    private static final String TASK_CREATED = "Task created:";
 
     private int id;
     private String title;
     private String description;
-    private List<Comment> comments;
+
+    private final List<Comment> comments;
+
     private Status status;
 
 
@@ -41,8 +42,7 @@ public abstract class TaskImpl implements Task {
         setTitle(title);
         setDescription(description);
         setStatus(status);
-        //todo to discuss implementation of print method first
-        //logChange(String.format("%s %s", TASK_CREATED, print()));
+        comments = new ArrayList<>();
     }
 
     protected void logChange(String change) {
@@ -78,6 +78,7 @@ public abstract class TaskImpl implements Task {
     }
 
     private void setId(int id) {
+        // TODO Validation of id
         this.id = id;
     }
 
@@ -100,8 +101,14 @@ public abstract class TaskImpl implements Task {
     protected void setStatus(Status status) {
         this.status = status;
     }
+
     protected abstract void advanceStatus();
+
     protected abstract void revertStatus();
+
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
 
     @Override
     public String print(){
@@ -118,9 +125,8 @@ public abstract class TaskImpl implements Task {
         }
         return output.toString();
     }
-        //todo to discuss implementation of print method
-//    @Override
-//    public String print() {
-//        return String.format("'%s', [%s | %s]", title, status, description);
-//    }
+
+    protected String printMainInformation() {
+        return String.format("'%s', [%s | %s]", title, status, description);
+    }
 }
