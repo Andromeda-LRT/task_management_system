@@ -1,7 +1,10 @@
 package com.company.oop.taskmanagmentsystem.models;
 
+import com.company.oop.taskmanagementsystem.models.BugImpl;
+import com.company.oop.taskmanagementsystem.models.CommentImpl;
 import com.company.oop.taskmanagementsystem.models.StoryImpl;
 import com.company.oop.taskmanagementsystem.models.TaskImpl;
+import com.company.oop.taskmanagementsystem.models.contracts.Comment;
 import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
@@ -9,6 +12,8 @@ import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class StoryImplTests {
     // TODO The tests should be implemented
@@ -70,4 +75,12 @@ public class StoryImplTests {
        // Assertions.assertEquals(Status.IN_PROGRESS, story.);
     }
 
+    @Test
+    public void addComment_Should_AddCommentToList() {
+        Comment comment = new CommentImpl("User1", "This is a test comment.");
+        story.addComment(comment);
+        List<Comment> comments = story.getComments();
+
+        Assertions.assertTrue(comments.contains(comment));
+    }
 }

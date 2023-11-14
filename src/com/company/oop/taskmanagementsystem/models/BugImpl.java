@@ -13,22 +13,9 @@ import java.util.List;
 public class BugImpl extends TaskImpl implements Bug {
 
     private static final MemberImpl NOBODY = new MemberImpl("NO ASSIGNEE");
-    private static final String NEW_ASSIGNEE = "Bug was assigned to: %s";
-    private static final String CHANGED_ASSIGNEE = "Bug assignee was changed to: %s";
-    private static final String NEW_COMMENT =
-            "Invalid status of bug! Status should be Active or Done!";
-    public static final String STATUS_CHANGED_FROM_ACTIVE_TO_DONE =
-            "Bug Status changed from Active to Done";
-    public static final String STATUS_IS_ALREADY_SET_TO_DONE =
-            "Cannot advance status, because Bug status is already set to Done";
-    public static final String STATUS_CHANGED_FROM_DONE_TO_ACTIVE =
-            "Bug status changed from Done to Active";
-    public static final String STATUS_IS_ALREADY_SET_TO_ACTIVE =
-            "Cannot revert status, because Bug status is already set to Active";
-    public static final String BUG_FOR_CONSTANTS = "Bug";
 
 
-    private final List<String> stepsToReproduce;
+    private List<String> stepsToReproduce;
 
     private Priority priority;
 
@@ -39,10 +26,12 @@ public class BugImpl extends TaskImpl implements Bug {
     public BugImpl(int id, String title, String description,
                    List<String> stepsToReproduce, Priority priority, Severity severity) {
         super(id, title, description, Status.ACTIVE);
-        this.stepsToReproduce = stepsToReproduce;
+        setStepsToReproduce(stepsToReproduce);
         this.priority = priority;
         this.severity = severity;
         this.assignee = NOBODY;
+
+        logChange(String.format(Constants.TASK_CREATED, Constants.BUG, getTitle()));
     }
 
     public void setPriority(Priority priority) {
@@ -53,11 +42,18 @@ public class BugImpl extends TaskImpl implements Bug {
         this.severity = severity;
     }
 
+    private void setStepsToReproduce(List<String> stepsToReproduce) {
+        if(stepsToReproduce==null || stepsToReproduce.isEmpty()){
+            throw  new IllegalArgumentException(Constants.EMPTY_STEPS_TO_REPRODUCE);
+        }
+        this.stepsToReproduce = stepsToReproduce;
+    }
+
     public void setAssignee(MemberImpl assignee) {
         if (assignee.getName().equalsIgnoreCase(NOBODY.getName())) {
-            logChange(String.format(NEW_ASSIGNEE, assignee.getName()));
+            logChange(String.format(Constants.NEW_ASSIGNEE,Constants.BUG, assignee.getName()));
         } else {
-            logChange(String.format(CHANGED_ASSIGNEE, assignee.getName()));
+            logChange(String.format(Constants.CHANGED_ASSIGNEE, Constants.BUG, assignee.getName()));
         }
         this.assignee = assignee;
     }
@@ -77,14 +73,14 @@ public class BugImpl extends TaskImpl implements Bug {
         switch (getPriority()){
             case LOW:
                 setPriority(Priority.MEDIUM);
-                logChange(String.format(Constants.PRIORITY_INCREASED_FROM_LOW_TO_MEDIUM, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.PRIORITY_INCREASED, Constants.BUG, Priority.LOW, Priority.MEDIUM));
                 break;
             case MEDIUM:
                 setPriority(Priority.HIGH);
-                logChange(String.format(Constants.PRIORITY_INCREASED_FROM_MEDIUM_TO_HIGH, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.PRIORITY_INCREASED, Constants.BUG, Priority.MEDIUM, Priority.HIGH));
                 break;
             case HIGH:
-                logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_HIGH, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_HIGH, Constants.BUG));
                 break;
         }
     }
@@ -94,14 +90,14 @@ public class BugImpl extends TaskImpl implements Bug {
         switch (getPriority()){
             case HIGH:
                 setPriority(Priority.MEDIUM);
-                logChange(String.format(Constants.PRIORITY_LOWERED_FROM_HIGH_TO_MEDIUM, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.PRIORITY_LOWERED, Constants.BUG, Priority.HIGH, Priority.MEDIUM));
                 break;
             case MEDIUM:
-                setPriority(Priority.HIGH);
-                logChange(String.format(Constants.PRIORITY_LOWERED_FROM_MEDIUM_TO_LOW, BUG_FOR_CONSTANTS));
+                setPriority(Priority.LOW);
+                logChange(String.format(Constants.PRIORITY_LOWERED, Constants.BUG, Priority.MEDIUM, Priority.LOW));
                 break;
             case LOW:
-                logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_LOW, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_LOW, Constants.BUG));
                 break;
         }
     }
@@ -116,14 +112,14 @@ public class BugImpl extends TaskImpl implements Bug {
         switch (getSeverity()){
             case MINOR:
                 setSeverity(Severity.MAJOR);
-                logChange(String.format(Constants.SEVERITY_INCREASED_FROM_MINOR_TO_MAJOR, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.SEVERITY_INCREASED, Severity.MINOR, Severity.MAJOR));
                 break;
             case MAJOR:
                 setSeverity(Severity.CRITICAL);
-                logChange(String.format(Constants.SEVERITY_INCREASED_FROM_MAJOR_TO_CRITICAL, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.SEVERITY_INCREASED, Severity.MAJOR, Severity.CRITICAL));
                 break;
             case CRITICAL:
-                logChange(String.format(Constants.SEVERITY_ALREADY_AT_CRITICAL, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.SEVERITY_ALREADY_AT_CRITICAL));
                 break;
         }
     }
@@ -133,14 +129,14 @@ public class BugImpl extends TaskImpl implements Bug {
         switch (getSeverity()){
             case CRITICAL:
                 setSeverity(Severity.MAJOR);
-                logChange(String.format(Constants.SEVERITY_DECREASED_FROM_CRITICAL_TO_MAJOR, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.SEVERITY_DECREASED, Severity.CRITICAL, Severity.MAJOR));
                 break;
             case MAJOR:
                 setSeverity(Severity.MINOR);
-                logChange(String.format(Constants.SEVERITY_DECREASED_FROM_MAJOR_TO_MINOR, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.SEVERITY_DECREASED, Severity.MAJOR, Severity.MINOR));
                 break;
             case MINOR:
-                logChange(String.format(Constants.SEVERITY_ALREADY_AT_MINOR, BUG_FOR_CONSTANTS));
+                logChange(String.format(Constants.SEVERITY_ALREADY_AT_MINOR));
                 break;
         }
     }
@@ -155,10 +151,10 @@ public class BugImpl extends TaskImpl implements Bug {
         switch (super.getStatus()){
             case ACTIVE:
                 super.setStatus(Status.DONE);
-              logChange(STATUS_CHANGED_FROM_ACTIVE_TO_DONE);
+              logChange(String.format(Constants.STATUS_CHANGED,Constants.BUG, Status.ACTIVE, Status.DONE));
                 break;
             case DONE:
-             logChange(STATUS_IS_ALREADY_SET_TO_DONE);
+             logChange(String.format(Constants.CANNOT_ADVANCE_STATUS, Constants.BUG, Status.DONE));
                 break;
         }
     }
@@ -167,10 +163,10 @@ public class BugImpl extends TaskImpl implements Bug {
         switch (super.getStatus()){
             case DONE:
                 super.setStatus(Status.ACTIVE);
-              logChange(STATUS_CHANGED_FROM_DONE_TO_ACTIVE);
+              logChange(String.format(Constants.STATUS_CHANGED,Constants.BUG, Status.DONE, Status.ACTIVE));
                 break;
             case ACTIVE:
-             logChange(STATUS_IS_ALREADY_SET_TO_ACTIVE);
+             logChange(String.format(Constants.CANNOT_REVERT_STATUS, Constants.BUG, Status.ACTIVE));
                 break;
         }
     }
