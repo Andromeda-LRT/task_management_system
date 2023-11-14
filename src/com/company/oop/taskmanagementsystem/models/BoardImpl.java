@@ -69,6 +69,6 @@ public class BoardImpl implements Board {
 
     @Override
     public String toString(){
-        return String.format("Board: %s", getName());
+        return String.format("Board: %s%n", getName());
     }
 }
