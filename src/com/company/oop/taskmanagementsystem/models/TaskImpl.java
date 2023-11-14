@@ -64,6 +64,7 @@ public abstract class TaskImpl implements Task {
         return description;
     }
 
+    @Override
     public Status getStatus() {
         return status;
     }
@@ -102,9 +103,8 @@ public abstract class TaskImpl implements Task {
         this.status = status;
     }
 
-    protected abstract void advanceStatus();
-
-    protected abstract void revertStatus();
+//    protected abstract void advanceStatus();
+//    protected abstract void revertStatus();
 
     public void addComment(Comment comment){
         comments.add(comment);
