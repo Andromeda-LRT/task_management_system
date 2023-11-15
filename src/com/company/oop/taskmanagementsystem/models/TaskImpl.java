@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsystem.models;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.contracts.Comment;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
@@ -108,6 +109,7 @@ public abstract class TaskImpl implements Task {
 
     public void addComment(Comment comment){
         comments.add(comment);
+        logChange(Constants.COMMENT_ADDED + comment.getAuthor());
     }
 
     @Override

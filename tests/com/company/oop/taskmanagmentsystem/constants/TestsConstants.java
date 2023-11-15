@@ -25,4 +25,6 @@ public class TestsConstants {
     public static final Severity VALID_SEVERITY = Severity.CRITICAL;
     public static final Priority TEST_PRIORITY = Priority.LOW;
     public static final Size TEST_SIZE = Size.MEDIUM;
+    public static final String VALID_MEMBER_NAME = "Ivancho";
+    public static final String INVALID_MEMBER_NAME ="Ivo";
 }
