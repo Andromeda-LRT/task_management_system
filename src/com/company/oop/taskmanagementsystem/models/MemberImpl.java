@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsystem.models;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
@@ -42,7 +43,8 @@ public class MemberImpl implements Member {
     public List<LoggerImpl> getActivityHistory() {
         return new ArrayList<>(activityHistory);
     }
-    private void setName(String name){
+
+    private void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(),
                 NAME_MIN_LENGTH,
                 NAME_MAX_LENGTH,
@@ -50,12 +52,12 @@ public class MemberImpl implements Member {
         this.name = name;
     }
 
-    public void addTask(TaskImpl task){
+    public void addTask(TaskImpl task) {
         taskList.add(task);
         logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
     }
 
-    public void removeTask(TaskImpl task){
+    public void removeTask(TaskImpl task) {
         taskList.remove(task);
         logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
 
@@ -63,5 +65,16 @@ public class MemberImpl implements Member {
 
     private void logChange(String change) {
         activityHistory.add(new LoggerImpl(change));
+    }
+
+    public String printActivity() {
+        StringBuilder output = new StringBuilder();
+        output.append(String.format(Constants.ACTIVITY, getName())).append(System.lineSeparator());
+        output.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+        for (LoggerImpl log : activityHistory) {
+            output.append(log.print()).append(System.lineSeparator());
+        }
+        output.append(Constants.LINE_DIVISOR);
+        return output.toString();
     }
 }

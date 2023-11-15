@@ -32,6 +32,7 @@ public class Constants {
             "Cannot advance status, because %s status is already set to %s.";
     public static final String CANNOT_REVERT_STATUS =
             "Cannot revert status, because %s status is already set to %s.";
+    public static final String LINE_DIVISOR = "---------------------";
 
 //  PRIORITY
     public static final String PRIORITY_LOWERED = "%s priority lowered from %s to %s.";
@@ -62,4 +63,6 @@ public class Constants {
             "Cannot increase, because story size is already set to Large";
     public static final String SIZE_ALREADY_SET_TO_SMALL =
             "Cannot decrease, because story size is already set to Small";
+    //Activity
+    public static final String ACTIVITY = "%s ACTIVITY";
 }
