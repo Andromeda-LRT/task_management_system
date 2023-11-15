@@ -27,4 +27,6 @@ public class TestsConstants {
     public static final Size TEST_SIZE = Size.MEDIUM;
     public static final String VALID_MEMBER_NAME = "Ivancho";
     public static final String INVALID_MEMBER_NAME ="Ivo";
+    public static final String VALID_TEAM_NAME = "testTeam";
+
 }

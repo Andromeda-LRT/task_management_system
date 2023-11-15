@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TeamImpl {
     private static final String ADDED_MEMBER = "%s %s was added to Team %s successfully.";
-    private static final String PRINT_HEAER =
+    private static final String PRINT_HEADER =
             "%s\n----------------------------\n%s:\n----------------------------\n";
 
     private String name;
@@ -56,7 +56,7 @@ public class TeamImpl {
 
     public String showAllTeamMembers() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format(PRINT_HEAER, getName(), "Members"));
+        stringBuilder.append(String.format(PRINT_HEADER, getName(), "Members"));
 
         for (MemberImpl member : members) {
             stringBuilder.append(member.getName()).append(System.lineSeparator());
@@ -68,7 +68,7 @@ public class TeamImpl {
 
     public String showAllTeamBoards() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format(PRINT_HEAER, getName(), "Boards"));
+        stringBuilder.append(String.format(PRINT_HEADER, getName(), "Boards"));
 
         for (BoardImpl board : boards) {
             stringBuilder.append(board.getName()).append(System.lineSeparator());
