@@ -133,7 +133,13 @@ public class BoardImpl implements Board {
     }
     @Override
     public void addTeam(TeamImpl teamToAdd){
-        teamsList.add(teamToAdd);
+        if(!teamsList.contains(teamToAdd)){
+            teamsList.add(teamToAdd);
+            logChange("Team was added to board " + getName());
+        }else {
+            throw new IllegalArgumentException("This team already exist in board" +
+                    getName());
+        }
     }
     @Override
     public void removeTeam(TeamImpl team) {
@@ -143,6 +149,7 @@ public class BoardImpl implements Board {
             for (TeamImpl teamLocal : teamsList) {
                 if (teamLocal.getName().equals(team.getName())) {
                     teamsList.remove(team);
+                    logChange("Team %s was removed.");
                     break;
                 }
             }
