@@ -45,9 +45,15 @@ public class TeamImpl {
     }
 
     public void addBoard(BoardImpl board) {
-        boards.add(board);
-
-        logChange(String.format(ADDED_MEMBER, "Board", board.getName(), getName()));
+        if(!boards.contains(board)) {
+            boards.add(board);
+            int index = boards.indexOf(board);
+            boards.get(index).addTeam(this);
+            logChange(String.format(Constants.TEAM_ADD_METHOD, "Board", board.getName(), getName()));
+        }else {
+            throw new IllegalArgumentException("This team already exist in board" +
+                    getName());
+        }
     }
 
     private void logChange(String change) {
@@ -66,12 +72,28 @@ public class TeamImpl {
         return stringBuilder.toString();
     }
 
+    @Override
+    public void removeBoard(BoardImpl board) {
+        if (boards.isEmpty()){
+            throw new IllegalArgumentException("There are no boards in this team");
+        } else {
+            for (BoardImpl boardLocal : boards) {
+                if (boardLocal.getName().equals(board.getName())) {
+                    boards.remove(board);
+                    boardLocal.removeTeam(this);
+                    logChange("Team board %s was removed.");
+                    break;
+                }
+            }
+        }
+    }
+
     public String showAllTeamBoards() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format(PRINT_HEADER, getName(), "Boards"));
 
-        for (BoardImpl board : boards) {
-            stringBuilder.append(board.getName()).append(System.lineSeparator());
+        for (LoggerImpl logger : getActivityHistory()) {
+            stringBuilder.append(logger.getDescription()).append(System.lineSeparator());
         }
         stringBuilder.append("----------------------------");
 

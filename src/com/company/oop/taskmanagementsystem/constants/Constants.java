@@ -33,7 +33,10 @@ public class Constants {
     public static final String CANNOT_REVERT_STATUS =
             "Cannot revert status, because %s status is already set to %s.";
     public static final String LINE_DIVISOR = "---------------------";
-    public static final String COMMENT_ADDED= "A comment was added by ";
+    public static final String COMMENT_ADDED = "A comment was added by ";
+    public static final String MEMBERS = "Members:";
+    public static final String BOARDS = "Boards:";
+    public static final String TEAM_ADD_METHOD = "%s %s was added to Team %s successfully.";
 
     //  PRIORITY
     public static final String PRIORITY_LOWERED = "%s priority lowered from %s to %s.";

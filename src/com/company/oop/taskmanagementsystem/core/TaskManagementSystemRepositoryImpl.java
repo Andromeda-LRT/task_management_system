@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
+    //TODO create methods for unique names for board and team
+    //TODO add team list and board list
+
     private int nextId;
     private final List members = new ArrayList<>();
 

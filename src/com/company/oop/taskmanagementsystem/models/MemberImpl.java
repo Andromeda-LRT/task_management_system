@@ -54,13 +54,21 @@ public class MemberImpl implements Member {
     }
 
     public void assignTask(TaskImpl task) {
-        taskList.add(task);
-        logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
+        if(!taskList.contains(task)) {
+            taskList.add(task);
+            logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
+        }else {
+            throw new IllegalArgumentException("Task is already assigned to " + getName());
+        }
     }
 
     public void unAssignTask(TaskImpl task) {
-        taskList.remove(task);
-        logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
+        if(taskList.contains(task)) {
+            taskList.remove(task);
+            logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
+        }else {
+            throw new IllegalArgumentException("There is no such task for " + getName());
+        }
 
     }
 
