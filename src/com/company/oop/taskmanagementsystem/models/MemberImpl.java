@@ -1,5 +1,7 @@
 package com.company.oop.taskmanagementsystem.models;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -8,7 +10,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class MemberImpl implements com.company.oop.taskmanagementsystem.models.contracts.Member {
+public class MemberImpl implements Member {
     private static final int NAME_MIN_LENGTH = 5;
     private static final int NAME_MAX_LENGTH = 15;
     private static final String NAME_LENGTH_ERROR = format(
@@ -25,6 +27,7 @@ public class MemberImpl implements com.company.oop.taskmanagementsystem.models.c
         setName(name);
         this.taskList = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
+        logChange(String.format(Constants.MEMBER_WAS_CREATED, this.name));
     }
 
     @Override
@@ -41,7 +44,8 @@ public class MemberImpl implements com.company.oop.taskmanagementsystem.models.c
     public List<LoggerImpl> getActivityHistory() {
         return new ArrayList<>(activityHistory);
     }
-    private void setName(String name){
+
+    private void setName(String name) {
         ValidationHelpers.validateIntRange(name.length(),
                 NAME_MIN_LENGTH,
                 NAME_MAX_LENGTH,
@@ -49,12 +53,12 @@ public class MemberImpl implements com.company.oop.taskmanagementsystem.models.c
         this.name = name;
     }
 
-    public void addTask(TaskImpl task){
+    public void assignTask(TaskImpl task) {
         taskList.add(task);
         logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
     }
 
-    public void removeTask(TaskImpl task){
+    public void unAssignTask(TaskImpl task) {
         taskList.remove(task);
         logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
 
@@ -62,5 +66,16 @@ public class MemberImpl implements com.company.oop.taskmanagementsystem.models.c
 
     private void logChange(String change) {
         activityHistory.add(new LoggerImpl(change));
+    }
+
+    public String printActivity() {
+        StringBuilder output = new StringBuilder();
+        output.append(String.format(Constants.ACTIVITY, getName())).append(System.lineSeparator());
+        output.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+        for (LoggerImpl log : activityHistory) {
+            output.append(log.print()).append(System.lineSeparator());
+        }
+        output.append(Constants.LINE_DIVISOR);
+        return output.toString();
     }
 }
