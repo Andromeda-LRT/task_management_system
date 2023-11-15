@@ -11,15 +11,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BoardImplTests {
-    private static final String INVALID_BOARD_NAME = "xxx";
-    private static final String VALID_BOARD_NAME = "xxxxxx";
+
     // TODO The tests should be implemented
 
     BoardImpl board;
 
     @BeforeEach
     public void initBoardImpl(){
-        board = new BoardImpl(VALID_BOARD_NAME);
+        board = new BoardImpl(TestsConstants.VALID_BOARD_NAME);
     }
 
     @Test
@@ -29,12 +28,12 @@ public class BoardImplTests {
 
     @Test
     public void constructor_Should_InitializeName_When_ArgumentsAreValid(){
-        Assertions.assertEquals(VALID_BOARD_NAME, board.getName());
+        Assertions.assertEquals(TestsConstants.VALID_BOARD_NAME, board.getName());
     }
     @Test
     public void constructor_Should_Throw_An_Exception_When_ArgumentsAreInvalid(){
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new BoardImpl(INVALID_BOARD_NAME));
+                new BoardImpl(TestsConstants.INVALID_BOARD_NAME));
     }
     @Test
     public void getTaskList_Should_ReturnACopyOfTaskList(){

@@ -19,19 +19,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BugImplTests {
-    private static final List<String> STEPS_TO_REPRODUCE = Arrays.asList("Step 1", "Step 2");
-    private static final List<String> EMPTY_STEPS_TO_REPRODUCE = new ArrayList<>();
-    private static final List<String> NULL_STEPS_TO_REPRODUCE = null;
-    private static final Priority VALID_PRIORITY = Priority.LOW;
-    private static final Severity VALID_SEVERITY = Severity.CRITICAL;
+
 
     BugImpl bug;
 
     @BeforeEach
     public void initBugImpl(){
         bug = new BugImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
-                TestsConstants.VALID_DESCRIPTION, STEPS_TO_REPRODUCE, VALID_PRIORITY,
-                VALID_SEVERITY);
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.STEPS_TO_REPRODUCE, TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
     }
 
     @Test
@@ -40,15 +36,15 @@ public class BugImplTests {
                 TestsConstants.VALID_ID,
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
-                STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                VALID_SEVERITY);
+                TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
 
         Assertions.assertEquals(1, bug.getId());
         Assertions.assertEquals("Example of a valid title", bug.getTitle());
         Assertions.assertEquals("Example of a valid description", bug.getDescription());
         Assertions.assertEquals(Status.ACTIVE, bug.getStatus());
-        Assertions.assertEquals(STEPS_TO_REPRODUCE, bug.getStepsToReproduce());
+        Assertions.assertEquals(TestsConstants.STEPS_TO_REPRODUCE, bug.getStepsToReproduce());
         Assertions.assertEquals(Priority.LOW, bug.getPriority());
         Assertions.assertEquals(Severity.CRITICAL, bug.getSeverity());
         Assertions.assertEquals("NO ASSIGNEE", bug.getAssignee().getName());
@@ -61,9 +57,9 @@ public class BugImplTests {
                 TestsConstants.VALID_ID,
                 TestsConstants.INVALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
-                STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                VALID_SEVERITY));
+                   TestsConstants.STEPS_TO_REPRODUCE,
+                   TestsConstants.VALID_PRIORITY,
+                   TestsConstants.VALID_SEVERITY));
     }
     @Test
     public void constructor_Should_ThrownException_When_InValidDescription() {
@@ -72,9 +68,9 @@ public class BugImplTests {
                         TestsConstants.VALID_ID,
                         TestsConstants.VALID_TITLE,
                         TestsConstants.INVALID_DESCRIPTION,
-                        STEPS_TO_REPRODUCE,
-                        VALID_PRIORITY,
-                        VALID_SEVERITY));
+                        TestsConstants.STEPS_TO_REPRODUCE,
+                        TestsConstants.VALID_PRIORITY,
+                        TestsConstants.VALID_SEVERITY));
     }
     @Test
     public void constructor_Should_ThrownException_When_StepsToReproduceAreEmpty() {
@@ -83,9 +79,9 @@ public class BugImplTests {
                         TestsConstants.VALID_ID,
                         TestsConstants.VALID_TITLE,
                         TestsConstants.INVALID_DESCRIPTION,
-                        EMPTY_STEPS_TO_REPRODUCE,
-                        VALID_PRIORITY,
-                        VALID_SEVERITY));
+                        TestsConstants.EMPTY_STEPS_TO_REPRODUCE,
+                        TestsConstants.VALID_PRIORITY,
+                        TestsConstants.VALID_SEVERITY));
     }
 
     @Test
@@ -95,9 +91,9 @@ public class BugImplTests {
                         TestsConstants.VALID_ID,
                         TestsConstants.VALID_TITLE,
                         TestsConstants.INVALID_DESCRIPTION,
-                        NULL_STEPS_TO_REPRODUCE,
-                        VALID_PRIORITY,
-                        VALID_SEVERITY));
+                        TestsConstants.NULL_STEPS_TO_REPRODUCE,
+                        TestsConstants.VALID_PRIORITY,
+                        TestsConstants.VALID_SEVERITY));
     }
 
     @Test
@@ -106,9 +102,9 @@ public class BugImplTests {
                 TestsConstants.VALID_ID,
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
-                STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                VALID_SEVERITY);
+                TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
 
         MemberImpl petar = new MemberImpl("Petar Petrov");
         bug.setAssignee(petar);
@@ -122,9 +118,9 @@ public class BugImplTests {
                 TestsConstants.VALID_ID,
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
-                STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                VALID_SEVERITY);
+                TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
 
         List<String> stepsToReproduce = bug.getStepsToReproduce();
 
@@ -139,9 +135,9 @@ public class BugImplTests {
                 TestsConstants.VALID_ID,
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
-                STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                VALID_SEVERITY);
+                TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
 
         bug.setPriority(Priority.MEDIUM);
 
@@ -155,9 +151,9 @@ public class BugImplTests {
                 TestsConstants.VALID_ID,
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
-                STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                VALID_SEVERITY);
+                TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
 
          bug.setSeverity(Severity.MAJOR);
 
@@ -170,9 +166,9 @@ public class BugImplTests {
                 TestsConstants.VALID_ID,
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
-                STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                VALID_SEVERITY);
+                TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
 
         Comment comment = new CommentImpl("User1", "This is a test comment.");
         bug.addComment(comment);
