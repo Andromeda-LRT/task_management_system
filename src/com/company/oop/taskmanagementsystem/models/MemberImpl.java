@@ -27,6 +27,7 @@ public class MemberImpl implements Member {
         setName(name);
         this.taskList = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
+        logChange(String.format(Constants.MEMBER_WAS_CREATED, this.name));
     }
 
     @Override
@@ -52,12 +53,12 @@ public class MemberImpl implements Member {
         this.name = name;
     }
 
-    public void addTask(TaskImpl task) {
+    public void assignTask(TaskImpl task) {
         taskList.add(task);
         logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
     }
 
-    public void removeTask(TaskImpl task) {
+    public void unAssignTask(TaskImpl task) {
         taskList.remove(task);
         logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
 

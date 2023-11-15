@@ -33,8 +33,9 @@ public class Constants {
     public static final String CANNOT_REVERT_STATUS =
             "Cannot revert status, because %s status is already set to %s.";
     public static final String LINE_DIVISOR = "---------------------";
+    public static final String COMMENT_ADDED= "A comment was added by ";
 
-//  PRIORITY
+    //  PRIORITY
     public static final String PRIORITY_LOWERED = "%s priority lowered from %s to %s.";
     public static final String PRIORITY_INCREASED = "%s priority increased from %s to %s.";
     public static final String PRIORITY_IS_ALREADY_SET_TO_HIGH =
@@ -65,4 +66,6 @@ public class Constants {
             "Cannot decrease, because story size is already set to Small";
     //Activity
     public static final String ACTIVITY = "%s ACTIVITY";
+    //Member
+    public static final String MEMBER_WAS_CREATED = "A member with the name %s was created";
 }

@@ -38,7 +38,7 @@ public class MemberImplTests {
 
     @Test
     public void addTask_Should_AddATaskToTheCollection() {
-        member.addTask(new FeedbackImpl(TestsConstants.VALID_ID,
+        member.assignTask(new FeedbackImpl(TestsConstants.VALID_ID,
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
                 TestsConstants.VALID_RATING));
@@ -51,8 +51,8 @@ public class MemberImplTests {
                 TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
                 TestsConstants.VALID_RATING);
-        member.addTask(feedback);
-        member.removeTask(feedback);
+        member.assignTask(feedback);
+        member.unAssignTask(feedback);
         Assertions.assertEquals(0, member.getListOfTasks().size());
     }
 
@@ -65,7 +65,7 @@ public class MemberImplTests {
 
         List<Task> listOfTasks = member.getListOfTasks();
 
-        member.addTask(feedback);
+        member.assignTask(feedback);
 
         Assertions.assertFalse(listOfTasks.contains(feedback));
     }
