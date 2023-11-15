@@ -7,12 +7,13 @@ public class CommentImpl implements Comment {
     private static final int CONTENT_MIN_LENGTH = 1;
     private static final int CONTENT_MAX_LENGTH = 500;
     private static final String CONTENT_LENGTH_ERROR_MESSAGE = "Comment needs to be between 1 and 500 symbols";
+    private static final String BLANK_AUTHOR_ERROR_MESSAGE = "Comment must have an author";
     public static final String NEW_LINE_DASH = "----------";
     private String author;
     private String content;
     // todo unsure of parameters order
     public CommentImpl(String author, String content){
-        this.author = author;
+        setAuthor(author);
         setContent(content);
     }
     @Override
@@ -25,6 +26,10 @@ public class CommentImpl implements Comment {
         return this.content;
     }
 
+    private void setAuthor(String author){
+        ValidationHelpers.validateEmptyString(author, BLANK_AUTHOR_ERROR_MESSAGE);
+        this.author = author;
+    }
     private void setContent(String content){
         ValidationHelpers.validateIntRange(content.length(), CONTENT_MIN_LENGTH,
                 CONTENT_MAX_LENGTH, CONTENT_LENGTH_ERROR_MESSAGE);
@@ -32,10 +37,14 @@ public class CommentImpl implements Comment {
 
     @Override
     public String print() {
-        StringBuilder output = new StringBuilder(NEW_LINE_DASH).append(System.lineSeparator());
-        output.append(String.format("%s", getContent())).append(System.lineSeparator())
-                .append(String.format("User: %s", getAuthor())).append(System.lineSeparator())
-                .append(NEW_LINE_DASH);
+        StringBuilder output = new StringBuilder(NEW_LINE_DASH);
+        output.append(System.lineSeparator());
+        output.append(String.format("%s", getContent()));
+        output.append(System.lineSeparator());
+        output.append(String.format("User: %s", getAuthor()));
+        output.append(System.lineSeparator());
+        output.append(NEW_LINE_DASH);
         return output.toString();
+
     }
 }

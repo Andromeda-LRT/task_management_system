@@ -147,7 +147,7 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
         @Override
-    protected void advanceStatus(){
+        public void advanceStatus(){
         switch (super.getStatus()){
             case ACTIVE:
                 super.setStatus(Status.DONE);
@@ -159,7 +159,7 @@ public class BugImpl extends TaskImpl implements Bug {
         }
     }
     @Override
-    protected void revertStatus(){
+    public void revertStatus(){
         switch (super.getStatus()){
             case DONE:
                 super.setStatus(Status.ACTIVE);
