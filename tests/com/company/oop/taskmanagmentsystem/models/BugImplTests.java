@@ -1,16 +1,17 @@
 package com.company.oop.taskmanagmentsystem.models;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.BugImpl;
 import com.company.oop.taskmanagementsystem.models.CommentImpl;
 import com.company.oop.taskmanagementsystem.models.MemberImpl;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Comment;
-import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
 import com.company.oop.taskmanagementsystem.models.enums.Severity;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,10 +22,17 @@ public class BugImplTests {
     private static final List<String> STEPS_TO_REPRODUCE = Arrays.asList("Step 1", "Step 2");
     private static final List<String> EMPTY_STEPS_TO_REPRODUCE = new ArrayList<>();
     private static final List<String> NULL_STEPS_TO_REPRODUCE = null;
-
     private static final Priority VALID_PRIORITY = Priority.LOW;
     private static final Severity VALID_SEVERITY = Severity.CRITICAL;
 
+    BugImpl bug;
+
+    @BeforeEach
+    public void initBugImpl(){
+        bug = new BugImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, STEPS_TO_REPRODUCE, VALID_PRIORITY,
+                VALID_SEVERITY);
+    }
 
     @Test
     public void constructor_Should_Initialize_All_Fields_When_ValidArguments() {
@@ -172,4 +180,55 @@ public class BugImplTests {
 
         Assertions.assertTrue(comments.contains(comment));
     }
+    @Test
+    public void advanceStatus_Should_AdvanceStatus_WhenValid(){
+        bug.advanceStatus();
+        Assertions.assertEquals(Status.DONE, bug.getStatus());
+    }
+
+    @Test
+    public void revertStatus_Should_RevertStatus_WhenValid(){
+        bug.advanceStatus();
+        bug.revertStatus();
+        Assertions.assertEquals(Status.ACTIVE, bug.getStatus());
+    }
+    @Test
+    public void advanceStatus_Should_GiveAnErrorMessage_When_StatusCannotAdvanceFurther(){
+        bug.advanceStatus();
+        bug.advanceStatus();
+        Assertions.assertEquals(String.format(Constants.STATUS_IS_ALREADY_SET_TO_DONE, Constants.BUG),
+                bug.getHistoryOfChanges().get(2).getDescription());
+    }
+    @Test
+    public void revertStatus_Should_GiveAnErrorMessage_When_StatusCannotRevertFurther(){
+        bug.revertStatus();
+        Assertions.assertEquals(String.format(Constants.CANNOT_REVERT_STATUS, Constants.BUG, Status.ACTIVE),
+                bug.getHistoryOfChanges().get(1).getDescription());
+    }
+    @Test
+    public void increasePriority_Should_IncreasePriority_When_PriorityIsValid(){
+        bug.increasePriority();
+        Assertions.assertEquals(Priority.MEDIUM, bug.getPriority());
+    }
+    @Test
+    public void lowerPriority_Should_LowerPriority_When_PriorityIsValid(){
+        bug.increasePriority();
+        bug.lowerPriority();
+        Assertions.assertEquals(Priority.LOW, bug.getPriority());
+    }
+    @Test
+    public void increasePriority_Should_GiveAnErrorMessage_When_PriorityCannotIncreaseFurther(){
+        bug.increasePriority();
+        bug.increasePriority();
+        bug.increasePriority();
+        Assertions.assertEquals(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_HIGH, Constants.BUG),
+                bug.getHistoryOfChanges().get(3).getDescription());
+    }
+    @Test
+    public void lowerPriority_Should_GiveAnErrorMessage_When_PriorityCannotLowerFurther(){
+        bug.lowerPriority();
+        Assertions.assertEquals(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_LOW, Constants.BUG),
+                bug.getHistoryOfChanges().get(1).getDescription());
+    }
+
 }

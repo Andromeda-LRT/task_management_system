@@ -37,7 +37,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
-    protected void advanceStatus() {
+    public void advanceStatus() {
         switch (super.getStatus()){
             case NEW:
                 super.setStatus(Status.UNSCHEDULED);
@@ -58,7 +58,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
-    protected void revertStatus() {
+    public void revertStatus() {
         switch (super.getStatus()){
             case DONE:
                 super.setStatus(Status.SCHEDULED);

@@ -14,7 +14,6 @@ public class StoryImpl extends TaskImpl implements Story {
 
     private Priority priority;
     private Size size;
-    //todo to fix id logic and status
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size){
         super(id, title, description, Status.NOT_DONE);
@@ -47,7 +46,7 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    protected void advanceStatus() {
+    public void advanceStatus() {
         switch (super.getStatus()) {
             case NOT_DONE:
                 super.setStatus(Status.IN_PROGRESS);
@@ -64,7 +63,7 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    protected void revertStatus() {
+    public void revertStatus() {
         switch (super.getStatus()){
             case DONE:
                 super.setStatus(Status.IN_PROGRESS);
@@ -148,6 +147,14 @@ public class StoryImpl extends TaskImpl implements Story {
     }
     @Override
     public String print() {
-        return null;
+        StringBuilder output = new StringBuilder();
+        output.append(String.format("Story with %s", super.print()));
+        output.append(System.lineSeparator());
+        output.append(String.format("Priority: %s", getPriority()));
+        output.append(System.lineSeparator());
+        output.append(String.format("Size: %s", getSize()));
+        // the new line could be removed later on
+        output.append(System.lineSeparator());
+        return output.toString();
     }
 }

@@ -5,7 +5,7 @@ import com.company.oop.taskmanagementsystem.models.enums.Status;
 
 import java.util.List;
 
-public interface Task extends Identifiable, Printable{
+public interface Task extends Identifiable, Printable, Statusable{
     String getTitle();
 
     String getDescription();

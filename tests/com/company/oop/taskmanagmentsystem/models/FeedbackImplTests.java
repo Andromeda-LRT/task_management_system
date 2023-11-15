@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagmentsystem.models;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.BugImpl;
 import com.company.oop.taskmanagementsystem.models.CommentImpl;
 import com.company.oop.taskmanagementsystem.models.FeedbackImpl;
@@ -72,5 +73,34 @@ public class FeedbackImplTests {
         Assertions.assertTrue(comments.contains(comment));
     }
 
-    //TODO add tests regarding comments and history
+    @Test
+    public void advanceStatus_Should_AdvanceStatus_WhenValid() {
+        feedback.advanceStatus();
+        Assertions.assertEquals(Status.UNSCHEDULED, feedback.getStatus());
+    }
+
+    @Test
+    public void revertStatus_Should_RevertStatus_WhenValid() {
+        feedback.advanceStatus();
+        feedback.revertStatus();
+        Assertions.assertEquals(Status.NEW, feedback.getStatus());
+    }
+
+    @Test
+    public void advanceStatus_Should_GiveAnErrorMessage_When_StatusCannotAdvanceFurther() {
+        feedback.advanceStatus();
+        feedback.advanceStatus();
+        feedback.advanceStatus();
+        feedback.advanceStatus();
+        Assertions.assertEquals(String.format(Constants.STATUS_IS_ALREADY_SET_TO_DONE, Constants.FEEDBACK),
+                feedback.getHistoryOfChanges().get(4).getDescription());
+    }
+
+    @Test
+    public void revertStatus_Should_GiveAnErrorMessage_When_StatusCannotRevertFurther() {
+        feedback.revertStatus();
+        Assertions.assertEquals(String.format(Constants.STATUS_IS_ALREADY_SET_TO_NEW, Constants.FEEDBACK),
+                feedback.getHistoryOfChanges().get(1).getDescription());
+        //TODO add tests regarding history
+    }
 }
