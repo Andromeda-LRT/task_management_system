@@ -12,7 +12,6 @@ public class UnassignTaskToMember extends CommandImpl{
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String ID_ERROR = "The first parameter should be a number.";
     private static final String TASK_UNASSIGNED = "Task with id %d was unassigned from %s";
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
 
     public UnassignTaskToMember(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -28,7 +27,7 @@ public class UnassignTaskToMember extends CommandImpl{
     }
 
     private void unAssignTaskToMember(int id, String name){
-        Member member = taskManagementSystemRepository.findMemberByName(name);
-        member.unAssignTask(taskManagementSystemRepository.findTaskById(id));
+        Member member = getTaskManagementSystemRepository().findMemberByName(name);
+        member.unAssignTask(getTaskManagementSystemRepository().findTaskById(id));
     }
 }

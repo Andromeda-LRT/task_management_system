@@ -11,7 +11,6 @@ import java.util.List;
 public class CreateNewMember extends CommandImpl {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private final static String MEMBER_REGISTERED = "Member %s registered successfully!";
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
     public CreateNewMember(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }

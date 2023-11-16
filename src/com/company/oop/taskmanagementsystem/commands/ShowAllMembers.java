@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ShowAllMembers extends CommandImpl {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
     public ShowAllMembers(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
@@ -22,12 +21,12 @@ public class ShowAllMembers extends CommandImpl {
     }
 
     private String print() {
-        if (taskManagementSystemRepository.getMembers().isEmpty()) {
+        if (getTaskManagementSystemRepository().getMembers().isEmpty()) {
             return "There are no added members.";
         }
         StringBuilder output = new StringBuilder();
         output.append("---Members---");
-        for (Member member : taskManagementSystemRepository.getMembers()) {
+        for (Member member : getTaskManagementSystemRepository().getMembers()) {
             output.append(member.getName()).append(System.lineSeparator());
         }
         output.append(Constants.LINE_DIVISOR);

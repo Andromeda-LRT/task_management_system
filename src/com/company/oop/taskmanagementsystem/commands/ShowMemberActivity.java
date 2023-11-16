@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ShowMemberActivity extends CommandImpl{
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
 
     public ShowMemberActivity(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -19,7 +18,7 @@ public class ShowMemberActivity extends CommandImpl{
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String name = parameters.get(0);
-        Member member = taskManagementSystemRepository.findMemberByName(name);
+        Member member = getTaskManagementSystemRepository().findMemberByName(name);
         return member.printActivity();
     }
 }
