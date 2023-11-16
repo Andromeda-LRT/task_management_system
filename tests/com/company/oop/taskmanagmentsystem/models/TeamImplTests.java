@@ -20,7 +20,7 @@ public class TeamImplTests {
     @BeforeEach
     void setUp() {
         team = new TeamImpl("TestTeam");
-        member = new MemberImpl("John Doewett");
+        member = new MemberImpl("First_LastName");
         board = new BoardImpl("TestBoard");
     }
 
@@ -35,7 +35,7 @@ public class TeamImplTests {
         Assertions.assertTrue(team.getMembers().contains(member));
 
         Assertions.assertEquals(2, team.getActivityHistory().size());
-        Assertions.assertEquals("Member John Doewett was added to Team TestTeam successfully.",
+        Assertions.assertEquals("Member First_LastName was added to Team TestTeam successfully.",
                 team.getActivityHistory().get(1).getDescription());
     }
 
@@ -51,7 +51,7 @@ public class TeamImplTests {
 
 
     @Test
-    void getMembers_ShuldReturnsCopy() {
+    void getMembers_ShouldReturnsCopy() {
         team.addMember(member);
 
         List<Member> membersCopy = team.getMembers();
@@ -90,5 +90,49 @@ public class TeamImplTests {
 
         activityHistoryCopy.clear();
         Assertions.assertFalse(team.getActivityHistory().isEmpty());
+    }
+
+    @Test
+    void addMember_Should_AddMemberToTeamAndLogActivity_When_ValidMemberAdded() {
+        team.addMember(member);
+
+        Assertions.assertTrue(team.getMembers().contains(member));
+
+        Assertions.assertEquals(2, team.getActivityHistory().size());
+        Assertions.assertEquals(
+                "Member First_LastName was added to Team TestTeam successfully.",
+                team.getActivityHistory().get(1).getDescription()
+        );
+    }
+
+    @Test
+    void addBoard_Should_AddBoardToTeamAndLogActivity_When_ValidBoardAdded() {
+        team.addBoard(board);
+
+        Assertions.assertTrue(team.getBoards().contains(board));
+
+        Assertions.assertEquals(2, team.getActivityHistory().size());
+        Assertions.assertEquals(
+                "Board TestBoard was added to Team TestTeam successfully.",
+                team.getActivityHistory().get(1).getDescription()
+        );
+    }
+
+    @Test
+    void removeBoard_Should_RemoveBoardFromTeamAndLogActivity_When_ExistingBoardRemoved() {
+        team.addBoard(board);
+
+        Assertions.assertEquals(1, team.getBoards().size());
+
+        team.removeBoard(board);
+
+        Assertions.assertFalse(team.getBoards().contains(board));
+
+        Assertions.assertFalse(board.getTeams().contains(team));
+
+        Assertions.assertEquals(3, team.getActivityHistory().size());
+        Assertions.assertEquals(
+                "Team board TestBoard was removed.",
+                team.getActivityHistory().get(2).getDescription());
     }
 }
