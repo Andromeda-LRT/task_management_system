@@ -12,7 +12,7 @@ public interface Board {
     List<TaskImpl> getTaskList();
     List<LoggerImpl> getActivityHistory();
     String showBoardActivity();
-   List<TeamImpl> getTeams();
+    List<TeamImpl> getTeams();
     void assignTask(TaskImpl task, MemberImpl memberToAssignTaskTo);
     void unassignTask(TaskImpl task, MemberImpl memberToUnassignTask);
     void addTask(TaskImpl task);
