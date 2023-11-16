@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsystem.models;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.contracts.Board;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -24,6 +25,7 @@ public class BoardImpl implements Board {
     public static final String MEMBER_DOES_NOT_ERR_MSG =
             "The member you want to assign a task to does not exist or does not belong to a team";
     public static final String BOARD_CREATED = "Board %s has been created";
+    public static final String TEAM_NOT_FOUND_ERR_MSG = "Team %s does not exist in this board.";
     private String name;
     private List<LoggerImpl> activityHistory;
     private List<TaskImpl> taskList;
@@ -71,6 +73,13 @@ public class BoardImpl implements Board {
         for (TaskImpl taskLocal : taskList) {
             if (taskLocal == task){
                 taskList.remove(task);
+                for (TeamImpl teamLocal : teamsList) {
+                    for (MemberImpl memberLocal : teamLocal.getMembers()) {
+                        if (memberLocal.getListOfTasks().contains(task)){
+                            memberLocal.unAssignTask(task);
+                        }
+                    }
+                }
             }
         }
         //taskList.remove(task);
@@ -82,11 +91,14 @@ public class BoardImpl implements Board {
     @Override
     public String showBoardActivity(){
         StringBuilder output = new StringBuilder(toString());
+        output.append(String.format(Constants.ACTIVITY, getName())).append(System.lineSeparator());
+        output.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
         for (LoggerImpl logger : activityHistory) {
             output.append(logger.getDescription());
             output.append(System.lineSeparator());
         }
-        return output.toString().trim();
+        output.append(Constants.LINE_DIVISOR);
+        return output.toString();
     }
 
     @Override
@@ -131,6 +143,7 @@ public class BoardImpl implements Board {
        }
       }
     }
+    //todo add logchange to addTeam and its name
     @Override
     public void addTeam(TeamImpl teamToAdd){
         if(!teamsList.contains(teamToAdd)){
@@ -141,6 +154,7 @@ public class BoardImpl implements Board {
                     getName());
         }
     }
+    //todo add logchange to removeTeam
     @Override
     public void removeTeam(TeamImpl team) {
         if (teamsList.isEmpty()){
@@ -151,6 +165,8 @@ public class BoardImpl implements Board {
                     teamsList.remove(team);
                     logChange("Team %s was removed.");
                     break;
+                } else {
+                    throw new IllegalArgumentException(String.format(TEAM_NOT_FOUND_ERR_MSG, team.getName()));
                 }
             }
         }

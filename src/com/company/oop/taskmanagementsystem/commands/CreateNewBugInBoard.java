@@ -6,6 +6,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 import java.util.List;
 
 public class CreateNewBugInBoard implements Command {
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 5;
+    //todo unsure if this is needed as logger adds the creation of a task.
+    //public static final String BUG_CREATED_SUCCESSFULLY = "Bug created successfully";
+
     private final TaskManagementSystemRepository taskManagementSystemRepository;
 
     public CreateNewBugInBoard(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -14,6 +18,7 @@ public class CreateNewBugInBoard implements Command {
 
     @Override
     public String execute(List<String> parameters) {
+
         return null;
     }
 }

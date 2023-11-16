@@ -8,6 +8,9 @@ import com.company.oop.taskmanagementsystem.models.contracts.Team;
 import java.util.List;
 
 public class ValidationHelpers {
+
+    public static final String INVALID_NUM_OF_ARGS_ERR_MSG = "Invalid number of arguments. Expected %d; received %d.";
+
     public static void validateIntRange(int value, int min, int max, String message) {
         if (value < min || value > max) {
             throw new IllegalArgumentException(message);
@@ -44,6 +47,13 @@ public class ValidationHelpers {
             if (board.getName().equals(name)){
                 throw new IllegalArgumentException(String.format(Constants.NOT_UNIQUE, name));
             }
+        }
+    }
+    public static void validateArgumentsCount(List<String> parameters, int expectedNumberOfParameters){
+        if (parameters.size() < expectedNumberOfParameters){
+            throw new IllegalArgumentException(
+                    String.format(INVALID_NUM_OF_ARGS_ERR_MSG, expectedNumberOfParameters, parameters.size())
+            );
         }
     }
 }
