@@ -20,7 +20,7 @@ public class MemberImpl implements Member {
     private static final String TASK_ASSIGNED = "Task %s was assigned to %s";
     private static final String TASK_UNASSIGNED = "Task %s was unassigned from %s";
     private String name;
-    private List<TaskImpl> taskList;
+    private List<Task> taskList;
     private List<LoggerImpl> activityHistory;
 
     public MemberImpl(String name) {
@@ -53,7 +53,7 @@ public class MemberImpl implements Member {
         this.name = name;
     }
 
-    public void assignTask(TaskImpl task) {
+    public void assignTask(Task task) {
         if(!taskList.contains(task)) {
             taskList.add(task);
             logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
@@ -62,7 +62,7 @@ public class MemberImpl implements Member {
         }
     }
 
-    public void unAssignTask(TaskImpl task) {
+    public void unAssignTask(Task task) {
         if(taskList.contains(task)) {
             taskList.remove(task);
             logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
@@ -80,9 +80,11 @@ public class MemberImpl implements Member {
         StringBuilder output = new StringBuilder();
         output.append(String.format(Constants.ACTIVITY, getName())).append(System.lineSeparator());
         output.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+
         for (LoggerImpl log : activityHistory) {
             output.append(log.print()).append(System.lineSeparator());
         }
+
         output.append(Constants.LINE_DIVISOR);
         return output.toString();
     }

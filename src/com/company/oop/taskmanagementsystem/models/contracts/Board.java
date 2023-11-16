@@ -9,15 +9,14 @@ import java.util.List;
 
 public interface Board {
     String getName();
-    List<TaskImpl> getTaskList();
+    List<Task> getTaskList();
     List<LoggerImpl> getActivityHistory();
     String showBoardActivity();
-    List<TeamImpl> getTeams();
-    void assignTask(TaskImpl task, MemberImpl memberToAssignTaskTo);
-    void unassignTask(TaskImpl task, MemberImpl memberToUnassignTask);
-    void addTask(TaskImpl task);
-    void removeTask(TaskImpl task);
-    void addTeam(TeamImpl team);
-    void removeTeam(TeamImpl team);
-
+    List<Team> getTeams();
+    void assignTask(Task task, Member memberToAssignTaskTo);
+    void unassignTask(Task task, Member memberToUnassignTask);
+    void addTask(Task task);
+    void removeTask(Task task);
+    void addTeam(Team team);
+    void removeTeam(Team team);
 }
