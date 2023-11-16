@@ -2,8 +2,8 @@ package com.company.oop.taskmanagementsystem.models;
 
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
+import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
-import com.company.oop.taskmanagementsystem.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.List;
 public class TeamImpl implements Team {
 
     private String name;
-    private List<MemberImpl> members;
-    private List<BoardImpl> boards;
+    private List<Member> members;
+    private List<Board> boards;
     private List<LoggerImpl> activityHistory;
 
     public TeamImpl(String name) {
@@ -30,12 +30,12 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public List<MemberImpl> getMembers() {
+    public List<Member> getMembers() {
         return new ArrayList<>(members);
     }
 
     @Override
-    public List<BoardImpl> getBoards() {
+    public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
 
@@ -45,14 +45,14 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public void addMember(MemberImpl member) {
+    public void addMember(Member member) {
         members.add(member);
 
         logChange(String.format(Constants.TEAM_ADD_METHOD,"Member", member.getName(), getName()));
     }
 
     @Override
-    public void addBoard(BoardImpl board) {
+    public void addBoard(Board board) {
         if(!boards.contains(board)) {
             boards.add(board);
             int index = boards.indexOf(board);
@@ -76,7 +76,7 @@ public class TeamImpl implements Team {
         stringBuilder.append(Constants.MEMBERS);
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        for (MemberImpl member : members) {
+        for (Member member : members) {
             stringBuilder.append(member.getName()).append(System.lineSeparator());
         }
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
@@ -85,11 +85,11 @@ public class TeamImpl implements Team {
     }
 
     @Override
-    public void removeBoard(BoardImpl board) {
+    public void removeBoard(Board board) {
         if (boards.isEmpty()){
             throw new IllegalArgumentException("There are no boards in this team");
         } else {
-            for (BoardImpl boardLocal : boards) {
+            for (Board boardLocal : boards) {
                 if (boardLocal.getName().equals(board.getName())) {
                     boards.remove(board);
                     boardLocal.removeTeam(this);
@@ -108,7 +108,7 @@ public class TeamImpl implements Team {
         stringBuilder.append(Constants.BOARDS);
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        for (BoardImpl board : boards) {
+        for (Board board : boards) {
             stringBuilder.append(board.getName()).append(System.lineSeparator());
         }
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
