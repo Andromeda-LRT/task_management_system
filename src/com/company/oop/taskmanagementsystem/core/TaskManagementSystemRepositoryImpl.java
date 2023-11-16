@@ -23,15 +23,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     public List<Member> getMembers() {
-        return members;
+        return new ArrayList<>(members);
     }
 
     public List<Team> getTeams() {
-        return teams;
+        return new ArrayList<>(teams);
     }
 
     public List<Board> getBoards() {
-        return boards;
+        return new ArrayList<>(boards);
     }
 
     public Feedback createFeedback(String title, String description, int rating) {
