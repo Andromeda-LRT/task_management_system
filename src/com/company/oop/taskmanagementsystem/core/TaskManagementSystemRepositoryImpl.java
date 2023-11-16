@@ -22,6 +22,18 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         nextId = 0;
     }
 
+    public List<Member> getMembers() {
+        return new ArrayList<>(members);
+    }
+
+    public List<Team> getTeams() {
+        return new ArrayList<>(teams);
+    }
+
+    public List<Board> getBoards() {
+        return new ArrayList<>(boards);
+    }
+
     public Feedback createFeedback(String title, String description, int rating) {
         return new FeedbackImpl(++nextId, title, description, rating);
     }
@@ -55,4 +67,22 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return team;
     }
 
+    public boolean teamExist(String teamName) {
+        for (Team team : getTeams()) {
+            if (team.getName().equalsIgnoreCase(teamName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean memberExist(String memberName) {
+        for (Member member : getMembers()) {
+            if (member.getName().equalsIgnoreCase(memberName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
