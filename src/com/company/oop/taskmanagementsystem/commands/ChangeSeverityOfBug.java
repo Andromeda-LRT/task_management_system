@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class ChangeSeverityOfBug implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class ChangeSeverityOfBug extends CommandImpl {
 
     public ChangeSeverityOfBug(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

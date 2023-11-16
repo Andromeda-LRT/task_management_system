@@ -74,12 +74,16 @@ public class BoardImpl implements Board {
     @Override
     public void removeTask(Task task){
         for (Task taskLocal : taskList) {
-            if (taskLocal == task){
+            if (taskLocal == task) {
                 taskList.remove(task);
-                for (Team teamLocal : teamsList) {
-                    for (Member memberLocal : teamLocal.getMembers()) {
-                        if (memberLocal.getListOfTasks().contains(task)){
-                            memberLocal.unAssignTask(task);
+                if (teamsList.isEmpty()) {
+                    break;
+                } else {
+                    for (Team teamLocal : teamsList) {
+                        for (Member memberLocal : teamLocal.getMembers()) {
+                            if (memberLocal.getListOfTasks().contains(task)) {
+                                memberLocal.unAssignTask(task);
+                            }
                         }
                     }
                 }

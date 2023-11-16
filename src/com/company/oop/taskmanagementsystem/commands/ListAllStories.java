@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class ListAllStories implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class ListAllStories extends CommandImpl{
 
     public ListAllStories(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

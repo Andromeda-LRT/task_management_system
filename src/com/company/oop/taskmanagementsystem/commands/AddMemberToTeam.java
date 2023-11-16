@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class AddMemberToTeam implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class AddMemberToTeam extends CommandImpl{
 
     public AddMemberToTeam(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

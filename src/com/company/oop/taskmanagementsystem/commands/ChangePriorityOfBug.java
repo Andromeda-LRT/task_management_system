@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class ChangePriorityOfBug implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class ChangePriorityOfBug extends CommandImpl {
 
     public ChangePriorityOfBug(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override
