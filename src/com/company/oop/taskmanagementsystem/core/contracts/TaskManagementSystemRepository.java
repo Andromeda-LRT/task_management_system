@@ -37,4 +37,5 @@ public interface TaskManagementSystemRepository {
     Team findTeamByName(String teamName);
 
     Member findMemberByName(String memberName);
+    Task findTaskById(int id);
 }

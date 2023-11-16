@@ -19,12 +19,16 @@ public class ShowAllMembers implements Command {
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        if (taskManagementSystemRepository.getMembers().isEmpty()){
+        return print();
+    }
+
+    private String print() {
+        if (taskManagementSystemRepository.getMembers().isEmpty()) {
             return "There are no added members.";
         }
         StringBuilder output = new StringBuilder();
         output.append("---Members---");
-        for (Member member: taskManagementSystemRepository.getMembers()) {
+        for (Member member : taskManagementSystemRepository.getMembers()) {
             output.append(member.getName()).append(System.lineSeparator());
         }
         output.append(Constants.LINE_DIVISOR);
