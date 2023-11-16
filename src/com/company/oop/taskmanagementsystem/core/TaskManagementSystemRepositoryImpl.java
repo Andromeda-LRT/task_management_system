@@ -15,6 +15,7 @@ import java.util.List;
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String TEAM_DOES_NOT_EXISTS = "Team %s does not exist!";
     private static final String MEMBER_DOES_NOT_EXISTS = "Member %s does not exist!";
+    private static final String BOARD_DOES_NOT_EXIST = "Board %s does not exist!";
     private static final String TASK_DOES_NOT_EXISTS = "Task with id %d does not exist!";
 
     private int nextId;
@@ -46,7 +47,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     public Bug createBug(String title, String description,
-                         ArrayList<String> stepsToReproduce, Priority priority, Severity severity) {
+                         List<String> stepsToReproduce, Priority priority, Severity severity) {
         Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity);
         tasks.add(bug);
         return bug;
@@ -128,4 +129,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXISTS, id));
 
     }
+
+    @Override
+    public Board findBoardByName(String boardName) {
+        for (Board board : getBoards()) {
+            if (board.getName().equalsIgnoreCase(boardName)) {
+                return board;
+            }
+        }
+
+        throw new IllegalArgumentException(String.format(BOARD_DOES_NOT_EXIST, boardName));
+    }
+
+
 }

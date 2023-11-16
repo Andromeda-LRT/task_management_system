@@ -8,12 +8,11 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class ShowAllMembers implements Command {
+public class ShowAllMembers extends CommandImpl {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
     private final TaskManagementSystemRepository taskManagementSystemRepository;
-
     public ShowAllMembers(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

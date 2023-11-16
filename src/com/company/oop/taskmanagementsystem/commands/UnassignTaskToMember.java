@@ -8,14 +8,14 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class UnassignTaskToMember implements Command {
+public class UnassignTaskToMember extends CommandImpl{
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String ID_ERROR = "The first parameter should be a number.";
     private static final String TASK_UNASSIGNED = "Task with id %d was unassigned from %s";
     private final TaskManagementSystemRepository taskManagementSystemRepository;
 
     public UnassignTaskToMember(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

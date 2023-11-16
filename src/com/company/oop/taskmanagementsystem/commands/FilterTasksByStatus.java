@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class FilterTasksByStatus implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class FilterTasksByStatus extends CommandImpl {
 
     protected FilterTasksByStatus (TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

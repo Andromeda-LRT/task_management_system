@@ -7,12 +7,12 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class ShowMemberActivity implements Command {
+public class ShowMemberActivity extends CommandImpl{
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private final TaskManagementSystemRepository taskManagementSystemRepository;
 
     public ShowMemberActivity(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

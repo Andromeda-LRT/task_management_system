@@ -4,6 +4,8 @@ import com.company.oop.taskmanagementsystem.models.BoardImpl;
 import com.company.oop.taskmanagementsystem.models.LoggerImpl;
 import com.company.oop.taskmanagementsystem.models.MemberImpl;
 import com.company.oop.taskmanagementsystem.models.TeamImpl;
+import com.company.oop.taskmanagementsystem.models.contracts.Board;
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +54,7 @@ public class TeamImplTests {
     void getMembers_ShuldReturnsCopy() {
         team.addMember(member);
 
-        List<MemberImpl> membersCopy = team.getMembers();
+        List<Member> membersCopy = team.getMembers();
 
         Assertions.assertNotSame(team.getMembers(), membersCopy);
 
@@ -66,7 +68,7 @@ public class TeamImplTests {
     void getBoards_ShouldReturnsCopy() {
         team.addBoard(board);
 
-        List<BoardImpl> boardsCopy = team.getBoards();
+        List<Board> boardsCopy = team.getBoards();
 
         Assertions.assertNotSame(team.getBoards(), boardsCopy);
 

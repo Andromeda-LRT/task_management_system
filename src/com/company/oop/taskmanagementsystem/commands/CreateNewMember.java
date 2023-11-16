@@ -8,13 +8,12 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class CreateNewMember implements Command {
+public class CreateNewMember extends CommandImpl {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private final static String MEMBER_REGISTERED = "Member %s registered successfully!";
     private final TaskManagementSystemRepository taskManagementSystemRepository;
-
     public CreateNewMember(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class ChangeStatusOfBug implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class ChangeStatusOfBug extends CommandImpl {
 
     public ChangeStatusOfBug(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override
