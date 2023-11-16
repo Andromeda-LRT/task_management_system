@@ -33,4 +33,8 @@ public interface TaskManagementSystemRepository {
     boolean teamExist(String teamName);
 
     boolean memberExist(String memberName);
+
+    Team findTeamByName(String teamName);
+
+    Member findMemberByName(String memberName);
 }

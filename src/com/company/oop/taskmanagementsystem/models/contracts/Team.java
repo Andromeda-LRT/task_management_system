@@ -13,15 +13,15 @@ public interface Team {
 
     String getName();
 
-    List<MemberImpl> getMembers();
+    List<Member> getMembers();
 
-    List<BoardImpl> getBoards();
+    List<Board> getBoards();
 
     List<LoggerImpl> getActivityHistory();
 
-    void addMember(MemberImpl member);
+    void addMember(Member member);
 
-    void addBoard(BoardImpl board);
+    void addBoard(Board board);
 
     String showAllTeamMembers();
 
@@ -29,5 +29,5 @@ public interface Team {
 
     String showTeamActivity();
 
-    void removeBoard(BoardImpl board);
+    void removeBoard(Board board);
 }
