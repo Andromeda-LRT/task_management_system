@@ -10,7 +10,18 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.String.format;
+
 public class TeamImpl implements Team {
+
+    //TODO Fix error messages
+
+    private static final int NAME_MIN_LENGTH = 5;
+    private static final int NAME_MAX_LENGTH = 15;
+    private static final String NAME_LENGTH_ERROR = format(
+            "The name must be between %s and %s characters long!",
+            NAME_MIN_LENGTH,
+            NAME_MAX_LENGTH);
 
     private String name;
     private List<Member> members;
@@ -18,12 +29,20 @@ public class TeamImpl implements Team {
     private List<LoggerImpl> activityHistory;
 
     public TeamImpl(String name) {
-        this.name = name;
+        setName(name);
         this.members = new ArrayList<>();
         this.boards = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
 
         logChange(String.format("Team %s was created.", getName()));
+    }
+
+    private void setName(String name) {
+        ValidationHelpers.validateIntRange(name.length(),
+                NAME_MIN_LENGTH,
+                NAME_MAX_LENGTH,
+                NAME_LENGTH_ERROR);
+        this.name = name;
     }
 
     @Override
@@ -95,7 +114,7 @@ public class TeamImpl implements Team {
                 if (boardLocal.getName().equals(board.getName())) {
                     boards.remove(board);
                     boardLocal.removeTeam(this);
-                    logChange("Team board %s was removed.");
+                    logChange(String.format("Team board %s was removed.", board.getName()));
                     break;
                 }
             }
@@ -133,7 +152,4 @@ public class TeamImpl implements Team {
 
         return stringBuilder.toString();
     }
-
-    //something
-
 }
