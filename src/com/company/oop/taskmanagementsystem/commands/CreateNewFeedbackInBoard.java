@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class CreateNewFeedbackInBoard implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class CreateNewFeedbackInBoard extends CommandImpl {
 
     public CreateNewFeedbackInBoard(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

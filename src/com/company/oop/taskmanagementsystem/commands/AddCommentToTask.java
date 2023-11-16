@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class AddCommentToTask implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class AddCommentToTask extends CommandImpl {
 
     public AddCommentToTask(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

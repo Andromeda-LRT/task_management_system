@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class ChangeStatusOfFeedback implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class ChangeStatusOfFeedback extends CommandImpl {
 
     public ChangeStatusOfFeedback(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

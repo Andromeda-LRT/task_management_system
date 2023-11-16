@@ -16,7 +16,7 @@ public interface TaskManagementSystemRepository {
     Story createStory( String title, String description, Priority priority, Size size);
 
     Bug createBug(String title, String description,
-                  ArrayList<String> stepsToReproduce, Priority priority, Severity severity);
+                  List<String> stepsToReproduce, Priority priority, Severity severity);
 
     Feedback createFeedback(String title, String description, int rating );
 
@@ -37,4 +37,5 @@ public interface TaskManagementSystemRepository {
     Team findTeamByName(String teamName);
 
     Member findMemberByName(String memberName);
+    Board findBoardByName(String boardName);
 }

@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class UnassignTaskToMember implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class UnassignTaskToMember extends CommandImpl{
 
     public UnassignTaskToMember(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

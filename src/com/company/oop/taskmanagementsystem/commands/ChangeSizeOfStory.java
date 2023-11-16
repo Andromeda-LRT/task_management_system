@@ -5,11 +5,10 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 
 import java.util.List;
 
-public class ChangeSizeOfStory implements Command {
-    private final TaskManagementSystemRepository taskManagementSystemRepository;
+public class ChangeSizeOfStory extends CommandImpl {
 
     public ChangeSizeOfStory(TaskManagementSystemRepository taskManagementSystemRepository) {
-        this.taskManagementSystemRepository = taskManagementSystemRepository;
+        super(taskManagementSystemRepository);
     }
 
     @Override

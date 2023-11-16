@@ -1,6 +1,8 @@
 package com.company.oop.taskmanagementsystem.models;
 
 import com.company.oop.taskmanagementsystem.constants.Constants;
+import com.company.oop.taskmanagementsystem.models.contracts.Board;
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
