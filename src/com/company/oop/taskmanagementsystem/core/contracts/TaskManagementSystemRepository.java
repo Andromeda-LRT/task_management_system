@@ -38,4 +38,5 @@ public interface TaskManagementSystemRepository {
 
     Member findMemberByName(String memberName);
     Board findBoardByName(String boardName);
+    Task findTaskById(int id);
 }

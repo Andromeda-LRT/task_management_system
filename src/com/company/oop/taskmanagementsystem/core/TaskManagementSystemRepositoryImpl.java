@@ -14,11 +14,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String TEAM_DOES_NOT_EXISTS = "Team %s does not exist!";
     private static final String MEMBER_DOES_NOT_EXISTS = "Member %s does not exist!";
     private static final String BOARD_DOES_NOT_EXIST = "Board %s does not exist!";
+    private static final String TASK_DOES_NOT_EXISTS = "Task with id %d does not exist!";
 
     private int nextId;
     private final List<Member> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
@@ -37,16 +39,22 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     public Feedback createFeedback(String title, String description, int rating) {
-        return new FeedbackImpl(++nextId, title, description, rating);
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
+        tasks.add(feedback);
+        return feedback;
     }
 
     public Bug createBug(String title, String description,
                          List<String> stepsToReproduce, Priority priority, Severity severity) {
-        return new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity);
+        Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity);
+        tasks.add(bug);
+        return bug;
     }
 
     public Story createStory(String title, String description, Priority priority, Size size) {
-        return new StoryImpl(++nextId, title, description, priority, size);
+        Story story = new StoryImpl(++nextId, title, description, priority, size);
+        tasks.add(story);
+        return story;
     }
 
     public Member createMember(String name) {
@@ -108,6 +116,16 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
 
         throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXISTS, memberName));
+    }
+    @Override
+    public Task findTaskById(int id){
+        for (Task task: tasks) {
+            if (task.getId() == id){
+                return task;
+            }
+        }
+        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXISTS, id));
+
     }
 
     @Override
