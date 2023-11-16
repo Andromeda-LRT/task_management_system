@@ -38,8 +38,9 @@ public class Constants {
     public static final String BOARDS = "Boards:";
     public static final String TEAM_ADD_METHOD = "%s %s was added to Team %s successfully.";
     public static final String NOT_UNIQUE = "The name %s is not unique in the system.";
+    public static final String ALL_TEAMS = "ALL TEAMS";
 
-    //  PRIORITY
+//  PRIORITY
     public static final String PRIORITY_LOWERED = "%s priority lowered from %s to %s.";
     public static final String PRIORITY_INCREASED = "%s priority increased from %s to %s.";
     public static final String PRIORITY_IS_ALREADY_SET_TO_HIGH =
