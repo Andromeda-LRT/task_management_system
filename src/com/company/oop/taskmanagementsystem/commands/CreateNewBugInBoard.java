@@ -2,6 +2,7 @@ package com.company.oop.taskmanagementsystem.commands;
 
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class CreateNewBugInBoard implements Command {
 
     @Override
     public String execute(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         return null;
     }
