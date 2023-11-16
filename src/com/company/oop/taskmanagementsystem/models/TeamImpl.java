@@ -1,12 +1,12 @@
 package com.company.oop.taskmanagementsystem.models;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
+import com.company.oop.taskmanagementsystem.models.contracts.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamImpl {
-    private static final String ADDED_MEMBER = "%s %s was added to Team %s successfully.";
-    private static final String PRINT_HEADER =
-            "%s\n----------------------------\n%s:\n----------------------------\n";
+public class TeamImpl implements Team {
 
     private String name;
     private List<MemberImpl> members;
@@ -22,28 +22,34 @@ public class TeamImpl {
         logChange(String.format("Team %s was created.", getName()));
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public List<MemberImpl> getMembers() {
         return new ArrayList<>(members);
     }
 
+    @Override
     public List<BoardImpl> getBoards() {
         return new ArrayList<>(boards);
     }
 
+    @Override
     public List<LoggerImpl> getActivityHistory() {
         return new ArrayList<>(activityHistory);
     }
 
+    @Override
     public void addMember(MemberImpl member) {
         members.add(member);
 
-        logChange(String.format(ADDED_MEMBER, "Member", member.getName(), getName()));
+        logChange(String.format(Constants.TEAM_ADD_METHOD,"Member", member.getName(), getName()));
     }
 
+    @Override
     public void addBoard(BoardImpl board) {
         if(!boards.contains(board)) {
             boards.add(board);
@@ -60,14 +66,18 @@ public class TeamImpl {
         activityHistory.add(new LoggerImpl(change));
     }
 
+    @Override
     public String showAllTeamMembers() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format(PRINT_HEADER, getName(), "Members"));
+        stringBuilder.append(getName());
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+        stringBuilder.append(Constants.MEMBERS);
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
         for (MemberImpl member : members) {
             stringBuilder.append(member.getName()).append(System.lineSeparator());
         }
-        stringBuilder.append("----------------------------\n");
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
         return stringBuilder.toString();
     }
@@ -88,27 +98,38 @@ public class TeamImpl {
         }
     }
 
+    @Override
     public String showAllTeamBoards() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format(PRINT_HEADER, getName(), "Boards"));
+        stringBuilder.append(getName());
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+        stringBuilder.append(Constants.BOARDS);
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        for (LoggerImpl logger : getActivityHistory()) {
-            stringBuilder.append(logger.getDescription()).append(System.lineSeparator());
+        for (BoardImpl board : boards) {
+            stringBuilder.append(board.getName()).append(System.lineSeparator());
         }
-        stringBuilder.append("----------------------------");
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
         return stringBuilder.toString();
     }
 
-//    public String showTeamActivity() {
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append(String.format(PRINT_HEAER, getName(), "Boards"));
-//
-//        for (BoardImpl board : boards) {
-//            stringBuilder.append(board.getName()).append(System.lineSeparator());
-//        }
-//        stringBuilder.append("----------------------------");
-//
-//        return stringBuilder.toString();
-//    }
+    @Override
+    public String showTeamActivity() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getName());
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+        stringBuilder.append(String.format(Constants.ACTIVITY, getName()));
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+
+        for (LoggerImpl logger : getActivityHistory()) {
+            stringBuilder.append(logger.getDescription()).append(System.lineSeparator());
+        }
+        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+
+        return stringBuilder.toString();
+    }
+
+    //something
+
 }
