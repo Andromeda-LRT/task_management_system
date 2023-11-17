@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
-    private static final String TEAM_DOES_NOT_EXISTS = "Team %s does not exist!";
-    private static final String MEMBER_DOES_NOT_EXISTS = "Member %s does not exist!";
+    private static final String TEAM_DOES_NOT_EXIST = "Team %s does not exist!";
+    private static final String MEMBER_DOES_NOT_EXIST = "Member %s does not exist!";
     private static final String BOARD_DOES_NOT_EXIST = "Board %s does not exist!";
-    private static final String TASK_DOES_NOT_EXISTS = "Task with id %d does not exist!";
+    private static final String TASK_DOES_NOT_EXIST = "Task with id %d does not exist!";
 
     private int nextId;
     private final List<Member> members = new ArrayList<>();
@@ -104,7 +104,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             }
         }
 
-        throw new IllegalArgumentException(String.format(TEAM_DOES_NOT_EXISTS, teamName));
+        throw new IllegalArgumentException(String.format(TEAM_DOES_NOT_EXIST, teamName));
     }
 
     @Override
@@ -115,7 +115,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             }
         }
 
-        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXISTS, memberName));
+        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXIST, memberName));
     }
     @Override
     public Task findTaskById(int id){
@@ -124,7 +124,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 return task;
             }
         }
-        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXISTS, id));
+        throw new IllegalArgumentException(String.format(TASK_DOES_NOT_EXIST, id));
 
     }
 
