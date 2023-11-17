@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
@@ -10,6 +9,7 @@ import java.util.List;
 
 public class ShowAllTeams extends CommandImpl {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
+    private static final String NO_TEAMS_IN_REPOSITORY = "There are no teams added yet!";
 
     public ShowAllTeams(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -23,6 +23,9 @@ public class ShowAllTeams extends CommandImpl {
     }
 
     private String showAllTeams() {
+        if(getTaskManagementSystemRepository().getTeams().isEmpty()){
+            throw new IllegalArgumentException(NO_TEAMS_IN_REPOSITORY);
+        }
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(Constants.ALL_TEAMS).append(System.lineSeparator());

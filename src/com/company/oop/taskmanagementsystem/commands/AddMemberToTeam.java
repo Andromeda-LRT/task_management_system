@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
@@ -9,7 +8,7 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 import java.util.List;
 
 public class AddMemberToTeam extends CommandImpl {
-    private static final String MEMBER_ADDED_TO_TEAM = "Member %s was added to team %s!";
+    private static final String MEMBER_ADDED_TO_TEAM = "Member %s was added to team %s successfully!";
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 

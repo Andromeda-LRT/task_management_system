@@ -5,8 +5,6 @@ import com.company.oop.taskmanagementsystem.models.contracts.Board;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +78,7 @@ public class TeamImpl implements Team {
             boards.get(index).addTeam(this);
             logChange(String.format(Constants.TEAM_ADD_METHOD, "Board", board.getName(), getName()));
         }else {
-            throw new IllegalArgumentException("This team already exist in board" +
+            throw new IllegalArgumentException("This board already exist in team" +
                     getName());
         }
     }
