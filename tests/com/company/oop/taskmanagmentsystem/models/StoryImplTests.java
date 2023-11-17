@@ -1,11 +1,9 @@
 package com.company.oop.taskmanagmentsystem.models;
 
-import com.company.oop.taskmanagementsystem.models.BugImpl;
-import com.company.oop.taskmanagementsystem.models.CommentImpl;
+import com.company.oop.taskmanagementsystem.models.*;
 import com.company.oop.taskmanagementsystem.constants.Constants;
-import com.company.oop.taskmanagementsystem.models.StoryImpl;
-import com.company.oop.taskmanagementsystem.models.TaskImpl;
 import com.company.oop.taskmanagementsystem.models.contracts.Comment;
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
@@ -74,6 +72,13 @@ public class StoryImplTests {
    @Test
    public void getComments_Should_ReturnACopyOfCommentsList(){
         Assertions.assertNotNull(story.getComments());
+   }
+   @Test
+   public void setAssignee_Should_SetNewAssignee_When_assigneeIsNobody(){
+       Member member = new MemberImpl("Georgi Petrov");
+       story.setAssignee(member);
+
+       Assertions.assertEquals(member.getName(), story.getAssignee().getName());
    }
     @Test
     public void advanceStatus_Should_AdvanceStatus_WhenValid(){

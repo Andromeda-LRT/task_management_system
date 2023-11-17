@@ -29,6 +29,7 @@ public class BoardImpl implements Board {
             "The member you want to assign a task to does not exist or does not belong to a team";
     public static final String BOARD_CREATED = "Board %s has been created";
     public static final String TEAM_NOT_FOUND_ERR_MSG = "Team %s does not exist in this board.";
+
     private String name;
     private List<LoggerImpl> activityHistory;
     private List<Task> taskList;
@@ -39,6 +40,7 @@ public class BoardImpl implements Board {
         this.activityHistory = new ArrayList<>();
         this.taskList = new ArrayList<>();
         this.teamsList = new ArrayList<>();
+        //todo likely to be removed due to commands?
         logChange(String.format(BOARD_CREATED, getName()));
     }
 
@@ -98,14 +100,19 @@ public class BoardImpl implements Board {
     @Override
     public String showBoardActivity(){
         StringBuilder output = new StringBuilder(toString());
-        output.append(String.format(Constants.ACTIVITY, getName())).append(System.lineSeparator());
-        output.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
-
-        for (LoggerImpl logger : activityHistory) {
-            output.append(logger.getDescription());
+        if (activityHistory.isEmpty()){
+            output.append(toString());
+            output.append(Constants.NO_BOARD_ACTIVITY);
             output.append(System.lineSeparator());
-        }
+        } else {
+            output.append(String.format(Constants.ACTIVITY, getName())).append(System.lineSeparator());
+            output.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
+            for (LoggerImpl logger : activityHistory) {
+                output.append(logger.getDescription());
+                output.append(System.lineSeparator());
+            }
+        }
         output.append(Constants.LINE_DIVISOR);
         return output.toString();
     }
