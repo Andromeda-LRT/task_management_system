@@ -1,8 +1,9 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsystem.models.contracts.Feedback;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
+import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -28,6 +29,10 @@ public class AssignTaskToMember extends CommandImpl {
 
     private void assignTaskToMember(int id, String name){
         Member member = getTaskManagementSystemRepository().findMemberByName(name);
+        Task task = getTaskManagementSystemRepository().findTaskById(id);
+        if (task instanceof Feedback){
+            throw new IllegalArgumentException("A Feedback cannot be assigned to a member.");
+        }
         member.assignTask(getTaskManagementSystemRepository().findTaskById(id));
     }
 }

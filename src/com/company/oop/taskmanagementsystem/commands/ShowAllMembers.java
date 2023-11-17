@@ -22,10 +22,10 @@ public class ShowAllMembers extends CommandImpl {
 
     private String print() {
         if (getTaskManagementSystemRepository().getMembers().isEmpty()) {
-            return "There are no added members.";
+            throw new IllegalArgumentException("There are no added members.");
         }
         StringBuilder output = new StringBuilder();
-        output.append("---Members---");
+        output.append("---Members---").append(System.lineSeparator());
         for (Member member : getTaskManagementSystemRepository().getMembers()) {
             output.append(member.getName()).append(System.lineSeparator());
         }
