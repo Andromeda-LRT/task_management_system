@@ -1,49 +1,50 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.TaskImpl;
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.Collections;
 import java.util.List;
 
-public class SortTasksByTitle extends CommandImpl {
-    private static final String SORT_TASKS_BY_TITLE = "---SORT TASKS BY TITLE---";
-    private static final String N0_SORT_TASKS_BY_TITLE = "There is no tasks added!";
+public class ListTasksWithAssignee extends CommandImpl {
+    private static final String NO_ASSIGNEES = "There are no members added!";
+    private static final String LIST_TASKS_WITH_ASSIGNEE = "Tasks with assignee:";
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
 
-    public SortTasksByTitle(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ListTasksWithAssignee(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
     @Override
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
-        return listTasksSortByTitle();
+        return listTasksWithAssignee();
     }
 
-    private String listTasksSortByTitle() {
-        if(getTaskManagementSystemRepository().getTasks().isEmpty()){
-            throw new IllegalArgumentException(N0_SORT_TASKS_BY_TITLE);
+    private String listTasksWithAssignee() {
+        if (getTaskManagementSystemRepository().getMembers().isEmpty()) {
+            throw new IllegalArgumentException(NO_ASSIGNEES);
         }
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(SORT_TASKS_BY_TITLE).append(System.lineSeparator());
+        stringBuilder.append(LIST_TASKS_WITH_ASSIGNEE).append(System.lineSeparator());
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        List<Task> tasks = getTaskManagementSystemRepository().getTasks();
+        List<Task> tasks = getTaskManagementSystemRepository().listTasksWithAssigneeSortedByTitle();
 
         Collections.sort(tasks);
 
-        for (Task task : tasks){
-            stringBuilder.append(task.printMainInformation()).append(System.lineSeparator());
+        for(Task task:tasks){
+            stringBuilder.append(task).append(System.lineSeparator());
         }
+
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
         return stringBuilder.toString();
     }
+
+
 }
