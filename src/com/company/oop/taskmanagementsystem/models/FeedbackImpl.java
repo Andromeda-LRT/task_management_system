@@ -8,7 +8,6 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
-import static java.lang.String.format;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
 
@@ -24,6 +23,12 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     @Override
     public int getRating() {
         return rating;
+    }
+
+    @Override
+    public void changeRating(int newRating) {
+        logChange(String.format(Constants.CHANGED_RATING, getRating(), newRating));
+        setRating(newRating);
     }
 
     private void setRating(int rating) {

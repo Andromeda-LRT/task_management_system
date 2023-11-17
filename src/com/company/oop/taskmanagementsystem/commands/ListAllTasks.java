@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ListAllTasks extends CommandImpl {
     private static final String ALL_TASKS = "---ALL TASKS---";
+    private static final String NO_TASKS = "No tasks were found!";
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
 
@@ -29,6 +30,11 @@ public class ListAllTasks extends CommandImpl {
 
     private String listAllTasks() {
         StringBuilder stringBuilder = new StringBuilder();
+
+        if(getTaskManagementSystemRepository().getTasks().isEmpty()){
+            stringBuilder.append(NO_TASKS).append(System.lineSeparator());
+            return stringBuilder.toString();
+        }
 
         stringBuilder.append(ALL_TASKS).append(System.lineSeparator());
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
