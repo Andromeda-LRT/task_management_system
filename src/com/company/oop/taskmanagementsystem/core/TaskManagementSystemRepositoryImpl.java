@@ -124,7 +124,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 return task;
             }
         }
-        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXISTS, id));
+        throw new IllegalArgumentException(String.format(TASK_DOES_NOT_EXISTS, id));
 
     }
 
