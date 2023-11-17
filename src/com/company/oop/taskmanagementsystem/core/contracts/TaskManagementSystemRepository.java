@@ -28,6 +28,8 @@ public interface TaskManagementSystemRepository {
 
     List<Board> getBoards();
 
+    List<Task> getTasks();
+
     Team createTeam(String name);
 
     boolean teamExist(String teamName);
