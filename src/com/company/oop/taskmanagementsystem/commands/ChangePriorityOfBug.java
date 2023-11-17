@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
+import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
@@ -10,8 +10,7 @@ import java.util.List;
 
 public class ChangePriorityOfBug extends CommandImpl {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private static final String ID_ERROR_MESSAGE = "The id of the bug should be a number";
-    private static final String ACTION_ERROR_MESSAGE = "The second argument can be: revert or advance";
+    private static final String ACTION_ERROR_MESSAGE = "The second argument can be: increase or lower";
 
     public ChangePriorityOfBug(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -21,7 +20,7 @@ public class ChangePriorityOfBug extends CommandImpl {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String action = parameters.get(0);
-        int id = ParsingHelpers.tryParseInt(parameters.get(0), ID_ERROR_MESSAGE);
+        int id = ParsingHelpers.tryParseInt(parameters.get(0), Constants.ID_ERROR_MESSAGE);
         return printAction(id, action);
     }
 
@@ -29,14 +28,14 @@ public class ChangePriorityOfBug extends CommandImpl {
         StringBuilder output = new StringBuilder();
         Bug bug;
         switch (action.toLowerCase()) {
-            case "advance":
+            case "increase":
                 bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
                 bug.increasePriority();
                 output.append(bug.getHistoryOfChanges()
                                 .get(bug.getHistoryOfChanges().size() - 1).getDescription())
                         .append(System.lineSeparator());
                 break;
-            case "revert":
+            case "lower":
                 bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
                 bug.lowerPriority();
                 output.append(bug.getHistoryOfChanges()
