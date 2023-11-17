@@ -3,6 +3,7 @@ package com.company.oop.taskmanagementsystem.commands;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
+import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -26,17 +27,19 @@ public class ChangePriorityOfBug extends CommandImpl {
 
     private String printAction(int id, String action) {
         StringBuilder output = new StringBuilder();
-        Bug bug;
+        Task task = getTaskManagementSystemRepository().findTaskById(id);
+        if (!(task instanceof Bug)){
+            throw new IllegalArgumentException("The provided id should be of a bug.");
+        }
+        Bug bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
         switch (action.toUpperCase()) {
             case "INCREASE":
-                bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
                 bug.increasePriority();
                 output.append(bug.getHistoryOfChanges()
                                 .get(bug.getHistoryOfChanges().size() - 1).getDescription())
                         .append(System.lineSeparator());
                 break;
             case "LOWER":
-                bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
                 bug.lowerPriority();
                 output.append(bug.getHistoryOfChanges()
                         .get(bug.getHistoryOfChanges().size() - 1).getDescription())
