@@ -5,7 +5,7 @@ import com.company.oop.taskmanagementsystem.models.enums.Status;
 
 import java.util.List;
 
-public interface Task extends Identifiable, Printable, Statusable{
+public interface Task extends Identifiable, Printable, Statusable, Comparable<Task>{
     String getTitle();
 
     String getDescription();
@@ -17,4 +17,6 @@ public interface Task extends Identifiable, Printable, Statusable{
     void addComment(Comment comment);
 
     List<LoggerImpl> getHistoryOfChanges();
+
+    String printMainInformation();
 }

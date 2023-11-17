@@ -69,8 +69,9 @@ public abstract class TaskImpl implements Task {
     public Status getStatus() {
         return status;
     }
+
     @Override
-    public List<Comment> getComments(){
+    public List<Comment> getComments() {
         return new ArrayList<>(comments);
     }
 
@@ -106,16 +107,16 @@ public abstract class TaskImpl implements Task {
 //    protected abstract void advanceStatus();
 //    protected abstract void revertStatus();
 
-    public void addComment(Comment comment){
+    public void addComment(Comment comment) {
         comments.add(comment);
         logChange(Constants.COMMENT_ADDED + comment.getAuthor());
     }
 
     @Override
-    public String print(){
+    public String print() {
         StringBuilder output = new StringBuilder();
 
-        if (comments.isEmpty()){
+        if (comments.isEmpty()) {
             output.append(NO_COMMENTS_MESSAGE).append(System.lineSeparator());
         } else {
             output.append(COMMENT_HEADER).append(System.lineSeparator());
@@ -127,7 +128,18 @@ public abstract class TaskImpl implements Task {
         return output.toString();
     }
 
-    protected String printMainInformation() {
-        return String.format("'%s', [%s | %s]", title, status, description);
+    @Override
+    public String printMainInformation() {
+        return String.format(
+                "ID:%d '%s', [%s | %s]",
+                getId(),
+                getTitle(),
+                getStatus(),
+                getDescription());
+    }
+
+    @Override
+    public int compareTo(Task nextTask) {
+        return this.title.compareTo(nextTask.getTitle());
     }
 }
