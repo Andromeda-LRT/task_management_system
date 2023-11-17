@@ -19,7 +19,15 @@ public class Constants {
     public static final String STORY = "Story";
     public static final String STATUS_IS_ALREADY_SET_TO_NOT_DONE =
             "Cannot revert status, because %s status is already set to Not Done";
-// ----------------------------------------------------------------------------------------------------
+    public static final String STATUS_IS_ALREADY_SET_TO_NOT_DONE_WITH_ID =
+            "Cannot revert status, because %s with ID %d's status is already set to Not Done";
+
+    public static final String STORY_STATUS_CHANGED_MSG = "Story with ID %d had it status changed from %s to %s";
+    public static final String STORY_PRIORITY_CHANGED_MSG = "Story with ID %d had it priority changed from %s to %s";
+    public static final String STORY_SIZE_CHANGED_MSG = "Story with ID %d had it size changed from %s to %s";
+    public static final String ID_DOES_NOT_BELONG_TO_STORY = "The provided id should be of a story.";
+
+    // ----------------------------------------------------------------------------------------------------
 //                               COMMON CONSTANTS
 // ----------------------------------------------------------------------------------------------------
     public static final String TASK_CREATED = "%s '%s' was created: ";
@@ -27,6 +35,8 @@ public class Constants {
     public static final String CHANGED_ASSIGNEE = "%s assignee was changed to: %s";
     public static final String STATUS_IS_ALREADY_SET_TO_DONE =
             "Cannot advance status, because %s status is already set to Done.";
+    public static final String STATUS_IS_ALREADY_SET_TO_DONE_WITH_ID =
+            "Cannot advance status, because %s with ID %d's status is already set to Done.";
     public static final String STATUS_CHANGED = "%s status changed from %s to %s.";
     public static final String CANNOT_ADVANCE_STATUS =
             "Cannot advance status, because %s status is already set to %s.";
@@ -45,8 +55,24 @@ public class Constants {
     public static final String PRIORITY_INCREASED = "%s priority increased from %s to %s.";
     public static final String PRIORITY_IS_ALREADY_SET_TO_HIGH =
             "Cannot increase, because %s priority is already set to High";
+    public static final String PRIORITY_IS_ALREADY_SET_TO_HIGH_WITH_ID =
+            "Cannot increase, because %s with ID %d's priority is already set to High";
     public static final String PRIORITY_IS_ALREADY_SET_TO_LOW =
             "Cannot lower, because %s priority is already set to Low";
+    public static final String PRIORITY_IS_ALREADY_SET_TO_LOW_WITH_ID =
+            "Cannot lower, because %s with ID %d's priority is already set to Low";
+    public static final String NO_BOARD_ACTIVITY = "No activity in this board";
+    public static final String BOARD_NOT_FOUND_ERR_MSG = "Board %s does not exist in Team %s";
+    public static final String OPERATION_ADVANCE = "ADVANCE";
+    public static final String OPERATION_REVERT = "REVERT";
+    public static final String OPERATION_INCREASE = "INCREASE";
+    public static final String OPERATION_LOWER = "LOWER";
+    public static final String OPERATION_DECREASE = "DECREASE";
+    public static final String NO_SUCH_CHANGE_STATUS_OPERATION_ERR_MSG = "No such change status operation! " +
+            "Please input either advance or revert.";
+    public static final String NO_SUCH_CHANGE_PRIORITY_OPERATION_ERR_MSG = "No such change status operation! " +
+            "Please input either increase or lower.";
+
 
 //  SEVERITY
 
@@ -67,8 +93,12 @@ public class Constants {
             ("Story size decreased from %s to %s.");
     public static final String SIZE_ALREADY_SET_TO_LARGE =
             "Cannot increase, because story size is already set to Large";
+    public static final String SIZE_ALREADY_SET_TO_LARGE_WITH_ID =
+            "Cannot increase, because story with ID %d's size is already set to Large";
     public static final String SIZE_ALREADY_SET_TO_SMALL =
             "Cannot decrease, because story size is already set to Small";
+    public static final String SIZE_ALREADY_SET_TO_SMALL_WITH_ID =
+            "Cannot decrease, because story with ID %d's size is already set to Small";
     //Activity
     public static final String ACTIVITY = "%s ACTIVITY";
     //Member
