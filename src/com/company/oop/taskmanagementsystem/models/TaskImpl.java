@@ -80,7 +80,6 @@ public abstract class TaskImpl implements Task {
     }
 
     private void setId(int id) {
-        // TODO Validation of id
         this.id = id;
     }
 
