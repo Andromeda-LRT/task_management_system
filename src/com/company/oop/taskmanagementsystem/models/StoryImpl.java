@@ -48,6 +48,7 @@ public class StoryImpl extends TaskImpl implements Story {
         this.priority = priority;
     }
 
+    @Override
     public void setAssignee(Member assignee){
         if (assignee.getName().equalsIgnoreCase(NOBODY.getName())){
             logChange(String.format(Constants.NEW_ASSIGNEE, Constants.STORY, assignee.getName()));

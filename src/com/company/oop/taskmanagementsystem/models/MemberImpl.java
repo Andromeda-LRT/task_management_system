@@ -1,7 +1,9 @@
 package com.company.oop.taskmanagementsystem.models;
 
 import com.company.oop.taskmanagementsystem.constants.Constants;
+import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
+import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -56,6 +58,11 @@ public class MemberImpl implements Member {
     public void assignTask(Task task) {
         if(!taskList.contains(task)) {
             taskList.add(task);
+            if (task instanceof Bug) {
+                ((Bug) task).setAssignee(this);
+            } else {
+                ((Story) task).setAssignee(this);
+            }
             logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
         }else {
             throw new IllegalArgumentException("Task is already assigned to " + getName());

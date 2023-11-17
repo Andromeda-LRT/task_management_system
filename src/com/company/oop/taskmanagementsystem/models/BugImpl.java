@@ -2,6 +2,7 @@ package com.company.oop.taskmanagementsystem.models;
 
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
 import com.company.oop.taskmanagementsystem.models.enums.Severity;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
@@ -21,7 +22,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     private Severity severity;
 
-    private MemberImpl assignee;
+    private Member assignee;
 
     public BugImpl(int id, String title, String description,
                    List<String> stepsToReproduce, Priority priority, Severity severity) {
@@ -43,15 +44,16 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     private void setStepsToReproduce(List<String> stepsToReproduce) {
-        if(stepsToReproduce==null || stepsToReproduce.isEmpty()){
-            throw  new IllegalArgumentException(Constants.EMPTY_STEPS_TO_REPRODUCE);
+        if (stepsToReproduce == null || stepsToReproduce.isEmpty()) {
+            throw new IllegalArgumentException(Constants.EMPTY_STEPS_TO_REPRODUCE);
         }
         this.stepsToReproduce = stepsToReproduce;
     }
 
-    public void setAssignee(MemberImpl assignee) {
+    @Override
+    public void setAssignee(Member assignee) {
         if (assignee.getName().equalsIgnoreCase(NOBODY.getName())) {
-            logChange(String.format(Constants.NEW_ASSIGNEE,Constants.BUG, assignee.getName()));
+            logChange(String.format(Constants.NEW_ASSIGNEE, Constants.BUG, assignee.getName()));
         } else {
             logChange(String.format(Constants.CHANGED_ASSIGNEE, Constants.BUG, assignee.getName()));
         }
@@ -70,7 +72,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     @Override
     public void increasePriority() {
-        switch (getPriority()){
+        switch (getPriority()) {
             case LOW:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_INCREASED, Constants.BUG, Priority.LOW, Priority.MEDIUM));
@@ -87,7 +89,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     @Override
     public void lowerPriority() {
-        switch (getPriority()){
+        switch (getPriority()) {
             case HIGH:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_LOWERED, Constants.BUG, Priority.HIGH, Priority.MEDIUM));
@@ -109,7 +111,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     @Override
     public void increaseSeverity() {
-        switch (getSeverity()){
+        switch (getSeverity()) {
             case MINOR:
                 setSeverity(Severity.MAJOR);
                 logChange(String.format(Constants.SEVERITY_INCREASED, Severity.MINOR, Severity.MAJOR));
@@ -126,7 +128,7 @@ public class BugImpl extends TaskImpl implements Bug {
 
     @Override
     public void lowerSeverity() {
-        switch (getSeverity()){
+        switch (getSeverity()) {
             case CRITICAL:
                 setSeverity(Severity.MAJOR);
                 logChange(String.format(Constants.SEVERITY_DECREASED, Severity.CRITICAL, Severity.MAJOR));
@@ -142,31 +144,32 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
-    public MemberImpl getAssignee() {
+    public Member getAssignee() {
         return assignee;
     }
 
-        @Override
-        public void advanceStatus(){
-        switch (super.getStatus()){
+    @Override
+    public void advanceStatus() {
+        switch (super.getStatus()) {
             case ACTIVE:
                 super.setStatus(Status.DONE);
-              logChange(String.format(Constants.STATUS_CHANGED,Constants.BUG, Status.ACTIVE, Status.DONE));
+                logChange(String.format(Constants.STATUS_CHANGED, Constants.BUG, Status.ACTIVE, Status.DONE));
                 break;
             case DONE:
-             logChange(String.format(Constants.CANNOT_ADVANCE_STATUS, Constants.BUG, Status.DONE));
+                logChange(String.format(Constants.CANNOT_ADVANCE_STATUS, Constants.BUG, Status.DONE));
                 break;
         }
     }
+
     @Override
-    public void revertStatus(){
-        switch (super.getStatus()){
+    public void revertStatus() {
+        switch (super.getStatus()) {
             case DONE:
                 super.setStatus(Status.ACTIVE);
-              logChange(String.format(Constants.STATUS_CHANGED,Constants.BUG, Status.DONE, Status.ACTIVE));
+                logChange(String.format(Constants.STATUS_CHANGED, Constants.BUG, Status.DONE, Status.ACTIVE));
                 break;
             case ACTIVE:
-             logChange(String.format(Constants.CANNOT_REVERT_STATUS, Constants.BUG, Status.ACTIVE));
+                logChange(String.format(Constants.CANNOT_REVERT_STATUS, Constants.BUG, Status.ACTIVE));
                 break;
         }
     }
@@ -175,14 +178,13 @@ public class BugImpl extends TaskImpl implements Bug {
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
 
-       // stringBuilder.append(super.print());
+        // stringBuilder.append(super.print());
         stringBuilder.append("Assigned to: ");
         stringBuilder.append(getAssignee().getName());
         stringBuilder.append(System.lineSeparator());
 
         return stringBuilder.toString();
     }
-
 
 
 }

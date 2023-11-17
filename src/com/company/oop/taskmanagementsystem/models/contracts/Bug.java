@@ -14,5 +14,7 @@ public interface Bug extends Identifiable, Printable, Prioritizeable, Task {
 
    void lowerSeverity();
 
-   MemberImpl getAssignee();
+   Member getAssignee();
+
+   void setAssignee(Member assignee);
 }

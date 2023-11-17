@@ -1,7 +1,10 @@
 package com.company.oop.taskmanagmentsystem.models;
 
+import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
+import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.FeedbackImpl;
 import com.company.oop.taskmanagementsystem.models.MemberImpl;
+import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
@@ -13,11 +16,19 @@ import java.util.List;
 
 public class MemberImplTests {
 
-    MemberImpl member;
+    private MemberImpl member;
+    private Bug bug;
+    private TaskManagementSystemRepository repository;
 
     @BeforeEach
     public void setUp() {
         member = new MemberImpl(TestsConstants.VALID_MEMBER_NAME);
+        repository = new TaskManagementSystemRepositoryImpl();
+        bug = repository.createBug(TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION,
+                TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.VALID_PRIORITY,
+                TestsConstants.VALID_SEVERITY);
     }
 
     @Test
@@ -38,35 +49,24 @@ public class MemberImplTests {
 
     @Test
     public void addTask_Should_AddATaskToTheCollection() {
-        member.assignTask(new FeedbackImpl(TestsConstants.VALID_ID,
-                TestsConstants.VALID_TITLE,
-                TestsConstants.VALID_DESCRIPTION,
-                TestsConstants.VALID_RATING));
+        member.assignTask(bug);
         Assertions.assertEquals(1, member.getListOfTasks().size());
     }
 
     @Test
     public void removeTask_Should_RemoveATaskFromTheCollection() {
-        FeedbackImpl feedback = new FeedbackImpl(TestsConstants.VALID_ID,
-                TestsConstants.VALID_TITLE,
-                TestsConstants.VALID_DESCRIPTION,
-                TestsConstants.VALID_RATING);
-        member.assignTask(feedback);
-        member.unAssignTask(feedback);
+        member.assignTask(bug);
+        member.unAssignTask(bug);
         Assertions.assertEquals(0, member.getListOfTasks().size());
     }
 
     @Test
     public void getListOfTasks_Should_ReturnCopyOfList() {
-        FeedbackImpl feedback = new FeedbackImpl(TestsConstants.VALID_ID,
-                TestsConstants.VALID_TITLE,
-                TestsConstants.VALID_DESCRIPTION,
-                TestsConstants.VALID_RATING);
 
         List<Task> listOfTasks = member.getListOfTasks();
 
-        member.assignTask(feedback);
+        member.assignTask(bug);
 
-        Assertions.assertFalse(listOfTasks.contains(feedback));
+        Assertions.assertFalse(listOfTasks.contains(bug));
     }
 }
