@@ -21,22 +21,22 @@ public class ChangeStatusOfBug extends CommandImpl {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String action = parameters.get(0);
-        int id = ParsingHelpers.tryParseInt(parameters.get(0), Constants.ID_ERROR_MESSAGE);
+        int id = ParsingHelpers.tryParseInt(parameters.get(1), Constants.ID_ERROR_MESSAGE);
         return printAction(id, action);
     }
 
     private String printAction(int id, String action) {
         StringBuilder output = new StringBuilder();
         Bug bug;
-        switch (action.toLowerCase()) {
-            case "advance":
+        switch (action.toUpperCase()) {
+            case "ADVANCE":
                 bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
                 bug.advanceStatus();
                 output.append(bug.getHistoryOfChanges()
                                 .get(bug.getHistoryOfChanges().size() - 1).getDescription())
                         .append(System.lineSeparator());
                 break;
-            case "revert":
+            case "REVERT":
                 bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
                 bug.revertStatus();
                 output.append(bug.getHistoryOfChanges()

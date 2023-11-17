@@ -38,6 +38,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(boards);
     }
 
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
+    }
+
     public Feedback createFeedback(String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
         tasks.add(feedback);
