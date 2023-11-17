@@ -9,16 +9,17 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface TaskManagementSystemRepository {
     Member createMember(String name);
 
-    Story createStory( String title, String description, Priority priority, Size size);
+    Story createStory(String title, String description, Priority priority, Size size);
 
     Bug createBug(String title, String description,
                   List<String> stepsToReproduce, Priority priority, Severity severity);
 
-    Feedback createFeedback(String title, String description, int rating );
+    Feedback createFeedback(String title, String description, int rating);
 
     Board createBoard(String name);
 
@@ -27,6 +28,8 @@ public interface TaskManagementSystemRepository {
     List<Team> getTeams();
 
     List<Board> getBoards();
+
+    List<Task> getTasks();
 
     Team createTeam(String name);
 
@@ -37,6 +40,19 @@ public interface TaskManagementSystemRepository {
     Team findTeamByName(String teamName);
 
     Member findMemberByName(String memberName);
+
     Board findBoardByName(String boardName);
+
     Task findTaskById(int id);
+
+    List<Bug> findAllBugsInTasks();
+
+
+    List<Story> findAllStoriesInTasks();
+
+    List<Feedback> findAllFeedbackInTasks();
+
+    String listTasksWithAssignee();
+
+    List<Task> listTasksWithAssigneeSortedByTitle();
 }

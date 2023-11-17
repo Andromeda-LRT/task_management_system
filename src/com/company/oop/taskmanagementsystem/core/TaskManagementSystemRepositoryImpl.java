@@ -7,8 +7,10 @@ import com.company.oop.taskmanagementsystem.models.enums.Priority;
 import com.company.oop.taskmanagementsystem.models.enums.Severity;
 import com.company.oop.taskmanagementsystem.models.enums.Size;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     private static final String TEAM_DOES_NOT_EXIST = "Team %s does not exist!";
@@ -21,6 +23,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Team> teams = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
     private final List<Task> tasks = new ArrayList<>();
+
 
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
@@ -36,6 +39,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
+    }
+
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
     }
 
     public Feedback createFeedback(String title, String description, int rating) {
@@ -117,10 +124,11 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
         throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXIST, memberName));
     }
+
     @Override
-    public Task findTaskById(int id){
-        for (Task task: tasks) {
-            if (task.getId() == id){
+    public Task findTaskById(int id) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
                 return task;
             }
         }
@@ -139,5 +147,63 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         throw new IllegalArgumentException(String.format(BOARD_DOES_NOT_EXIST, boardName));
     }
 
+    @Override
+    public List<Bug> findAllBugsInTasks() {
+        List<Bug> bugs = getTasks().stream()
+                .filter(task -> task instanceof Bug)
+                .map(task -> (Bug) task)
+                .collect(Collectors.toList());
 
+        return bugs;
+    }
+
+    @Override
+    public List<Story> findAllStoriesInTasks() {
+        List<Story> stories = tasks.stream()
+                .filter(task -> task instanceof Story)
+                .map(task -> (Story) task)
+                .collect(Collectors.toList());
+
+        return stories;
+    }
+
+    @Override
+    public List<Feedback> findAllFeedbackInTasks() {
+        List<Feedback> feedbackList = tasks.stream()
+                .filter(task -> task instanceof Feedback)
+                .map(task -> (Feedback) task)
+                .collect(Collectors.toList());
+
+        return feedbackList;
+    }
+
+    @Override
+    public String listTasksWithAssignee() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Member member : getMembers()) {
+            if (!member.getListOfTasks().isEmpty()) {
+                for (Task task : member.getListOfTasks()) {
+                    stringBuilder.append(task.printMainInformation())
+                            .append(System.lineSeparator());
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public List<Task> listTasksWithAssigneeSortedByTitle() {
+        List<Task> tasks = new ArrayList<>();
+
+        for (Member member : getMembers()) {
+            if (!member.getListOfTasks().isEmpty()) {
+                for (Task task : member.getListOfTasks()) {
+                    tasks.add(task);
+                }
+            }
+        }
+
+        return tasks;
+    }
 }

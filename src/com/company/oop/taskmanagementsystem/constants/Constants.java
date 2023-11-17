@@ -13,6 +13,7 @@ public class Constants {
 // ----------------------------------------------------------------------------------------------------
     public static final String EMPTY_STEPS_TO_REPRODUCE = "There are no steps to reproduce!";
     public static final String BUG = "Bug";
+    public static final String ID_ERROR_MESSAGE = "The id of the bug should be a number";
 // ----------------------------------------------------------------------------------------------------
 //                               STORY CONSTANTS
 // ----------------------------------------------------------------------------------------------------
