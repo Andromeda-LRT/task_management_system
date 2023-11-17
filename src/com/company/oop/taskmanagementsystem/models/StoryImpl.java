@@ -2,6 +2,7 @@ package com.company.oop.taskmanagementsystem.models;
 
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.models.contracts.Comment;
+import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
 import com.company.oop.taskmanagementsystem.models.enums.Size;
@@ -14,17 +15,24 @@ public class StoryImpl extends TaskImpl implements Story {
 
     private Priority priority;
     private Size size;
+    private Member assignee;
+    private static final Member NOBODY = new MemberImpl("NO ASSIGNEE");
 
     public StoryImpl(int id, String title, String description, Priority priority, Size size){
         super(id, title, description, Status.NOT_DONE);
         setPriority(priority);
         setSize(size);
-
+        this.assignee = NOBODY;
         logChange(String.format(Constants.TASK_CREATED, Constants.STORY, getTitle()));
     }
     @Override
     public Size getSize() {
         return this.size;
+    }
+
+    @Override
+    public Member getAssignee() {
+        return this.assignee;
     }
 
     @Override
@@ -38,6 +46,15 @@ public class StoryImpl extends TaskImpl implements Story {
 
     private void setPriority(Priority priority){
         this.priority = priority;
+    }
+
+    public void setAssignee(Member assignee){
+        if (assignee.getName().equalsIgnoreCase(NOBODY.getName())){
+            logChange(String.format(Constants.NEW_ASSIGNEE, Constants.STORY, assignee.getName()));
+        } else {
+            logChange(String.format(Constants.CHANGED_ASSIGNEE, Constants.STORY, assignee.getName()));
+        }
+        this.assignee = assignee;
     }
 
     @Override
