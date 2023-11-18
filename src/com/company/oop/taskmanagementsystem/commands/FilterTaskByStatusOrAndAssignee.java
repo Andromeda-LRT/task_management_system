@@ -36,6 +36,8 @@ public class FilterTaskByStatusOrAndAssignee extends CommandImpl {
         return result;
     }
 
+    //todo think about notdone status - Reni
+    // todo case sensitive status
     private String filterForStatusAndAssignee(List<String> parameters) {
         Status status = ParsingHelpers.tryParseEnum(parameters.get(0), Status.class);
         String assignee = parameters.get(1);
@@ -48,7 +50,8 @@ public class FilterTaskByStatusOrAndAssignee extends CommandImpl {
         List<Task> tasks = addBugsAndStoriesToAList();
 
         for (Task task : tasks) {
-            if (task.getStatus().equals(status) && (task instanceof Bug ? ((Bug) task).getAssignee().getName().equals(assignee) : ((Story) task).getAssignee().getName().equals(assignee))) {
+            if (task.getStatus().equals(status) && (task instanceof Bug ? ((Bug) task).getAssignee().getName().equals(assignee) :
+                    ((Story) task).getAssignee().getName().equals(assignee))) {
                 builder.append(task.printMainInformation()).append(System.lineSeparator());
             }
         }

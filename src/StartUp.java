@@ -1,3 +1,4 @@
+import com.company.oop.taskmanagementsystem.core.TaskManagementSystemEngineImpl;
 import com.company.oop.taskmanagementsystem.models.*;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
@@ -62,5 +63,8 @@ public class StartUp {
 //     //   System.out.println(board.showBoardActivity());
 //
 //        System.out.println(member.printActivity());
+
+        TaskManagementSystemEngineImpl engine = new TaskManagementSystemEngineImpl();
+        engine.start();
     }
 }

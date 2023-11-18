@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CreateNewBugInBoard extends CommandImpl {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
-    //todo unsure if this is needed as logger adds the creation of a task.
+    //todo unsure if this is needed as logger adds the creation of a task. - Ted
     public static final String BUG_CREATED_SUCCESSFULLY = "Board %s in Team %s added Bug with title %s successfully";
 
     public CreateNewBugInBoard(TaskManagementSystemRepository taskManagementSystemRepository) {

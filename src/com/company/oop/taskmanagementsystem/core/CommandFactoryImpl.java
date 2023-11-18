@@ -79,7 +79,23 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new FilterTaskByStatusOrAndAssignee(taskManagementSystemRepository);
             case FILTERTASKWITHASSIGNEEBYSTATUSANDORASSIGNEE:
                 return new FilterTaskWithAssigneeByStatusAndOrAssignee(taskManagementSystemRepository);
-            // TODO Add the rest of commands
+
+            case SORTTASKSBYPRIORITY:
+               return null;
+               //TODO ADD the class for this command - Ted
+            case SORTTASKSBYSEVERITY:
+                return null;
+            //TODO ADD the class for this command - Ted
+            case SORTTASKSBYSIZE:
+                return null;
+            //TODO ADD the class for this command - Ted
+            case SORTTASKSBYRATING:
+                return null;
+            //TODO ADD the class for this command - Ted
+            case LISTTASKSWITHASSIGNEE:
+                return new ListTasksWithAssignee(taskManagementSystemRepository);
+            case LISTTASKWITHASSIGNEESORTEDBYTITLE:
+                return new ListTasksWithAssigneeSortedByTitle(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException();
         }

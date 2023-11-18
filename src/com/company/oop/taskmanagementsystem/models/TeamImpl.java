@@ -12,7 +12,7 @@ import static java.lang.String.format;
 
 public class TeamImpl implements Team {
 
-    //TODO Fix error messages
+    //TODO Fix error messages - Lyubima
 
     private static final int NAME_MIN_LENGTH = 5;
     private static final int NAME_MAX_LENGTH = 15;

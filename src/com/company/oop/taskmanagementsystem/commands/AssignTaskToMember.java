@@ -12,7 +12,7 @@ import java.util.List;
 public class AssignTaskToMember extends CommandImpl {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String ID_ERROR = "The first parameter should be a number.";
-    private static final String TASK_ASSIGNED = "Task with id %d was unassigned to %s";
+    private static final String TASK_ASSIGNED = "Task with id %d was assigned to %s";
 
     public AssignTaskToMember(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
