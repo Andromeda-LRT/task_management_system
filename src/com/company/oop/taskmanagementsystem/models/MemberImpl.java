@@ -72,6 +72,12 @@ public class MemberImpl implements Member {
     public void unAssignTask(Task task) {
         if(taskList.contains(task)) {
             taskList.remove(task);
+            Member member = new MemberImpl("NOBODY");
+            if (task instanceof Bug) {
+                ((Bug) task).setAssignee(member);
+            } else {
+                ((Story) task).setAssignee(member);
+            }
             logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
         }else {
             throw new IllegalArgumentException("There is no such task for " + getName());
