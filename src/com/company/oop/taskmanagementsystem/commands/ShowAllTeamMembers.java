@@ -33,10 +33,3 @@ public class ShowAllTeamMembers extends CommandImpl {
         return team.showAllTeamMembers();
     }
 }
-//TODO print should be fixed - Lyubima
-//    SHOWALLTEAMMEMBERS team123
-//        team123---------------------
-//        Members:---------------------
-//        Lyubima
-//        Reneta
-//        ---------------------

@@ -132,7 +132,7 @@ public class TeamImplTests {
 
         Assertions.assertEquals(3, team.getActivityHistory().size());
         Assertions.assertEquals(
-                "Team board TestBoard was removed.",
+                "Board TestBoard was removed from team TestTeam.",
                 team.getActivityHistory().get(2).getDescription());
     }
 }

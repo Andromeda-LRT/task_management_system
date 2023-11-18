@@ -190,5 +190,17 @@ public class BugImpl extends TaskImpl implements Bug {
         return stringBuilder.toString();
     }
 
+    @Override
+    public String printMainInformation() {
+        StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append(super.printMainInformation());
+        stringBuilder.append(" ");
+        stringBuilder.append("[" + getPriority() + " PRIORITY]");
+        stringBuilder.append(" [" + getSeverity() + " SEVERITY]");
+        stringBuilder.append("assigned to " + getAssignee());
+        stringBuilder.append(System.lineSeparator());
+
+        return stringBuilder.toString();
+    }
 }

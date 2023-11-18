@@ -83,4 +83,15 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         }
     }
 
+    @Override
+    public String printMainInformation() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(super.printMainInformation());
+        stringBuilder.append(" ");
+        stringBuilder.append("[" + getRating() + " RATING]");
+        stringBuilder.append(System.lineSeparator());
+
+        return stringBuilder.toString();
+    }
 }

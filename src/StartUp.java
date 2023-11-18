@@ -18,14 +18,14 @@ public class StartUp {
 //        MemberImpl member = new MemberImpl("Pesho Pesho");
 //        MemberImpl member1 = new MemberImpl("Gosho Gosho");
 //
-//        TeamImpl team = new TeamImpl("Alpha");
+        TeamImpl team = new TeamImpl("Alpha");
 //
 //        team.addMember(member);
 //        team.addMember(member1);
 //
-//        BoardImpl board = new BoardImpl("TestBoard1");
+//       BoardImpl board = new BoardImpl("TestBoard1");
 //
-//        team.addBoard(board);
+//      team.addBoard(board);
 //
 //        TaskImpl task1 = new StoryImpl(1, "StoryStoryStory1", "sTORYdESCRITPIONsTORYdESCRITPIONsTORYdESCRITPION   1",
 //                Priority.LOW, Size.MEDIUM);
