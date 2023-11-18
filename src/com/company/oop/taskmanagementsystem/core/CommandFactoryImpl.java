@@ -75,7 +75,11 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListAllStories(taskManagementSystemRepository);
             case LISTFEEDBACK:
                 return new ListAllFeedback(taskManagementSystemRepository);
-                // TODO Add the rest of commands
+            case FILTERTASKBYSTATUSORANDASSIGNEE:
+                return new FilterTaskByStatusOrAndAssignee(taskManagementSystemRepository);
+            case FILTERTASKWITHASSIGNEEBYSTATUSANDORASSIGNEE:
+                return new FilterTaskWithAssigneeByStatusAndOrAssignee(taskManagementSystemRepository);
+            // TODO Add the rest of commands
             default:
                 throw new IllegalArgumentException();
         }
