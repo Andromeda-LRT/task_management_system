@@ -72,7 +72,7 @@ public class MemberImpl implements Member {
     public void unAssignTask(Task task) {
         if(taskList.contains(task)) {
             taskList.remove(task);
-            Member member = new MemberImpl("NOBODY");
+            Member member = new MemberImpl("NO ASSIGNEE");
             if (task instanceof Bug) {
                 ((Bug) task).setAssignee(member);
             } else {
