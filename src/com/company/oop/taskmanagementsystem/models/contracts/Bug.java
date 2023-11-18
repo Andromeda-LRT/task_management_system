@@ -16,5 +16,5 @@ public interface Bug extends Identifiable, Printable, Prioritizeable, Task {
 
    Member getAssignee();
 
-   void setAssignee(Member assignee);
+   void changeAssignee(Member assignee);
 }

@@ -59,9 +59,9 @@ public class MemberImpl implements Member {
         if(!taskList.contains(task)) {
             taskList.add(task);
             if (task instanceof Bug) {
-                ((Bug) task).setAssignee(this);
+                ((Bug) task).changeAssignee(this);
             } else {
-                ((Story) task).setAssignee(this);
+                ((Story) task).changeAssignee(this);
             }
             logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
         }else {
@@ -74,9 +74,9 @@ public class MemberImpl implements Member {
             taskList.remove(task);
             Member member = new MemberImpl("NO ASSIGNEE");
             if (task instanceof Bug) {
-                ((Bug) task).setAssignee(member);
+                ((Bug) task).changeAssignee(member);
             } else {
-                ((Story) task).setAssignee(member);
+                ((Story) task).changeAssignee(member);
             }
             logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
         }else {

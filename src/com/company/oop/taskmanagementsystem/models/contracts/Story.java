@@ -8,5 +8,5 @@ public interface Story extends Prioritizeable, Task {
      Member getAssignee();
      void increaseSize();
      void decreaseSize();
-     void setAssignee(Member assignee);
+     void changeAssignee(Member member);
 }

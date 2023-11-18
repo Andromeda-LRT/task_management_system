@@ -51,6 +51,10 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+    public void changeAssignee(Member assignee){
+        setAssignee(assignee);
+    }
+
     public void setAssignee(Member assignee) {
         if (assignee.getName().equalsIgnoreCase(NOBODY.getName())) {
             logChange(String.format(Constants.NEW_ASSIGNEE, Constants.BUG, assignee.getName()));

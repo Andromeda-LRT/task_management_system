@@ -18,7 +18,7 @@ public class UnassignTaskToPersonTests {
     private static final String VALID_ID = "1";
     private TaskManagementSystemRepository repository;
     private UnassignTaskToMember unassignTaskToMember;
-    private List<String> parameters;;
+    private List<String> parameters;
     private Bug bug;
     @BeforeEach
     public void setUp() {
