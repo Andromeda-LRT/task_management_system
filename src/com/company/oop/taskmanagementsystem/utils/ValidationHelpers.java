@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ValidationHelpers {
 
-    public static final String INVALID_NUM_OF_ARGS_ERR_MSG = "Invalid number of arguments. Expected %d; received %d.";
+    public static final String INVALID_NUM_OF_ARGS_ERR_MSG = "Invalid number of arguments. Expected %d received %d.";
 
     public static void validateIntRange(int value, int min, int max, String message) {
         if (value < min || value > max) {

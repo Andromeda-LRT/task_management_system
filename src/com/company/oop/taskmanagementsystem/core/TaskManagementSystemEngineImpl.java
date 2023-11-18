@@ -1,8 +1,11 @@
 package com.company.oop.taskmanagementsystem.core;
 
+import com.company.oop.taskmanagementsystem.commands.contracts.Command;
+import com.company.oop.taskmanagementsystem.core.contracts.CommandFactory;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemEngine;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -11,9 +14,11 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
     private static final String OPERATION_CANNOT_BE_EMPTY_ERROR = "Operation cannot be empty";
     private static final String SHUT_DOWN_COMMAND = "Exit";
     private final TaskManagementSystemRepository taskManagementSystemRepository;
+    private final CommandFactory commandFactory;
 
     public TaskManagementSystemEngineImpl(){
         this.taskManagementSystemRepository = new TaskManagementSystemRepositoryImpl();
+        this.commandFactory = new CommandFactoryImpl();
     }
 
     /**
@@ -51,9 +56,10 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
 
     private void processOperation(String input){
         String operationName = extractOperationName(input);
+        Command command = commandFactory.createCommandFromCommandName(operationName, taskManagementSystemRepository);
         List<String> parameters = extractOperationParameters(input);
-        // todo to implement using commandFactory and execute method
-        //todo to print the final result
+        String commandResult = command.execute(parameters);
+        System.out.println(commandResult);
     }
     /**
      * From the received line in input only the first word is extracted, which is expected to be the operation
@@ -75,11 +81,11 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
      * @return A list of the parameters needed to execute the operation
      */
     private List<String> extractOperationParameters(String input){
-        //todo to consider a specific logic when input is a comment
-
-        String[] operationParts = input.split(" ");
-        List<String> parameters = Arrays.asList(operationParts);
-        parameters.remove(0);
+        String[] commandParts = input.split(" ");
+        ArrayList<String> parameters = new ArrayList<>();
+        for (int i = 1; i < commandParts.length; i++) {
+            parameters.add(commandParts[i]);
+        }
         return parameters;
     }
 

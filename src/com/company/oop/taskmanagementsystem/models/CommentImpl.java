@@ -11,7 +11,6 @@ public class CommentImpl implements Comment {
     public static final String NEW_LINE_DASH = "----------";
     private String author;
     private String content;
-    // todo unsure of parameters order
     public CommentImpl(String author, String content){
         setAuthor(author);
         setContent(content);

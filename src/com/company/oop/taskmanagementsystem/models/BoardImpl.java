@@ -40,7 +40,7 @@ public class BoardImpl implements Board {
         this.activityHistory = new ArrayList<>();
         this.taskList = new ArrayList<>();
         this.teamsList = new ArrayList<>();
-        //todo likely to be removed due to commands?
+        //todo likely to be removed due to commands? - Ted
         logChange(String.format(BOARD_CREATED, getName()));
     }
 
@@ -159,7 +159,7 @@ public class BoardImpl implements Board {
        }
       }
     }
-    //todo add logchange to addTeam and its name
+    //todo add logchange to addTeam and its name - Ted
     @Override
     public void addTeam(Team teamToAdd){
         if(!teamsList.contains(teamToAdd)){
@@ -170,7 +170,7 @@ public class BoardImpl implements Board {
                     getName());
         }
     }
-    //todo add logchange to removeTeam
+    //todo add logchange to removeTeam - Ted
     @Override
     public void removeTeam(Team team) {
         if (teamsList.isEmpty()){

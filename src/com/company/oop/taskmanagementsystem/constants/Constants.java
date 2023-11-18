@@ -25,7 +25,7 @@ public class Constants {
             "Cannot revert status, because %s with ID %d's status is already set to Not Done";
 
     public static final String STORY_STATUS_CHANGED_MSG = "Story with ID %d had it status changed from %s to %s";
-    public static final String STORY_PRIORITY_CHANGED_MSG = "Story with ID %d had it priority changed from %s to %s";
+    public static final String STORY_PRIORITY_CHANGED_MSG = "Story with ID %d had its priority changed from %s to %s";
     public static final String STORY_SIZE_CHANGED_MSG = "Story with ID %d had it size changed from %s to %s";
     public static final String ID_DOES_NOT_BELONG_TO_STORY = "The provided id should be of a story.";
 

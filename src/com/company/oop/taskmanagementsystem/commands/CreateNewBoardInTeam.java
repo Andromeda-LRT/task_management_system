@@ -36,3 +36,8 @@ public class CreateNewBoardInTeam extends CommandImpl {
         return String.format(BOARD_ADDED_TO_TEAM, boardName, teamName);
     }
 }
+// TODO the board should be unique in team - Lyubima
+// but have problem with this command and it add the same board
+// two or more times
+//    CREATENEWBOARDINTEAM board1 team123
+//        Board board1 was created in team team123.

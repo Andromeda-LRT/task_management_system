@@ -127,3 +127,4 @@ public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
         return string.toString().trim();
     }
 }
+// todo fix case sensitive status - Reni
