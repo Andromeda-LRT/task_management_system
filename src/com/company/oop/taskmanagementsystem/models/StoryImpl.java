@@ -188,11 +188,9 @@ public class StoryImpl extends TaskImpl implements Story {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(super.printMainInformation());
-        stringBuilder.append(" ");
         stringBuilder.append("[" + getPriority() + " PRIORITY]");
-        stringBuilder.append(" [" + getSize() + " SIZE]");
-        stringBuilder.append("assigned to " + getAssignee());
-        stringBuilder.append(System.lineSeparator());
+        stringBuilder.append("[" + getSize() + " SIZE]");
+        stringBuilder.append(" assigned to " + getAssignee().getName());
 
         return stringBuilder.toString();
     }

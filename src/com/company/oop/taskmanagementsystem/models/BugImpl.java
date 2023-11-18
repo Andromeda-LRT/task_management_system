@@ -182,7 +182,6 @@ public class BugImpl extends TaskImpl implements Bug {
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        // stringBuilder.append(super.print());
         stringBuilder.append("Assigned to: ");
         stringBuilder.append(getAssignee().getName());
         stringBuilder.append(System.lineSeparator());
@@ -195,11 +194,9 @@ public class BugImpl extends TaskImpl implements Bug {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(super.printMainInformation());
-        stringBuilder.append(" ");
         stringBuilder.append("[" + getPriority() + " PRIORITY]");
-        stringBuilder.append(" [" + getSeverity() + " SEVERITY]");
-        stringBuilder.append("assigned to " + getAssignee());
-        stringBuilder.append(System.lineSeparator());
+        stringBuilder.append("[" + getSeverity() + " SEVERITY]");
+        stringBuilder.append(" assigned to " + getAssignee().getName());
 
         return stringBuilder.toString();
     }
