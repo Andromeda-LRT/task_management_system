@@ -75,6 +75,12 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListAllStories(taskManagementSystemRepository);
             case LISTFEEDBACK:
                 return new ListAllFeedback(taskManagementSystemRepository);
+            case SORTBUGBY:
+                return new SortBugByTitlePrioritySeverity(taskManagementSystemRepository);
+            case SORTSTORYBY:
+                return new SortStoryByTitlePrioritySize(taskManagementSystemRepository);
+            case SORTFEEDBACKBY:
+                return new SortFeedbackByTitleRating(taskManagementSystemRepository);
                 // TODO Add the rest of commands
             default:
                 throw new IllegalArgumentException();

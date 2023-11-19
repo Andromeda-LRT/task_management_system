@@ -41,7 +41,10 @@ public enum CommandType {
 
     LISTBUGS,
     LISTSTORIES,
-    LISTFEEDBACK;
+    LISTFEEDBACK,
+    SORTBUGBY,
+    SORTSTORYBY,
+    SORTFEEDBACKBY;
 
 //    List bugs/stories/feedback only.
 //
