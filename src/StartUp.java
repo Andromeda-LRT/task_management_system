@@ -1,8 +1,16 @@
+import com.company.oop.taskmanagementsystem.core.TaskManagementSystemEngineImpl;
 import com.company.oop.taskmanagementsystem.models.*;
+import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
+import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
 import com.company.oop.taskmanagementsystem.models.enums.Size;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StartUp {
     public static void main(String[] args) {
@@ -55,5 +63,8 @@ public class StartUp {
 //     //   System.out.println(board.showBoardActivity());
 //
 //        System.out.println(member.printActivity());
+
+        TaskManagementSystemEngineImpl engine = new TaskManagementSystemEngineImpl();
+        engine.start();
     }
 }

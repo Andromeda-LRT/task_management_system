@@ -128,6 +128,9 @@ public abstract class TaskImpl implements Task {
         return output.toString();
     }
 
+    //TODO override this method in - Lyubima
+    // bug story feedback classes
+    // print priority/severity/rating
     @Override
     public String printMainInformation() {
         return String.format(

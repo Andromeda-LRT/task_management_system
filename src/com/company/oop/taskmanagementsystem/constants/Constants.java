@@ -8,6 +8,7 @@ public class Constants {
     public static final String NEGATIVE_RATING_ERROR = "The rating should be a positive number.";
     public static final String STATUS_IS_ALREADY_SET_TO_NEW =
             "Cannot revert status, because %s status is already set to New";
+    public static final String CHANGED_RATING = "Rating of feedback was changed from %d to %d.";
 // ----------------------------------------------------------------------------------------------------
 //                               BUG CONSTANTS
 // ----------------------------------------------------------------------------------------------------
@@ -24,7 +25,7 @@ public class Constants {
             "Cannot revert status, because %s with ID %d's status is already set to Not Done";
 
     public static final String STORY_STATUS_CHANGED_MSG = "Story with ID %d had it status changed from %s to %s";
-    public static final String STORY_PRIORITY_CHANGED_MSG = "Story with ID %d had it priority changed from %s to %s";
+    public static final String STORY_PRIORITY_CHANGED_MSG = "Story with ID %d had its priority changed from %s to %s";
     public static final String STORY_SIZE_CHANGED_MSG = "Story with ID %d had it size changed from %s to %s";
     public static final String ID_DOES_NOT_BELONG_TO_STORY = "The provided id should be of a story.";
 

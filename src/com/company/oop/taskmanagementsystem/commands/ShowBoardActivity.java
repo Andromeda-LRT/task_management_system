@@ -37,3 +37,10 @@ public class ShowBoardActivity extends CommandImpl{
         throw new IllegalArgumentException(String.format(Constants.BOARD_NOT_FOUND_ERR_MSG, boardName, teamName));
     }
 }
+//todo print should be fixed - Ted
+//Board: board1 - > remove this line
+//        board1 ACTIVITY
+//        ---------------------
+//        Board board1 has been created
+//        Team was added to board board1 -> add team name
+//        ---------------------

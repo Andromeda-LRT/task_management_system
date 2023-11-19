@@ -21,6 +21,7 @@ public class ShowAllMembers extends CommandImpl {
     }
 
     private String print() {
+        //TODO FIX line separator - LINE_DIVISOR - Reni
         if (getTaskManagementSystemRepository().getMembers().isEmpty()) {
             throw new IllegalArgumentException("There are no added members.");
         }
