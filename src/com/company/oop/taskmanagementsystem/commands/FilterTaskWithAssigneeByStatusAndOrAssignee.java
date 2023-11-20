@@ -67,7 +67,7 @@ public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
         StringBuilder output = new StringBuilder();
         boolean isStatus = false;
         for (Status status : Status.values()) {
-            if (status.toString().equals(parameter)) {
+            if ((status.toString().replace(" ", "_")).equalsIgnoreCase(parameter)) {
                 isStatus = true;
                 break;
             }
@@ -96,7 +96,7 @@ public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
                 .append(System.lineSeparator());
         List<Task> tasks = addBugsAndStoriesToAList();
         for (Task task : tasks) {
-            if (task.getStatus().toString().equalsIgnoreCase(parameter) &&
+            if ((task.getStatus().toString().replace(" ", "_")).equalsIgnoreCase(parameter) &&
                     (task instanceof Bug ?
                             ((Bug) task).getAssignee().getName()!="NO ASSIGNEE" :
                             ((Story) task).getAssignee().getName()!="NO ASSIGNEE"))
@@ -127,4 +127,3 @@ public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
         return string.toString().trim();
     }
 }
-// todo fix case sensitive status - Reni

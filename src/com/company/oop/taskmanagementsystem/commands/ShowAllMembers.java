@@ -21,12 +21,12 @@ public class ShowAllMembers extends CommandImpl {
     }
 
     private String print() {
-        //TODO FIX line separator - LINE_DIVISOR - Reni
         if (getTaskManagementSystemRepository().getMembers().isEmpty()) {
             throw new IllegalArgumentException("There are no added members.");
         }
         StringBuilder output = new StringBuilder();
-        output.append("---Members---").append(System.lineSeparator());
+        output.append("Members").append(System.lineSeparator());
+        output.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
         for (Member member : getTaskManagementSystemRepository().getMembers()) {
             output.append(member.getName()).append(System.lineSeparator());
         }

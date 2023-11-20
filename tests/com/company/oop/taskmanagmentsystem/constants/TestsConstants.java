@@ -28,5 +28,10 @@ public class TestsConstants {
     public static final String VALID_MEMBER_NAME = "Ivancho";
     public static final String INVALID_MEMBER_NAME ="Ivo";
     public static final String VALID_TEAM_NAME = "testTeam";
+    public static final String FILTERED_TITLES = "---Titles filtered by %s ---";
+    public static final String BUG_SORTED_BY_GIVEN_PARAMETER = "---BUG SORTED BY %S---";
+    public static final String FEEDBACK_SORTED_BY_GIVEN_PARAMETER = "---FEEDBACK SORTED BY %S---";
+    public static final String STORY_SORTED_BY_GIVEN_PARAMETER = "---STORY SORTED BY %S---";
+
 
 }

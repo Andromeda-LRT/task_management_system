@@ -2,6 +2,7 @@ package com.company.oop.taskmanagementsystem.models.enums;
 
 public enum Size {
     SMALL,
+
     MEDIUM,
     LARGE;
 
