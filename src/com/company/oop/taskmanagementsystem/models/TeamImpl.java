@@ -5,6 +5,7 @@ import com.company.oop.taskmanagementsystem.models.contracts.Board;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +13,15 @@ import static java.lang.String.format;
 
 public class TeamImpl implements Team {
 
-    //TODO Fix error messages - Lyubima
-
     private static final int NAME_MIN_LENGTH = 5;
     private static final int NAME_MAX_LENGTH = 15;
     private static final String NAME_LENGTH_ERROR = format(
             "The name must be between %s and %s characters long!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
-
+    private static final String BOARD_EXISTS = "Board with name %s already exist in team %s";
+    private static final String BOARD_REMOVED = "Board %s was removed from team %s.";
+    private static final String NO_BOARDS_IN_TEAM = "There are no boards in this team %s";
     private String name;
     private List<Member> members;
     private List<Board> boards;
@@ -67,20 +68,33 @@ public class TeamImpl implements Team {
     public void addMember(Member member) {
         members.add(member);
 
-        logChange(String.format(Constants.TEAM_ADD_METHOD,"Member", member.getName(), getName()));
+        logChange(String.format(Constants.TEAM_ADD_METHOD, "Member", member.getName(), getName()));
     }
 
     @Override
     public void addBoard(Board board) {
-        if(!boards.contains(board)) {
+        if (!boards.contains(board) && !isBoardNameExist(board.getName())) {
             boards.add(board);
             int index = boards.indexOf(board);
             boards.get(index).addTeam(this);
             logChange(String.format(Constants.TEAM_ADD_METHOD, "Board", board.getName(), getName()));
-        }else {
-            throw new IllegalArgumentException("This board already exist in team" +
-                    getName());
+        } else {
+            throw new IllegalArgumentException(
+                    String.format(
+                            BOARD_EXISTS,
+                            board.getName(),
+                            getName())
+            );
         }
+    }
+
+    private boolean isBoardNameExist(String name) {
+        for (Board board : getBoards()) {
+            if (board.getName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void logChange(String change) {
@@ -90,10 +104,13 @@ public class TeamImpl implements Team {
     @Override
     public String showAllTeamMembers() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getName());
-        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
-        stringBuilder.append(Constants.MEMBERS);
-        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+        stringBuilder.append(
+                 getName())
+                .append(" ")
+                .append(Constants.MEMBERS)
+                .append(System.lineSeparator())
+                .append(Constants.LINE_DIVISOR)
+                .append(System.lineSeparator());
 
         for (Member member : members) {
             stringBuilder.append(member.getName()).append(System.lineSeparator());
@@ -105,14 +122,14 @@ public class TeamImpl implements Team {
 
     @Override
     public void removeBoard(Board board) {
-        if (boards.isEmpty()){
-            throw new IllegalArgumentException("There are no boards in this team");
+        if (boards.isEmpty()) {
+            throw new IllegalArgumentException(String.format(NO_BOARDS_IN_TEAM, getBoards()));
         } else {
             for (Board boardLocal : boards) {
                 if (boardLocal.getName().equals(board.getName())) {
                     boards.remove(board);
                     boardLocal.removeTeam(this);
-                    logChange(String.format("Team board %s was removed.", board.getName()));
+                    logChange(String.format(BOARD_REMOVED, board.getName(), getName()));
                     break;
                 }
             }
@@ -122,9 +139,11 @@ public class TeamImpl implements Team {
     @Override
     public String showAllTeamBoards() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getName());
-        stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
-        stringBuilder.append(Constants.BOARDS);
+
+        stringBuilder.append(getName())
+                .append(" ")
+                .append(Constants.BOARDS)
+                .append(System.lineSeparator());
         stringBuilder.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
         for (Board board : boards) {

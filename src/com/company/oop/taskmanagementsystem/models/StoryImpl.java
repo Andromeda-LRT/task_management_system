@@ -18,13 +18,14 @@ public class StoryImpl extends TaskImpl implements Story {
     private Member assignee;
     private static final Member NOBODY = new MemberImpl("NO ASSIGNEE");
 
-    public StoryImpl(int id, String title, String description, Priority priority, Size size){
+    public StoryImpl(int id, String title, String description, Priority priority, Size size) {
         super(id, title, description, Status.NOT_DONE);
         setPriority(priority);
         setSize(size);
         this.assignee = NOBODY;
         logChange(String.format(Constants.TASK_CREATED, Constants.STORY, getTitle()));
     }
+
     @Override
     public Size getSize() {
         return this.size;
@@ -36,25 +37,25 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    public Priority getPriority(){
+    public Priority getPriority() {
         return this.priority;
     }
 
-    private void setSize(Size size){
+    private void setSize(Size size) {
         this.size = size;
     }
 
-    private void setPriority(Priority priority){
+    private void setPriority(Priority priority) {
         this.priority = priority;
     }
 
     @Override
-    public void changeAssignee(Member member){
+    public void changeAssignee(Member member) {
         setAssignee(member);
     }
 
-    public void setAssignee(Member assignee){
-        if (assignee.getName().equalsIgnoreCase(NOBODY.getName())){
+    public void setAssignee(Member assignee) {
+        if (assignee.getName().equalsIgnoreCase(NOBODY.getName())) {
             logChange(String.format(Constants.NEW_ASSIGNEE, Constants.STORY, assignee.getName()));
         } else {
             logChange(String.format(Constants.CHANGED_ASSIGNEE, Constants.STORY, assignee.getName()));
@@ -63,7 +64,7 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
-    public List<Comment> getComments(){
+    public List<Comment> getComments() {
         return super.getComments();
     }
 
@@ -86,24 +87,24 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public void revertStatus() {
-        switch (super.getStatus()){
+        switch (super.getStatus()) {
             case DONE:
                 super.setStatus(Status.IN_PROGRESS);
                 logChange(String.format(Constants.STATUS_CHANGED, Constants.STORY, Status.DONE, Status.IN_PROGRESS));
                 break;
             case IN_PROGRESS:
                 super.setStatus(Status.NOT_DONE);
-              logChange(String.format(Constants.STATUS_CHANGED, Constants.STORY, Status.IN_PROGRESS, Status.NOT_DONE));
+                logChange(String.format(Constants.STATUS_CHANGED, Constants.STORY, Status.IN_PROGRESS, Status.NOT_DONE));
                 break;
             case NOT_DONE:
-             logChange(String.format(Constants.STATUS_IS_ALREADY_SET_TO_NOT_DONE, Constants.STORY));
+                logChange(String.format(Constants.STATUS_IS_ALREADY_SET_TO_NOT_DONE, Constants.STORY));
                 break;
         }
     }
 
     @Override
     public void increasePriority() {
-        switch (getPriority()){
+        switch (getPriority()) {
             case LOW:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_INCREASED, Constants.STORY, Priority.LOW, Priority.MEDIUM));
@@ -120,7 +121,7 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public void lowerPriority() {
-        switch (getPriority()){
+        switch (getPriority()) {
             case HIGH:
                 setPriority(Priority.MEDIUM);
                 logChange(String.format(Constants.PRIORITY_LOWERED, Constants.STORY, Priority.HIGH, Priority.MEDIUM));
@@ -134,9 +135,10 @@ public class StoryImpl extends TaskImpl implements Story {
                 break;
         }
     }
+
     @Override
     public void increaseSize() {
-        switch (getSize()){
+        switch (getSize()) {
             case SMALL:
                 setSize(Size.MEDIUM);
                 logChange(String.format(Constants.SIZE_INCREASED, Size.SMALL, Size.MEDIUM));
@@ -153,7 +155,7 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public void decreaseSize() {
-        switch (getSize()){
+        switch (getSize()) {
             case LARGE:
                 setSize(Size.MEDIUM);
                 logChange(String.format(Constants.SIZE_DECREASED, Size.LARGE, Size.MEDIUM));
@@ -167,6 +169,7 @@ public class StoryImpl extends TaskImpl implements Story {
                 break;
         }
     }
+
     @Override
     public String print() {
         StringBuilder output = new StringBuilder();
@@ -178,5 +181,17 @@ public class StoryImpl extends TaskImpl implements Story {
         // the new line could be removed later on
         output.append(System.lineSeparator());
         return output.toString();
+    }
+
+    @Override
+    public String printMainInformation() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(super.printMainInformation());
+        stringBuilder.append("[" + getPriority() + " PRIORITY]");
+        stringBuilder.append("[" + getSize() + " SIZE]");
+        stringBuilder.append(" assigned to " + getAssignee().getName());
+
+        return stringBuilder.toString();
     }
 }
