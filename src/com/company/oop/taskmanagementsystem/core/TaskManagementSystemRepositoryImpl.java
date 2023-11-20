@@ -24,46 +24,75 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Board> boards = new ArrayList<>();
     private final List<Task> tasks = new ArrayList<>();
 
+    private final List<Bug> bugsList = new ArrayList<>();
+    private final List<Story> storiesList = new ArrayList<>();
+    private final List<Feedback> feedbackList = new ArrayList<>();
 
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
     }
 
+    @Override
     public List<Member> getMembers() {
         return new ArrayList<>(members);
     }
 
+    @Override
     public List<Team> getTeams() {
         return new ArrayList<>(teams);
     }
 
+    @Override
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
 
+    @Override
     public List<Task> getTasks() {
         return new ArrayList<>(tasks);
     }
 
+    @Override
+    public List<Bug> getBugs() {
+        return new ArrayList<>(bugsList);
+    }
+
+    @Override
+    public List<Story> getStories() {
+        return new ArrayList<>(storiesList);
+    }
+
+    @Override
+    public List<Feedback> getFeedback() {
+        return new ArrayList<>(feedbackList);
+    }
+
+    @Override
     public Feedback createFeedback(String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
+        feedbackList.add(feedback);
         tasks.add(feedback);
         return feedback;
     }
 
+    @Override
     public Bug createBug(String title, String description,
                          List<String> stepsToReproduce, Priority priority, Severity severity) {
         Bug bug = new BugImpl(++nextId, title, description, stepsToReproduce, priority, severity);
+        bugsList.add(bug);
         tasks.add(bug);
         return bug;
     }
 
+    @Override
     public Story createStory(String title, String description, Priority priority, Size size) {
         Story story = new StoryImpl(++nextId, title, description, priority, size);
+        storiesList.add(story);
         tasks.add(story);
         return story;
     }
 
+    @Override
     public Member createMember(String name) {
         ValidationHelpers.validateNameIsUniqueInMemberTeamBoard(name, members, teams, boards);
         Member member = new MemberImpl(name);
@@ -71,12 +100,14 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return member;
     }
 
+    @Override
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
         boards.add(board);
         return board;
     }
 
+    @Override
     public Team createTeam(String name) {
         ValidationHelpers.validateNameIsUniqueInMemberTeamBoard(name, members, teams, boards);
         Team team = new TeamImpl(name);
@@ -84,6 +115,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return team;
     }
 
+    @Override
     public boolean teamExist(String teamName) {
         for (Team team : getTeams()) {
             if (team.getName().equalsIgnoreCase(teamName)) {
@@ -94,6 +126,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return false;
     }
 
+    @Override
     public boolean memberExist(String memberName) {
         for (Member member : getMembers()) {
             if (member.getName().equalsIgnoreCase(memberName)) {
@@ -175,6 +208,16 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .collect(Collectors.toList());
 
         return feedbackList;
+    }
+
+    @Override
+    public Feedback findFeedbackById(int id) {
+        for (Feedback feedbackLocal : feedbackList) {
+            if (feedbackLocal.getId() == id) {
+                return feedbackLocal;
+            }
+        }
+        return null;
     }
 
     @Override
