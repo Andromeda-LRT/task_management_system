@@ -205,4 +205,15 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
         return tasks;
     }
+
+    @Override
+    public List<Task> filterTaskByTitle(String target) {
+
+        return tasks
+                .stream()
+                .filter(element -> element.getTitle().contains(target))
+                .collect(Collectors.toList());
+    }
+
+
 }

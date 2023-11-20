@@ -55,4 +55,5 @@ public interface TaskManagementSystemRepository {
     String listTasksWithAssignee();
 
     List<Task> listTasksWithAssigneeSortedByTitle();
+    List<Task> filterTaskByTitle(String target);
 }
