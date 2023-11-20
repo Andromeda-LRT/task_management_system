@@ -85,19 +85,17 @@ public class SortStoryByTitlePrioritySizeTests {
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        Comparator<Story> compareByPrio = new Comparator<>() {
-            @Override
-            public int compare(Story o1, Story o2) {
-                return o1.getPriority().compareTo(o2.getPriority());
-            }
-        };
+//        Comparator<Story> compareByPrio = new Comparator<>() {
+//            @Override
+//            public int compare(Story o1, Story o2) {
+//                return o1.getPriority().compareTo(o2.getPriority());
+//            }
+//        };
 
-        storiesForTest.sort(compareByPrio.reversed());
+        storiesForTest.sort((s1, s2) -> s2.getPriority().compareTo(s1.getPriority()));
 
         for (Story story : storiesForTest) {
             sb.append(story.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", parameters.get(0).toUpperCase()))
-                    .append(story.getPriority()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
@@ -115,19 +113,17 @@ public class SortStoryByTitlePrioritySizeTests {
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        Comparator<Story> compareBySize = new Comparator<>() {
-            @Override
-            public int compare(Story o1, Story o2) {
-                return o1.getSize().compareTo(o2.getSize());
-            }
-        };
+//        Comparator<Story> compareBySize = new Comparator<>() {
+//            @Override
+//            public int compare(Story o1, Story o2) {
+//                return o1.getSize().compareTo(o2.getSize());
+//            }
+//        };
 
-        storiesForTest.sort(compareBySize.reversed());
+        storiesForTest.sort((s1, s2) -> s2.getSize().compareTo(s1.getSize()));
 
         for (Story story : storiesForTest) {
             sb.append(story.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", parameters.get(0).toUpperCase()))
-                    .append(story.getSize()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 

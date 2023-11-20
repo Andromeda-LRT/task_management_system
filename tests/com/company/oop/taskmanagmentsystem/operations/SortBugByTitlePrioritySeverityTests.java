@@ -88,8 +88,6 @@ public class SortBugByTitlePrioritySeverityTests {
 
         for (Bug bug : bugsForTest) {
             sb.append(bug.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", parameters.get(0).toUpperCase()))
-                    .append(bug.getPriority()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
@@ -110,11 +108,8 @@ public class SortBugByTitlePrioritySeverityTests {
         };
 
         bugsForTest.sort(compareBySeverity);
-
         for (Bug bug : bugsForTest) {
             sb.append(bug.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", parameters.get(0).toUpperCase()))
-                    .append(bug.getSeverity()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 

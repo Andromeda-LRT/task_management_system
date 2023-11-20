@@ -59,25 +59,21 @@ public class SortBugByTitlePrioritySeverity extends CommandImpl {
     }
 
     private String sortBugsByPriority(StringBuilder sb, String sortOperation, List<Bug> bugs){
-        // discovered while trying to implement comparator anonymous interface and got offered
-        // this by InteliJ. Leaving it for reference, but managed successfully implement comparator.
-       // Comparator<Bug> compareByPriority = Comparator.comparing(Prioritizeable::getPriority);
-        Comparator<Bug> compareByPrio = new Comparator<>() {
-            @Override
-            public int compare(Bug o1, Bug o2) {
-                return o1.getPriority().compareTo(o2.getPriority());
-            }
-        };
+//        Comparator<Bug> compareByPrio = new Comparator<>() {
+//            @Override
+//            public int compare(Bug o1, Bug o2) {
+//                return o1.getPriority().compareTo(o2.getPriority());
+//            }
+//        };
         sb.append(String.format(BUG_SORTED_BY_GIVEN_PARAMETER, sortOperation))
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        bugs.sort(compareByPrio.reversed());
+        //bugs.sort(compareByPrio.reversed());
+        bugs.sort((b1, b2) -> b2.getPriority().compareTo(b1.getPriority()));
 
         for (Bug bug : bugs) {
             sb.append(bug.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", sortOperation.toUpperCase()))
-                    .append(bug.getPriority()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
@@ -86,23 +82,22 @@ public class SortBugByTitlePrioritySeverity extends CommandImpl {
     private String sortBugsBySeverity(StringBuilder sb, String sortOperation, List<Bug> bugs){
         // the idea behind anonymous comparator is to use it based on the concrete interface or class
         // then to implement the compare logic that we want for this class as a local class within method
-        Comparator<Bug> compareBySeverity = new Comparator<>() {
-            @Override
-            public int compare(Bug o1, Bug o2) {
-                return o1.getSeverity().compareTo(o2.getSeverity());
-            }
-        };
+//        Comparator<Bug> compareBySeverity = new Comparator<>() {
+//            @Override
+//            public int compare(Bug o1, Bug o2) {
+//                return o1.getSeverity().compareTo(o2.getSeverity());
+//            }
+//        };
 
         sb.append(String.format(BUG_SORTED_BY_GIVEN_PARAMETER, sortOperation))
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        bugs.sort(compareBySeverity);
+       // bugs.sort(compareBySeverity);
+        bugs.sort((b1, b2) -> b1.getSeverity().compareTo(b2.getSeverity()));
 
         for (Bug bug : bugs) {
             sb.append(bug.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", sortOperation.toUpperCase()))
-                    .append(bug.getSeverity()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
