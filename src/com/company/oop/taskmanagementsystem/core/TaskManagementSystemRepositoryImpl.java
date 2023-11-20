@@ -28,7 +28,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Story> storiesList = new ArrayList<>();
     private final List<Feedback> feedbackList = new ArrayList<>();
 
-
     public TaskManagementSystemRepositoryImpl() {
         nextId = 0;
     }
