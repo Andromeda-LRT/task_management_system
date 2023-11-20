@@ -82,16 +82,16 @@ public class SortFeedbackByTitleRatingTests {
         Comparator<Feedback> compareByRating = new Comparator<>() {
             @Override
             public int compare(Feedback o1, Feedback o2) {
-                return Integer.compare(o1.getRating(), o2.getRating());
+                return Integer.compare(o2.getRating(), o1.getRating());
             }
         };
         feedbacksForTest.sort(compareByRating);
         sb.append(String.format(TestsConstants.FEEDBACK_SORTED_BY_GIVEN_PARAMETER, parameters.get(0)))
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
+
         for (Feedback feedback : feedbacksForTest) {
             sb.append(feedback.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", parameters.get(0).toUpperCase())).append(feedback.getRating()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 

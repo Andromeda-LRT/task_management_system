@@ -69,37 +69,32 @@ public class SortStoryByTitlePrioritySize extends CommandImpl {
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        stories.sort(compareByPrio.reversed());
+        stories.sort((s1, s2) -> s2.getPriority().compareTo(s1.getPriority()));
 
         for (Story story : stories) {
             sb.append(story.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", sortOperation.toUpperCase()))
-                    .append(story.getPriority()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
         return sb.toString();
     }
     private String sortStoriesBySize(StringBuilder sb, String sortOperation, List<Story> stories){
-        // the idea behind anonymous comparator is to use it based on the concrete interface or class
-        // then to implement the compare logic that we want for this class as a local class within method
-        Comparator<Story> compareBySize = new Comparator<>() {
-            @Override
-            public int compare(Story o1, Story o2) {
-                return o1.getSize().compareTo(o2.getSize());
-            }
-        };
+
+//        Comparator<Story> compareBySize = new Comparator<>() {
+//            @Override
+//            public int compare(Story o1, Story o2) {
+//                return o1.getSize().compareTo(o2.getSize());
+//            }
+//        };
 
         sb.append(String.format(STORY_SORTED_BY_GIVEN_PARAMETER, sortOperation))
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        stories.sort(compareBySize.reversed());
+        stories.sort((s1, s2) -> s2.getSize().compareTo(s1.getSize()));
 
         for (Story story : stories) {
             sb.append(story.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", sortOperation.toUpperCase()))
-                    .append(story.getSize()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 

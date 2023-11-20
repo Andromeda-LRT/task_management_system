@@ -57,21 +57,20 @@ public class SortFeedbackByTitleRating extends CommandImpl {
     }
 
     private String sortFeedbacksByRating(StringBuilder sb, String sortOperation, List<Feedback> feedbacks){
-        Comparator<Feedback> compareByRating = new Comparator<>() {
-            @Override
-            public int compare(Feedback o1, Feedback o2) {
-                return Integer.compare(o1.getRating(), o2.getRating());
-            }
-        };
+//        Comparator<Feedback> compareByRating = new Comparator<>() {
+//            @Override
+//            public int compare(Feedback o1, Feedback o2) {
+//                return Integer.compare(o1.getRating(), o2.getRating());
+//            }
+//        };
         sb.append(String.format(FEEDBACK_SORTED_BY_GIVEN_PARAMETER, sortOperation))
                 .append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        feedbacks.sort(compareByRating);
+        feedbacks.sort((f1, f2) -> Integer.compare(f2.getRating(), f1.getRating()));
 
         for (Feedback feedback : feedbacks) {
             sb.append(feedback.printMainInformation()).append(System.lineSeparator());
-            sb.append(String.format("%s: ", sortOperation.toUpperCase())).append(feedback.getRating()).append(System.lineSeparator());
         }
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
