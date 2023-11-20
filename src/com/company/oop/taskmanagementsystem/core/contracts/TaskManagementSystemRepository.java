@@ -55,4 +55,12 @@ public interface TaskManagementSystemRepository {
     String listTasksWithAssignee();
 
     List<Task> listTasksWithAssigneeSortedByTitle();
+
+    List<Bug> getBugs();
+
+    List<Story> getStories();
+
+    List<Feedback> getFeedback();
+
+    Feedback findFeedbackById(int id);
 }
