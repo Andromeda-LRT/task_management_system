@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChangePriorityOfStoryTests {
-    // TODO The tests should be implemented
+
     private Command command;
     private List<String> parameters;
     private TaskManagementSystemRepository taskManagementSystemRepository;
@@ -56,7 +56,7 @@ public class ChangePriorityOfStoryTests {
                 TestsConstants.VALID_DESCRIPTION, Priority.MEDIUM,
                 TestsConstants.TEST_SIZE);
         parameters.add(Constants.OPERATION_INCREASE);
-        Story story = (Story) taskManagementSystemRepository.findTaskById(TestsConstants.VALID_ID);
+        Story story = taskManagementSystemRepository.findStoryById(TestsConstants.VALID_ID);
         story.increasePriority();
 
         Assertions.assertEquals(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_HIGH_WITH_ID,
@@ -68,7 +68,7 @@ public class ChangePriorityOfStoryTests {
                 TestsConstants.VALID_DESCRIPTION, Priority.MEDIUM,
                 TestsConstants.TEST_SIZE);
         parameters.add(Constants.OPERATION_LOWER);
-        Story story = (Story) taskManagementSystemRepository.findTaskById(TestsConstants.VALID_ID);
+        Story story = taskManagementSystemRepository.findStoryById(TestsConstants.VALID_ID);
         story.lowerPriority();
 
         Assertions.assertEquals(String.format(Constants.PRIORITY_IS_ALREADY_SET_TO_LOW_WITH_ID,

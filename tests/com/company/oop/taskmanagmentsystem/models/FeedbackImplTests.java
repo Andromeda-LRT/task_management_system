@@ -82,8 +82,10 @@ public class FeedbackImplTests {
     @Test
     public void revertStatus_Should_RevertStatus_WhenValid() {
         feedback.advanceStatus();
+        feedback.advanceStatus();
+        feedback.advanceStatus();
         feedback.revertStatus();
-        Assertions.assertEquals(Status.NEW, feedback.getStatus());
+        Assertions.assertEquals(Status.SCHEDULED, feedback.getStatus());
     }
 
     @Test
@@ -101,6 +103,5 @@ public class FeedbackImplTests {
         feedback.revertStatus();
         Assertions.assertEquals(String.format(Constants.STATUS_IS_ALREADY_SET_TO_NEW, Constants.FEEDBACK),
                 feedback.getHistoryOfChanges().get(1).getDescription());
-        //TODO add tests regarding history
     }
 }

@@ -57,7 +57,7 @@ public class ChangeSizeOfStoryTests {
                 TestsConstants.VALID_DESCRIPTION, Priority.MEDIUM,
                 TestsConstants.TEST_SIZE);
         parameters.add(Constants.OPERATION_INCREASE);
-        Story story = (Story) taskManagementSystemRepository.findTaskById(TestsConstants.VALID_ID);
+        Story story = taskManagementSystemRepository.findStoryById(TestsConstants.VALID_ID);
         story.increaseSize();
 
         Assertions.assertEquals(String.format(Constants.SIZE_ALREADY_SET_TO_LARGE_WITH_ID,
@@ -69,7 +69,7 @@ public class ChangeSizeOfStoryTests {
                 TestsConstants.VALID_DESCRIPTION, Priority.MEDIUM,
                 TestsConstants.TEST_SIZE);
         parameters.add(Constants.OPERATION_DECREASE);
-        Story story = (Story) taskManagementSystemRepository.findTaskById(TestsConstants.VALID_ID);
+        Story story = taskManagementSystemRepository.findStoryById(TestsConstants.VALID_ID);
         story.decreaseSize();
 
         Assertions.assertEquals(String.format(Constants.SIZE_ALREADY_SET_TO_SMALL_WITH_ID,

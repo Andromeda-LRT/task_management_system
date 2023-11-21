@@ -13,14 +13,15 @@ import org.junit.jupiter.api.Test;
 
 public class BoardImplTests {
 
-
-    // TODO The tests should be implemented
-
     BoardImpl board;
+    Team team;
+    Member member;
 
     @BeforeEach
     public void initBoardImpl(){
         board = new BoardImpl(TestsConstants.VALID_BOARD_NAME);
+        team = new TeamImpl(TestsConstants.VALID_TEAM_NAME);
+        member = new MemberImpl(TestsConstants.VALID_MEMBER_NAME);
     }
 
     @Test
@@ -54,18 +55,32 @@ public class BoardImplTests {
     }
     @Test
     public void removeTask_Should_RemoveTaskFromList_When_ArgumentsValid(){
-        Task testTask = new FeedbackImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
-                TestsConstants.VALID_DESCRIPTION, TestsConstants.VALID_RATING);
+        Task testTask = new StoryImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION,
+                TestsConstants.TEST_PRIORITY, TestsConstants.TEST_SIZE);
         board.addTask(testTask);
         board.removeTask(testTask);
         Assertions.assertEquals(0, board.getTaskList().size());
     }
     @Test
+    public void removeTask_Should_AlsoUnassignTaskFromMember_When_ArgumentsValid(){
+        Task testTask = new StoryImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION,
+                TestsConstants.TEST_PRIORITY, TestsConstants.TEST_SIZE);
+        board.addTeam(team);
+        team.addMember(member);
+        board.addTask(testTask);
+        board.assignTask(testTask, member);
+        board.removeTask(testTask);
+        Assertions.assertEquals(0, member.getListOfTasks().size());
+    }
+    @Test
     public void assignTask_Should_AssignTaskToList_When_ArgumentsValid(){
         Team team1 = new TeamImpl(TestsConstants.VALID_TEAM_NAME);
         Member member1 = new MemberImpl(TestsConstants.VALID_MEMBER_NAME);
-        Task testTask = new FeedbackImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
-                TestsConstants.VALID_DESCRIPTION, TestsConstants.VALID_RATING);
+        Task testTask = new BugImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.STEPS_TO_REPRODUCE
+                , TestsConstants.TEST_PRIORITY, TestsConstants.VALID_SEVERITY);
         team1.addMember(member1);
         board.addTeam(team1);
         board.assignTask(testTask, member1);
@@ -77,9 +92,10 @@ public class BoardImplTests {
     public void unassignTask_Should_UnassignTaskFromList_When_ArgumentsValid(){
         Team team1 = new TeamImpl(TestsConstants.VALID_TEAM_NAME);
         Member member1 = new MemberImpl(TestsConstants.VALID_MEMBER_NAME);
-        Task testTask = new FeedbackImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
-                TestsConstants.VALID_DESCRIPTION, TestsConstants.VALID_RATING);
-        Task testTask1 = new StoryImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
+        Task testTask = new BugImpl(TestsConstants.VALID_ID, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.STEPS_TO_REPRODUCE
+                , TestsConstants.TEST_PRIORITY, TestsConstants.VALID_SEVERITY);
+        Task testTask1 = new StoryImpl(2, TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION, TestsConstants.TEST_PRIORITY,
                 TestsConstants.TEST_SIZE);
         team1.addMember(member1);
@@ -142,6 +158,12 @@ public class BoardImplTests {
         Assertions.assertEquals(team1.getName(), board.getTeams().get(0).getName());
     }
     @Test
+    public void addTeam_Should_ThrowAnException_When_TeamAlreadyExistsInBoard(){
+        board.addTeam(team);
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                board.addTeam(team));
+    }
+    @Test
     public void removeTeam_Should_RemoveTeamFromList_When_ArgumentsAreValid(){
         Team team1 = new TeamImpl(TestsConstants.VALID_TEAM_NAME);
         board.addTeam(team1);
@@ -151,6 +173,13 @@ public class BoardImplTests {
     @Test
     public void removeTeam_Should_ThrowAnException_When_TeamListIsEmpty(){
         Team team1 = new TeamImpl(TestsConstants.VALID_TEAM_NAME);
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                board.removeTeam(team1));
+    }
+    @Test
+    public void removeTeam_Should_ThrowAnException_When_TeamDoesNotExistInBoard(){
+        Team team1 = new TeamImpl(TestsConstants.VALID_TEAM_NAME_2);
+        board.addTeam(team);
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 board.removeTeam(team1));
     }

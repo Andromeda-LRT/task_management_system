@@ -32,6 +32,5 @@ public class TestsConstants {
     public static final String BUG_SORTED_BY_GIVEN_PARAMETER = "---BUG SORTED BY %S---";
     public static final String FEEDBACK_SORTED_BY_GIVEN_PARAMETER = "---FEEDBACK SORTED BY %S---";
     public static final String STORY_SORTED_BY_GIVEN_PARAMETER = "---STORY SORTED BY %S---";
-
-
+    public static final String VALID_TEAM_NAME_2 = "TestTeam2";
 }
