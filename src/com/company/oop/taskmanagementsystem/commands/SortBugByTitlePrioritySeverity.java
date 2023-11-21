@@ -25,7 +25,7 @@ public class SortBugByTitlePrioritySeverity extends CommandImpl {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        List<Bug> bugs = getTaskManagementSystemRepository().findAllBugsInTasks();
+        List<Bug> bugs = getTaskManagementSystemRepository().getBugs();
         if (bugs.isEmpty()){
             throw new IllegalArgumentException(NO_BUGS_TO_SORT);
         }

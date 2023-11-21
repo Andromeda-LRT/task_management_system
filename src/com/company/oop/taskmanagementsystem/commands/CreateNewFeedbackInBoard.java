@@ -34,9 +34,10 @@ public class CreateNewFeedbackInBoard extends CommandImpl {
 
     private String addTask(String teamName, String boardName, String title, String description, int rating){
 
-        Task feedback = createTaskFeedback(title, description, rating);
+
         for (Board boardLocal : getTaskManagementSystemRepository().findTeamByName(teamName).getBoards()) {
             if (boardLocal.getName().equals(boardName)){
+                Task feedback = createTaskFeedback(title, description, rating);
                 boardLocal.addTask(feedback);
                 return String.format(FEEDBACK_CREATED_SUCCESSFULLY,boardName, teamName, title);
             }
