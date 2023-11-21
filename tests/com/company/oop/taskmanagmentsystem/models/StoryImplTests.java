@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class StoryImplTests {
-    // TODO The tests should be implemented
 
     private StoryImpl story;
     @BeforeEach
@@ -79,6 +78,13 @@ public class StoryImplTests {
        story.setAssignee(member);
 
        Assertions.assertEquals(member.getName(), story.getAssignee().getName());
+   }
+   @Test
+   public void setAssignee_Should_SetStoryToNoAssignee_When_StoryIsCreated(){
+        story.setAssignee(story.getAssignee());
+       Assertions.assertEquals(String.format(Constants.NEW_ASSIGNEE
+               ,Constants.STORY, story.getAssignee().getName() )
+               , story.getHistoryOfChanges().get(1).getDescription());
    }
     @Test
     public void advanceStatus_Should_AdvanceStatus_WhenValid(){
@@ -154,8 +160,6 @@ public class StoryImplTests {
                Assertions.assertEquals(Constants.SIZE_ALREADY_SET_TO_SMALL,
                 story.getHistoryOfChanges().get(2).getDescription());
     }
-
-    // todo tests with logger
 
     @Test
     public void addComment_Should_AddCommentToList() {
