@@ -27,7 +27,7 @@ public class ListAllFeedback extends CommandImpl {
 
     private String listAllFeedback() {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Feedback> feedbacks = getTaskManagementSystemRepository().findAllFeedbackInTasks();
+        List<Feedback> feedbacks = getTaskManagementSystemRepository().getFeedback();
 
         if (feedbacks.isEmpty()) {
             stringBuilder.append(NO_ADDED_FEEDBACK).append(System.lineSeparator());

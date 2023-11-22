@@ -25,18 +25,18 @@ public class ChangeStatusOfFeedback extends CommandImpl {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String action = parameters.get(0);
         int id = ParsingHelpers.tryParseInt(parameters.get(1), Constants.ID_ERROR_MESSAGE);
+
         return changeStatusOfFeedback(id, action);
     }
 
     private String changeStatusOfFeedback(int id, String action) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        Task task = getTaskManagementSystemRepository().findTaskById(id);
+        Feedback feedback = getTaskManagementSystemRepository().findFeedbackById(id);
 
-        if (!(task instanceof Feedback)) {
+        if (feedback == null) {
             throw new IllegalArgumentException(NO_FEEDBACK_INSTANCE);
         }
-        Feedback feedback = (Feedback) getTaskManagementSystemRepository().findTaskById(id);
 
         switch (action.toUpperCase()) {
             case "ADVANCE":
