@@ -27,7 +27,7 @@ public class ListAllBugs extends CommandImpl {
 
     private String listAllBugs() {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Bug> bugs = getTaskManagementSystemRepository().findAllBugsInTasks();
+        List<Bug> bugs = getTaskManagementSystemRepository().getBugs();
 
         if (bugs.isEmpty()) {
             stringBuilder.append(NO_ADDED_BUGS).append(System.lineSeparator());

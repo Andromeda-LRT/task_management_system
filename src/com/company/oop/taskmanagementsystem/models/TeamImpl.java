@@ -22,6 +22,7 @@ public class TeamImpl implements Team {
     private static final String BOARD_EXISTS = "Board with name %s already exist in team %s";
     private static final String BOARD_REMOVED = "Board %s was removed from team %s.";
     private static final String NO_BOARDS_IN_TEAM = "There are no boards in this team %s";
+    private static final String NO_SUCH_BOARD_IN_TEAM = "Board with name %s does not exist in team %s";
     private String name;
     private List<Member> members;
     private List<Board> boards;
@@ -122,6 +123,8 @@ public class TeamImpl implements Team {
 
     @Override
     public void removeBoard(Board board) {
+        boolean flag = false;
+
         if (boards.isEmpty()) {
             throw new IllegalArgumentException(String.format(NO_BOARDS_IN_TEAM, getBoards()));
         } else {
@@ -130,9 +133,15 @@ public class TeamImpl implements Team {
                     boards.remove(board);
                     boardLocal.removeTeam(this);
                     logChange(String.format(BOARD_REMOVED, board.getName(), getName()));
+                    flag = true;
                     break;
                 }
             }
+        }
+        if(!flag){
+            throw new IllegalArgumentException(
+                    String.format(NO_SUCH_BOARD_IN_TEAM, board.getName(), getName())
+            );
         }
     }
 

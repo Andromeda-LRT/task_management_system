@@ -19,9 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BugImplTests {
-
-
-    BugImpl bug;
+    private BugImpl bug;
 
     @BeforeEach
     public void initBugImpl(){
