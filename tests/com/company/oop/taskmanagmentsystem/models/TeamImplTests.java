@@ -49,7 +49,26 @@ public class TeamImplTests {
                 team.getActivityHistory().get(1).getDescription());
     }
 
+    @Test
+    void addBoard_Should_ThrowIllegalArgumentException_When_BoardAlreadyInList() {
+        Board board = new BoardImpl("Board 1");
+        team.addBoard(board);
 
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            team.addBoard(board);
+        });
+    }
+
+    @Test
+    void addBoard_Should_ThrowIllegalArgumentException_When_BoardNameAlreadyExists() {
+        Board board1 = new BoardImpl("Board 1");
+        Board board2 = new BoardImpl("Board 1");
+        team.addBoard(board1);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            team.addBoard(board2);
+        });
+    }
     @Test
     void getMembers_ShouldReturnsCopy() {
         team.addMember(member);
@@ -134,5 +153,24 @@ public class TeamImplTests {
         Assertions.assertEquals(
                 "Board TestBoard was removed from team TestTeam.",
                 team.getActivityHistory().get(2).getDescription());
+    }
+    @Test
+    void removeBoard_Should_ThrowIllegalArgumentException_When_NoBoardsInList() {
+        Board board = new BoardImpl("Board 1");
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            team.removeBoard(board);
+        });
+    }
+
+    @Test
+    void removeBoard_Should_ThrowIllegalArgumentException_When_BoardNotInList() {
+        Board board1 = new BoardImpl("Board 1");
+        Board board2 = new BoardImpl("Board 2");
+        team.addBoard(board1);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            team.removeBoard(board2);
+        });
     }
 }

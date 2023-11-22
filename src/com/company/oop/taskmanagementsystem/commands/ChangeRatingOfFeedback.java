@@ -5,6 +5,7 @@ import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemR
 import com.company.oop.taskmanagementsystem.models.contracts.Feedback;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
+import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class ChangeRatingOfFeedback extends CommandImpl {
 
     @Override
     public String execute(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+
         int idOfFeedback = ParsingHelpers.tryParseInt(parameters.get(0), ID_FEEDBACK_SHOULD_BE_DIGIT);
         int ratingOfFeedback = ParsingHelpers.tryParseInt(parameters.get(1), ERROR_MESSAGE_NOT_VALID_RATING);
 
@@ -30,12 +33,10 @@ public class ChangeRatingOfFeedback extends CommandImpl {
     private String changeRatingOfFeedback(int idOfFeedback, int ratingOfFeedback) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        Task task = getTaskManagementSystemRepository().findTaskById(idOfFeedback);
-        if (!(task instanceof Feedback)) {
+        Feedback feedback = getTaskManagementSystemRepository().findFeedbackById(idOfFeedback);
+        if (feedback==null) {
             throw new IllegalArgumentException(NO_FEEDBACK_INSTANCE);
         }
-
-        Feedback feedback = (Feedback) getTaskManagementSystemRepository().findTaskById(idOfFeedback);
 
         feedback.changeRating(ratingOfFeedback);
 

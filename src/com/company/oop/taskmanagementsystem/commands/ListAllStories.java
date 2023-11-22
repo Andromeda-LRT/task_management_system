@@ -27,7 +27,7 @@ public class ListAllStories extends CommandImpl {
 
     private String listAllStories() {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Story> stories = getTaskManagementSystemRepository().findAllStoriesInTasks();
+        List<Story> stories = getTaskManagementSystemRepository().getStories();
 
         if (stories.isEmpty()) {
             stringBuilder.append(NO_ADDED_STORIES).append(System.lineSeparator());
