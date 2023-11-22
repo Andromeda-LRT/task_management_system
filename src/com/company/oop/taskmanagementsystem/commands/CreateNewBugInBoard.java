@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CreateNewBugInBoard extends CommandImpl {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
-    //todo unsure if this is needed as logger adds the creation of a task. - Ted
+
     public static final String BUG_CREATED_SUCCESSFULLY = "Board %s in Team %s added Bug with title %s successfully";
 
     public CreateNewBugInBoard(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -41,9 +41,10 @@ public class CreateNewBugInBoard extends CommandImpl {
 
     private String addTask(String teamName, String boardName, String title, String description,
                            List<String> stepsToReproduce, Priority priority, Severity severity){
-        Task bug = createTaskBug(title, description, stepsToReproduce, priority, severity);
+
         for (Board boardLocal : getTaskManagementSystemRepository().findTeamByName(teamName).getBoards()) {
             if (boardLocal.getName().equals(boardName)){
+                Task bug = createTaskBug(title, description, stepsToReproduce, priority, severity);
                 boardLocal.addTask(bug);
                 return String.format(BUG_CREATED_SUCCESSFULLY, boardName, teamName, title);
             }

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateNewBugInBoardTests {
-    // TODO The tests should be implemented
 
     private Command command;
     private List<String> parameters;
@@ -62,6 +61,4 @@ public class CreateNewBugInBoardTests {
                 command.execute(parameters));
     }
 
-//    @Test
-//    public void execute_Should_ThrowException_When_
 }

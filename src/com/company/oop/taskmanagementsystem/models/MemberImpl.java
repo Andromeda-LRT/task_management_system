@@ -58,6 +58,7 @@ public class MemberImpl implements Member {
     public void assignTask(Task task) {
         if(!taskList.contains(task)) {
             taskList.add(task);
+            //
             if (task instanceof Bug) {
                 ((Bug) task).changeAssignee(this);
             } else {

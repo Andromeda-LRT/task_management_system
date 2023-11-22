@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChangeStatusOfStoryTests {
-    // TODO The tests should be implemented
+
     private Command command;
     private List<String> parameters;
     private TaskManagementSystemRepository taskManagementSystemRepository;
@@ -46,7 +46,7 @@ public class ChangeStatusOfStoryTests {
                 TestsConstants.VALID_DESCRIPTION, Priority.MEDIUM,
                 TestsConstants.TEST_SIZE);
         parameters.add(Constants.OPERATION_REVERT);
-        taskManagementSystemRepository.findTaskById(TestsConstants.VALID_ID).advanceStatus();
+        taskManagementSystemRepository.findStoryById(TestsConstants.VALID_ID).advanceStatus();
 
         Assertions.assertEquals(String.format(Constants.STORY_STATUS_CHANGED_MSG, TestsConstants.VALID_ID,
                 Status.IN_PROGRESS, Status.NOT_DONE), command.execute(parameters));
@@ -58,8 +58,8 @@ public class ChangeStatusOfStoryTests {
                 TestsConstants.VALID_DESCRIPTION, Priority.MEDIUM,
                 TestsConstants.TEST_SIZE);
         parameters.add(Constants.OPERATION_ADVANCE);
-        taskManagementSystemRepository.findTaskById(TestsConstants.VALID_ID).advanceStatus();
-        taskManagementSystemRepository.findTaskById(TestsConstants.VALID_ID).advanceStatus();
+        taskManagementSystemRepository.findStoryById(TestsConstants.VALID_ID).advanceStatus();
+        taskManagementSystemRepository.findStoryById(TestsConstants.VALID_ID).advanceStatus();
         Assertions.assertEquals(String.format(Constants.STATUS_IS_ALREADY_SET_TO_DONE_WITH_ID,
                 Constants.STORY, TestsConstants.VALID_ID), command.execute(parameters));
     }

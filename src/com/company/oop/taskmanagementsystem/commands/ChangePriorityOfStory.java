@@ -26,22 +26,23 @@ public class ChangePriorityOfStory extends CommandImpl {
 
         int storyID = Integer.parseInt(parameters.get(0));
         String changePriorityOperation = parameters.get(1);
-        Task task = getTaskManagementSystemRepository().findTaskById(storyID);
-        if (!(task instanceof Story)){
-            throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
-        }
+        Story story = getTaskManagementSystemRepository().findStoryById(storyID);
+//        Task task = getTaskManagementSystemRepository().findTaskById(storyID);
+//        if (!(task instanceof Story)){
+//            throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
+//        }
 
         switch (changePriorityOperation.toUpperCase()){
             case Constants.OPERATION_INCREASE:
-                return storyIncreasePriority(storyID);
+                return storyIncreasePriority(storyID, story);
             case Constants.OPERATION_LOWER:
-                return storyLowerPriority(storyID);
+                return storyLowerPriority(storyID, story);
         }
         throw new IllegalArgumentException(Constants.NO_SUCH_CHANGE_PRIORITY_OPERATION_ERR_MSG);
     }
 
-    private String storyIncreasePriority(int storyID){
-        Story story = (Story) getTaskManagementSystemRepository().findTaskById(storyID);
+    private String storyIncreasePriority(int storyID, Story story){
+
         Priority latestPriority = story.getPriority();
         story.increasePriority();
         if (latestPriority == Priority.HIGH){
@@ -53,8 +54,8 @@ public class ChangePriorityOfStory extends CommandImpl {
                 story.getPriority());
     }
 
-    private String storyLowerPriority(int storyID){
-        Story story = (Story) getTaskManagementSystemRepository().findTaskById(storyID);
+    private String storyLowerPriority(int storyID, Story story){
+
         Priority latestPriority = story.getPriority();
         story.lowerPriority();
         if (latestPriority == Priority.LOW){

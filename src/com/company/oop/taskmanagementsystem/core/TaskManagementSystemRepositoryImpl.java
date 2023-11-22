@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagementsystem.core;
 
+import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.*;
 import com.company.oop.taskmanagementsystem.models.contracts.*;
@@ -23,7 +24,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Team> teams = new ArrayList<>();
     private final List<Board> boards = new ArrayList<>();
     private final List<Task> tasks = new ArrayList<>();
-
     private final List<Bug> bugsList = new ArrayList<>();
     private final List<Story> storiesList = new ArrayList<>();
     private final List<Feedback> feedbackList = new ArrayList<>();
@@ -217,8 +217,28 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 return feedbackLocal;
             }
         }
-        return null;
+        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_FEEDBACK);
     }
+
+    @Override
+    public Story findStoryById(int id) {
+        for (Story storyLocal : storiesList) {
+            if (storyLocal.getId() == id){
+                return storyLocal;
+            }
+        }
+        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
+    }
+
+    @Override
+    public Bug findBugByID(int id) {
+        for (Bug bugLocal : bugsList) {
+            if (bugLocal.getId() == id)
+                return bugLocal;
+        }
+        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_BUG);
+    }
+
 
     @Override
     public String listTasksWithAssignee() {

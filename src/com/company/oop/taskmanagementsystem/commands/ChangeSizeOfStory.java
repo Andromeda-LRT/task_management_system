@@ -25,22 +25,23 @@ public class ChangeSizeOfStory extends CommandImpl {
 
         int storyID = Integer.parseInt(parameters.get(0));
         String changePriorityOperation = parameters.get(1);
-        Task task = getTaskManagementSystemRepository().findTaskById(storyID);
-        if (!(task instanceof Story)){
-            throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
-        }
+        Story story = getTaskManagementSystemRepository().findStoryById(storyID);
+//        Task task = getTaskManagementSystemRepository().findTaskById(storyID);
+//        if (!(task instanceof Story)){
+//            throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
+//        }
 
         switch (changePriorityOperation.toUpperCase()){
             case Constants.OPERATION_INCREASE:
-                return storyIncreaseSize(storyID);
+                return storyIncreaseSize(storyID, story);
             case Constants.OPERATION_DECREASE:
-                return storyDecreaseSize(storyID);
+                return storyDecreaseSize(storyID, story);
         }
         throw new IllegalArgumentException(Constants.NO_SUCH_CHANGE_PRIORITY_OPERATION_ERR_MSG);
     }
 
-    private String storyIncreaseSize(int storyID){
-        Story story = (Story) getTaskManagementSystemRepository().findTaskById(storyID);
+    private String storyIncreaseSize(int storyID, Story story){
+
         Size latestSize = story.getSize();
         story.increaseSize();
         if (latestSize == Size.LARGE){
@@ -51,8 +52,8 @@ public class ChangeSizeOfStory extends CommandImpl {
                 story.getSize());
     }
 
-    private String storyDecreaseSize(int storyID){
-        Story story = (Story) getTaskManagementSystemRepository().findTaskById(storyID);
+    private String storyDecreaseSize(int storyID, Story story){
+
         Size latestSize = story.getSize();
         story.decreaseSize();
         if (latestSize == Size.SMALL){

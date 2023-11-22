@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateNewStoryInBoardTests {
-    // TODO The tests should be implemented
 
     private Command command;
     private List<String> parameters;

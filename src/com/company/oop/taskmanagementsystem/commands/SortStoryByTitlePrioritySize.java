@@ -25,7 +25,7 @@ public class SortStoryByTitlePrioritySize extends CommandImpl {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        List<Story> stories = getTaskManagementSystemRepository().findAllStoriesInTasks();
+        List<Story> stories = getTaskManagementSystemRepository().getStories();
         if (stories.isEmpty()){
             throw new IllegalArgumentException(NO_STORIES_TO_SORT);
         }

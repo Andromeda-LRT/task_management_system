@@ -9,12 +9,14 @@ public class Constants {
     public static final String STATUS_IS_ALREADY_SET_TO_NEW =
             "Cannot revert status, because %s status is already set to New";
     public static final String CHANGED_RATING = "Rating of feedback was changed from %d to %d.";
+    public static final String ID_DOES_NOT_BELONG_TO_FEEDBACK = "The provided id should be of a feedback.";
 // ----------------------------------------------------------------------------------------------------
 //                               BUG CONSTANTS
 // ----------------------------------------------------------------------------------------------------
     public static final String EMPTY_STEPS_TO_REPRODUCE = "There are no steps to reproduce!";
     public static final String BUG = "Bug";
     public static final String ID_ERROR_MESSAGE = "The id of the bug should be a number";
+    public static final String ID_DOES_NOT_BELONG_TO_BUG = "The provided id should be of a bug.";
 // ----------------------------------------------------------------------------------------------------
 //                               STORY CONSTANTS
 // ----------------------------------------------------------------------------------------------------

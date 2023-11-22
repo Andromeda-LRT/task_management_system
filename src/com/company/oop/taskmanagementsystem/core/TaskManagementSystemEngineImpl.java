@@ -108,7 +108,8 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
             fullOperation = fullOperation.replaceAll("\\{\\{.+(?=}})}}", "");
         }
         List<String> result = new ArrayList<>(
-                Arrays.asList(fullOperation.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
+                Arrays.asList(fullOperation.substring(indexOfFirstSeparator + 1)
+                                .split(MAIN_SPLIT_SYMBOL)));
         if (result.contains("")){
             return AddCommentOrDescriptionToParameters(result, parameters);
         }
