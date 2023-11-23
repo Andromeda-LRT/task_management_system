@@ -58,12 +58,6 @@ public class MemberImpl implements Member {
     public void assignTask(Task task) {
         if(!taskList.contains(task)) {
             taskList.add(task);
-            //
-            if (task instanceof Bug) {
-                ((Bug) task).changeAssignee(this);
-            } else {
-                ((Story) task).changeAssignee(this);
-            }
             logChange(String.format(TASK_ASSIGNED, task.getTitle(), getName()));
         }else {
             throw new IllegalArgumentException("Task is already assigned to " + getName());
@@ -73,15 +67,7 @@ public class MemberImpl implements Member {
     public void unAssignTask(Task task) {
         if(taskList.contains(task)) {
             taskList.remove(task);
-            Member member = new MemberImpl("NO ASSIGNEE");
-            if (task instanceof Bug) {
-                ((Bug) task).changeAssignee(member);
-            } else {
-                ((Story) task).changeAssignee(member);
-            }
             logChange(String.format(TASK_UNASSIGNED, task.getTitle(), getName()));
-        }else {
-            throw new IllegalArgumentException("There is no such task for " + getName());
         }
 
     }

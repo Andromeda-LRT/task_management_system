@@ -28,7 +28,6 @@ public class AddCommentToTask extends CommandImpl {
         return addComment(description, author, id);
     }
 
-    // todo fix method which add comment to task - Reni
     public String addComment(String description, String author, int id){
         if (!getTaskManagementSystemRepository().memberExist(author)){
             throw new IllegalArgumentException(EXISTING_MEMBER_ERROR);

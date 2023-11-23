@@ -27,12 +27,21 @@ public class AssignTaskToMember extends CommandImpl {
         return String.format(TASK_ASSIGNED, id, name);
     }
 
-    private void assignTaskToMember(int id, String name){
+    private void assignTaskToMember(int id, String name) {
         Member member = getTaskManagementSystemRepository().findMemberByName(name);
         Task task = getTaskManagementSystemRepository().findTaskById(id);
-        if (task instanceof Feedback){
+
+        if (getTaskManagementSystemRepository().getBugs().contains(task)) {
+            member.assignTask(getTaskManagementSystemRepository().findTaskById(id));
+            getTaskManagementSystemRepository().findBugByID(id).changeAssignee(member);
+        } else if (getTaskManagementSystemRepository().getStories().contains(task)) {
+            member.assignTask(getTaskManagementSystemRepository().findTaskById(id));
+            getTaskManagementSystemRepository().findStoryById(id).changeAssignee(member);
+        } else if (getTaskManagementSystemRepository().getFeedback().contains(task)){
             throw new IllegalArgumentException("A Feedback cannot be assigned to a member.");
         }
-        member.assignTask(getTaskManagementSystemRepository().findTaskById(id));
+        else {
+            throw new IllegalArgumentException("There is no task with the provided ID.");
+        }
     }
 }

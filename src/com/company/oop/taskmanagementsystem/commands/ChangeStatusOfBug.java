@@ -28,11 +28,10 @@ public class ChangeStatusOfBug extends CommandImpl {
 
     private String printAction(int id, String action) {
         StringBuilder output = new StringBuilder();
-        Task task = getTaskManagementSystemRepository().findTaskById(id);
-        if (!(task instanceof Bug)){
-            throw new IllegalArgumentException("The provided id should be of a bug.");
+        Bug bug = getTaskManagementSystemRepository().findBugByID(id);
+        if (bug==null){
+            throw new IllegalArgumentException("The provided ID Should be of a existing bug.");
         }
-        Bug bug = (Bug) getTaskManagementSystemRepository().findTaskById(id);
         switch (action.toUpperCase()) {
             case "ADVANCE":
                 bug.advanceStatus();
