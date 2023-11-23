@@ -14,7 +14,7 @@ import java.util.List;
 public class ShowAllMembersTests {
     private List<String> parameters;
     private TaskManagementSystemRepository repository;
-    private static final String EXPECTED_RESULT = "---Members---%n%s%n---------------------";
+    private static final String EXPECTED_RESULT = "Members%n---------------------%n%s%n---------------------";
 
     @BeforeEach
     public void setUp() {

@@ -65,4 +65,6 @@ public interface TaskManagementSystemRepository {
     List<Feedback> getFeedback();
 
     Feedback findFeedbackById(int id);
+    Bug findBugById(int id);
+    Story findStoryById(int id);
 }

@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterTaskWithAssigneeByStatusAndOrAssigneeTests {
-    private static final String EXPECTED_RESULT_STATUS = "Tasks with status Done:%nID:1 'Example of a valid title', [Done | Example of a valid description] Ivancho";
-    private static final String EXPECTED_RESULT_STATUS_AND_ASSIGNEE = "Tasks with status Done and assignee Ivancho:%nID:1 'Example of a valid title', [Done | Example of a valid description]";
-    private static final String EXPECTED_RESULT_ASSIGNEE = "Tasks with assignee Ivancho:%nID:1 'Example of a valid title', [Done | Example of a valid description]";
+    private static final String EXPECTED_RESULT_STATUS = "Tasks with status Done:%nID:1 'Example of a valid title', [Done | Example of a valid description][Low PRIORITY][Critical SEVERITY] assigned to Ivancho";
+    private static final String EXPECTED_RESULT_STATUS_AND_ASSIGNEE = "Tasks with status Done and assignee Ivancho:%nID:1 'Example of a valid title', [Done | Example of a valid description][Low PRIORITY][Critical SEVERITY] assigned to Ivancho";
+    private static final String EXPECTED_RESULT_ASSIGNEE = "Tasks with assignee Ivancho:%nID:1 'Example of a valid title', [Done | Example of a valid description][Low PRIORITY][Critical SEVERITY] assigned to Ivancho";
 
     private List<String> parameters;
     private TaskManagementSystemRepository repository;

@@ -2,7 +2,9 @@ package com.company.oop.taskmanagementsystem.commands;
 
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsystem.models.MemberImpl;
 import com.company.oop.taskmanagementsystem.models.contracts.Member;
+import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -28,6 +30,16 @@ public class UnassignTaskToMember extends CommandImpl{
 
     private void unAssignTaskToMember(int id, String name){
         Member member = getTaskManagementSystemRepository().findMemberByName(name);
-        member.unAssignTask(getTaskManagementSystemRepository().findTaskById(id));
+        Member memberNew = new MemberImpl("NO ASSIGNEE");
+        Task task = getTaskManagementSystemRepository().findTaskById(id);
+        if (getTaskManagementSystemRepository().getBugs().contains(task)) {
+            member.unAssignTask(getTaskManagementSystemRepository().findTaskById(id));
+            getTaskManagementSystemRepository().findBugById(id).changeAssignee(memberNew);
+        } else if (getTaskManagementSystemRepository().getStories().contains(task)) {
+            member.unAssignTask(getTaskManagementSystemRepository().findTaskById(id));
+            getTaskManagementSystemRepository().findStoryById(id).changeAssignee(memberNew);
+        } else {
+        throw new IllegalArgumentException("There is no such task for " + member.getName());
+    }
     }
 }

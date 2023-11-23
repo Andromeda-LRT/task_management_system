@@ -1,14 +1,11 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Story;
-import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Status;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
@@ -48,15 +45,20 @@ public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
         StringBuilder builder = new StringBuilder();
         builder.append(String.format(LISTING_FOR_STATUS_AND_ASSIGNEE, status.toString(), assignee))
                 .append(System.lineSeparator());
-        List<Task> tasks = addBugsAndStoriesToAList();
-
-        for (Task task : tasks) {
-            if (task.getStatus().equals(status) &&
-                    (task instanceof Bug ?
-                            ((Bug) task).getAssignee().getName().equals(assignee) :
-                            ((Story) task).getAssignee().getName().equals(assignee))
-            ) {
-                builder.append(task.printMainInformation()).append(System.lineSeparator());
+        List<Bug> bugs = getTaskManagementSystemRepository().getBugs();
+        List<Story> stories = getTaskManagementSystemRepository().getStories();
+        if (!bugs.isEmpty()) {
+            for (Bug bug : bugs) {
+                if (bug.getStatus().equals(status) && bug.getAssignee().getName().equals(assignee)) {
+                    builder.append(bug.printMainInformation()).append(System.lineSeparator());
+                }
+            }
+        }
+        if (!stories.isEmpty()) {
+            for (Story story : stories) {
+                if (story.getStatus().equals(status) && story.getAssignee().getName().equals(assignee)) {
+                    builder.append(story.printMainInformation()).append(System.lineSeparator());
+                }
             }
         }
         return builder.toString().trim();
@@ -81,47 +83,51 @@ public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
         return output.toString().trim();
     }
 
-    private List<Task> addBugsAndStoriesToAList() {
-        List<Bug> bugs = getTaskManagementSystemRepository().findAllBugsInTasks();
-        List<Story> stories = getTaskManagementSystemRepository().findAllStoriesInTasks();
-        List<Task> tasks = new ArrayList<>();
-        tasks.addAll(bugs);
-        tasks.addAll(stories);
-        return tasks;
-    }
-
     private String printForStatus(String parameter) {
         StringBuilder string = new StringBuilder();
         string.append(String.format(LISTING_FOR_STATUS, parameter))
                 .append(System.lineSeparator());
-        List<Task> tasks = addBugsAndStoriesToAList();
-        for (Task task : tasks) {
-            if ((task.getStatus().toString().replace(" ", "_")).equalsIgnoreCase(parameter) &&
-                    (task instanceof Bug ?
-                            ((Bug) task).getAssignee().getName()!="NO ASSIGNEE" :
-                            ((Story) task).getAssignee().getName()!="NO ASSIGNEE"))
-            {
-                string.append(task.printMainInformation())
-                        .append(" ")
-                        .append((task instanceof Bug ?
-                                ((Bug) task).getAssignee().getName():
-                                ((Story) task).getAssignee().getName()))
-                        .append(System.lineSeparator());
+        List<Bug> bugs = getTaskManagementSystemRepository().getBugs();
+        List<Story> stories = getTaskManagementSystemRepository().getStories();
+        if (!bugs.isEmpty()) {
+            for (Bug bug : bugs) {
+                if ((bug.getStatus().toString().replace(" ", "_")).equalsIgnoreCase(parameter) &&
+                        bug.getAssignee().getName() != "NO ASSIGNEE") {
+                    string.append(bug.printMainInformation()).append(System.lineSeparator());
+                }
             }
         }
+        if (!stories.isEmpty()) {
+            for (Story story : stories) {
+                if ((story.getStatus().toString().replace(" ", "_")).equalsIgnoreCase(parameter) &&
+                        story.getAssignee().getName() != "NO ASSIGNEE") {
+                    string.append(story.printMainInformation()).append(System.lineSeparator());
+                }
+            }
+        }
+
         return string.toString().trim();
     }
+
 
     private String printForAssignee(String parameter) {
         StringBuilder string = new StringBuilder();
         string.append(String.format(LISTING_FOR_ASSIGNEE, parameter))
                 .append(System.lineSeparator());
-        List<Task> tasks = addBugsAndStoriesToAList();
-        for (Task task : tasks) {
-            if ((task instanceof Bug ?
-                    ((Bug) task).getAssignee().getName().equals(parameter) :
-                    ((Story) task).getAssignee().getName().equals(parameter))) {
-                string.append(task.printMainInformation()).append(System.lineSeparator());
+        List<Bug> bugs = getTaskManagementSystemRepository().findAllBugsInTasks();
+        List<Story> stories = getTaskManagementSystemRepository().findAllStoriesInTasks();
+        if (!bugs.isEmpty()) {
+            for (Bug bug : bugs) {
+                if (bug.getAssignee().getName().equals(parameter)) {
+                    string.append(bug.printMainInformation()).append(System.lineSeparator());
+                }
+            }
+        }
+        if (!stories.isEmpty()) {
+            for (Story story : stories) {
+                if (story.getAssignee().getName().equals(parameter)) {
+                    string.append(story.printMainInformation()).append(System.lineSeparator());
+                }
             }
         }
         return string.toString().trim();

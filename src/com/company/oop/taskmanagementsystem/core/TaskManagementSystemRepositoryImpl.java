@@ -221,6 +221,26 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
+    public Bug findBugById(int id) {
+        for (Bug bug : bugsList) {
+            if (bug.getId() == id) {
+                return bug;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Story findStoryById(int id) {
+        for (Story story : storiesList) {
+            if (story.getId() == id) {
+                return story;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public String listTasksWithAssignee() {
         StringBuilder stringBuilder = new StringBuilder();
 

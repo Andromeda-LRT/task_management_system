@@ -5,7 +5,9 @@ import com.company.oop.taskmanagementsystem.commands.UnassignTaskToMember;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.MemberImpl;
+import com.company.oop.taskmanagementsystem.models.StoryImpl;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
+import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,14 +36,14 @@ public class UnassignTaskToPersonTests {
 
     @Test
     void unassignTaskToMember_Should_ThrowAnException_When_NoSuchIdIsFound(){
-        parameters.add(VALID_ID);
+        parameters.add("2");
         parameters.add(TestsConstants.VALID_MEMBER_NAME);
         repository.createMember(TestsConstants.VALID_MEMBER_NAME);
         Assertions.assertThrows(IllegalArgumentException.class, () -> unassignTaskToMember.execute(parameters));
     }
 
     @Test
-    void unassignTaskToMember_Should_AddNewTaskToMember_When_ValidParametersAreProvided(){
+    void unassignTaskToMember_Should_AddNewBugToMember_When_ValidParametersAreProvided(){
         repository.createMember(TestsConstants.VALID_MEMBER_NAME);
         parameters.add(VALID_ID);
         parameters.add(TestsConstants.VALID_MEMBER_NAME);
@@ -61,5 +63,19 @@ public class UnassignTaskToPersonTests {
         parameters.remove(1);
         parameters.add("Maria");
         Assertions.assertThrows(IllegalArgumentException.class, () -> unassignTaskToMember.execute(parameters));
+    }
+
+    @Test
+    void unassignTaskToMember_Should_AddNewStoryToMember_When_ValidParametersAreProvided(){
+        Story story = repository.createStory( TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.TEST_PRIORITY,
+                TestsConstants.TEST_SIZE);
+        repository.createMember(TestsConstants.VALID_MEMBER_NAME);
+        parameters.add("2");
+        parameters.add(TestsConstants.VALID_MEMBER_NAME);
+        AssignTaskToMember assignTaskToMember = new AssignTaskToMember(repository);
+        assignTaskToMember.execute(parameters);
+        unassignTaskToMember.execute(parameters);
+        Assertions.assertFalse(repository.findMemberByName(TestsConstants.VALID_MEMBER_NAME).getListOfTasks().contains(story));
     }
 }
