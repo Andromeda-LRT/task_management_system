@@ -34,7 +34,7 @@ public class UnassignTaskToMember extends CommandImpl{
         Task task = getTaskManagementSystemRepository().findTaskById(id);
         if (getTaskManagementSystemRepository().getBugs().contains(task)) {
             member.unAssignTask(getTaskManagementSystemRepository().findTaskById(id));
-            getTaskManagementSystemRepository().findBugById(id).changeAssignee(memberNew);
+            getTaskManagementSystemRepository().findBugByID(id).changeAssignee(memberNew);
         } else if (getTaskManagementSystemRepository().getStories().contains(task)) {
             member.unAssignTask(getTaskManagementSystemRepository().findTaskById(id));
             getTaskManagementSystemRepository().findStoryById(id).changeAssignee(memberNew);

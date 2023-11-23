@@ -28,7 +28,7 @@ public class ChangePriorityOfBug extends CommandImpl {
     private String printAction(int id, String action) {
         StringBuilder output = new StringBuilder();
 
-        Bug bug = getTaskManagementSystemRepository().findBugById(id);
+        Bug bug = getTaskManagementSystemRepository().findBugByID(id);
         if (bug==null){
             throw new IllegalArgumentException("The provided ID Should be of a existing bug.");
         }

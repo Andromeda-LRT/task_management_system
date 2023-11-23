@@ -33,7 +33,7 @@ public class AssignTaskToMember extends CommandImpl {
 
         if (getTaskManagementSystemRepository().getBugs().contains(task)) {
             member.assignTask(getTaskManagementSystemRepository().findTaskById(id));
-            getTaskManagementSystemRepository().findBugById(id).changeAssignee(member);
+            getTaskManagementSystemRepository().findBugByID(id).changeAssignee(member);
         } else if (getTaskManagementSystemRepository().getStories().contains(task)) {
             member.assignTask(getTaskManagementSystemRepository().findTaskById(id));
             getTaskManagementSystemRepository().findStoryById(id).changeAssignee(member);
