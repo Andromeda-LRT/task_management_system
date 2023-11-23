@@ -23,12 +23,15 @@ public class BoardImpl implements Board {
             "Task %s with description:%n%s has been assigned to %s";
     private static final String TASK_UNASSIGNED =
             "Task %s with description:%n%s has been unassigned from %s";
-    public static final String NO_TEAMS_IN_BOARD_ERR_MSG =
+    private static final String NO_TEAMS_IN_BOARD_ERR_MSG =
             "There are no teams added to board";
-    public static final String MEMBER_DOES_NOT_ERR_MSG =
+    private static final String MEMBER_DOES_NOT_EXIST_ERR_MSG =
             "The member you want to assign a task to does not exist or does not belong to a team";
-    public static final String BOARD_CREATED = "Board %s has been created";
-    public static final String TEAM_NOT_FOUND_ERR_MSG = "Team %s does not exist in this board.";
+    private static final String BOARD_CREATED = "Board %s has been created";
+    private static final String TEAM_NOT_FOUND_ERR_MSG = "Team %s does not exist in this board.";
+    private static final String TEAM_ADDED_TO_BOARD = "Team has been added to board %s";
+    private static final String TEAM_ALREADY_EXIST_IN_BOARD = "This team already exist in board %s";
+    private static final String TEAM_REMOVED_MSG = "Team %s has been removed removed.";
 
     private String name;
     private List<LoggerImpl> activityHistory;
@@ -40,7 +43,6 @@ public class BoardImpl implements Board {
         this.activityHistory = new ArrayList<>();
         this.taskList = new ArrayList<>();
         this.teamsList = new ArrayList<>();
-        //todo likely to be removed due to commands? - Ted
         logChange(String.format(BOARD_CREATED, getName()));
     }
 
@@ -74,24 +76,29 @@ public class BoardImpl implements Board {
         logChange(String.format(TASK_ADDED, task.getTitle(), getName()));
     }
     @Override
+    /*
+       Made changes to this method by separating both for each loops into separate loops,
+       because if teamList was not empty we would enter the nested loop and unassign the task
+       from the member, however, since there was no break in the primary loop it would continue to
+       iterate through taskList and throw an exception.
+     */
     public void removeTask(Task task){
         for (Task taskLocal : taskList) {
             if (taskLocal == task) {
                 taskList.remove(task);
-                if (teamsList.isEmpty()) {
-                    break;
-                } else {
-                    for (Team teamLocal : teamsList) {
-                        for (Member memberLocal : teamLocal.getMembers()) {
-                            if (memberLocal.getListOfTasks().contains(task)) {
-                                memberLocal.unAssignTask(task);
-                            }
-                        }
+                break;
+            }
+        }
+        if (!teamsList.isEmpty()) {
+            for (Team teamLocal : teamsList) {
+                for (Member memberLocal : teamLocal.getMembers()) {
+                    if (memberLocal.getListOfTasks().contains(task)) {
+                        memberLocal.unAssignTask(task);
+                        break;
                     }
                 }
             }
         }
-        //taskList.remove(task);
         logChange(String.format(TASK_REMOVED, task.getTitle(), getName()));
     }
     private void logChange(String change){
@@ -129,16 +136,16 @@ public class BoardImpl implements Board {
              memberToAssignTaskTo.getName()));
             break;
         } else {
-        throw new IllegalArgumentException(MEMBER_DOES_NOT_ERR_MSG);
+        throw new IllegalArgumentException(MEMBER_DOES_NOT_EXIST_ERR_MSG);
         }
        }
       }
         // to have a for each loop for teamImpl list and to find the concrete member
         // then to have it assigned
-        // add memberimpl as parameter to use teams list to look for the member
+        // add memberImpl as parameter to use teams list to look for the member
         // in question.
         // could throw an exception if teams list is empty
-        // throw exception if member does not exist in teams's list
+        // throw exception if member does not exist in teams' list
     }
 
     @Override
@@ -154,23 +161,21 @@ public class BoardImpl implements Board {
                     memberToUnassignTask.getName()));
             break;
         } else {
-        throw new IllegalArgumentException(MEMBER_DOES_NOT_ERR_MSG);
+        throw new IllegalArgumentException(MEMBER_DOES_NOT_EXIST_ERR_MSG);
         }
        }
       }
     }
-    //todo add logchange to addTeam and its name - Ted
     @Override
     public void addTeam(Team teamToAdd){
         if(!teamsList.contains(teamToAdd)){
             teamsList.add(teamToAdd);
-            logChange("Team was added to board " + getName());
+            logChange(String.format(TEAM_ADDED_TO_BOARD, getName()));
         }else {
-            throw new IllegalArgumentException("This team already exist in board" +
-                    getName());
+            throw new IllegalArgumentException(String.format(TEAM_ALREADY_EXIST_IN_BOARD, getName()));
         }
     }
-    //todo add logchange to removeTeam - Ted
+
     @Override
     public void removeTeam(Team team) {
         if (teamsList.isEmpty()){
@@ -179,7 +184,7 @@ public class BoardImpl implements Board {
             for (Team teamLocal : teamsList) {
                 if (teamLocal.getName().equals(team.getName())) {
                     teamsList.remove(team);
-                    logChange("Team %s was removed.");
+                    logChange(String.format(TEAM_REMOVED_MSG, team.getName()));
                     break;
                 } else {
                     throw new IllegalArgumentException(String.format(TEAM_NOT_FOUND_ERR_MSG, team.getName()));

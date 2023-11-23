@@ -51,7 +51,7 @@ public class SortBugByTitlePrioritySeverityTests {
         repository.createBug("hhhhhhhhhh", TestsConstants.VALID_DESCRIPTION,
                 TestsConstants.STEPS_TO_REPRODUCE, Priority.HIGH, Severity.MAJOR);
 
-        bugsForTest = repository.findAllBugsInTasks();
+        bugsForTest = repository.getBugs();
     }
 
     @Test

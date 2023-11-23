@@ -53,7 +53,7 @@ public class SortFeedbackByTitleRatingTests {
                 77);
         repository.createFeedback("bbbbbbbbbb", TestsConstants.VALID_DESCRIPTION,
                 4);
-        feedbacksForTest = repository.findAllFeedbackInTasks();
+        feedbacksForTest = repository.getFeedback();
     }
 
     @Test

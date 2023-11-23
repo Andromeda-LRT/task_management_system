@@ -25,7 +25,7 @@ public class SortFeedbackByTitleRating extends CommandImpl {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        List<Feedback> feedbacks = getTaskManagementSystemRepository().findAllFeedbackInTasks();
+        List<Feedback> feedbacks = getTaskManagementSystemRepository().getFeedback();
         if (feedbacks.isEmpty()){
             throw new IllegalArgumentException(NO_FEEDBACKS_TO_SORT);
         }

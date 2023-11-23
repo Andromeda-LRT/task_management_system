@@ -38,9 +38,10 @@ public class CreateNewStoryInBoard extends CommandImpl {
     private String addTask(String teamName, String boardName, String title, String description,
                            Priority priority, Size size){
 
-        Task story = createTaskStory(title, description, priority, size);
+
         for (Board boardLocal : getTaskManagementSystemRepository().findTeamByName(teamName).getBoards()) {
             if (boardLocal.getName().equals(boardName)){
+                Task story = createTaskStory(title, description, priority, size);
                 boardLocal.addTask(story);
                 return String.format(STORY_CREATED_SUCCESSFULLY, boardName, teamName, title);
             }

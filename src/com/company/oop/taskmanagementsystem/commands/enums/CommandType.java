@@ -1,7 +1,7 @@
 package com.company.oop.taskmanagementsystem.commands.enums;
 
 public enum CommandType {
-    //TODO update command names to be the same
+    //TODO update command names to be the same, to be done on last day before next lecture before 23/11/23
     // as command classes
     CREATEMEMBER,//*
     SHOWALLMEMBERS,//*
@@ -48,16 +48,9 @@ public enum CommandType {
     FILTERTASKWITHASSIGNEEBYSTATUSANDORASSIGNEE, //*
     SORTBUGBY,
     SORTSTORYBY,
-    SORTFEEDBACKBY;
-//todo to check the listTaskWithAssignee commands as they are already done
-
-//    SORTTASKSBYPRIORITY,
-//    SORTTASKSBYSEVERITY,
-//    SORTTASKSBYSIZE,
-//    SORTTASKSBYRATING,
-//
-//    LISTTASKSWITHASSIGNEE,
-//    LISTTASKWITHASSIGNEESORTEDBYTITLE;
+    SORTFEEDBACKBY,
+    LISTTASKSWITHASSIGNEE,
+    LISTTASKWITHASSIGNEESORTEDBYTITLE;
 
 
 }

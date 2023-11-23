@@ -54,7 +54,7 @@ public class SortStoryByTitlePrioritySizeTests {
         repository.createStory("bbbbbbbbbb", TestsConstants.VALID_DESCRIPTION,
                 Priority.HIGH, Size.MEDIUM);
 
-        storiesForTest = repository.findAllStoriesInTasks();
+        storiesForTest = repository.getStories();
     }
 
     @Test
