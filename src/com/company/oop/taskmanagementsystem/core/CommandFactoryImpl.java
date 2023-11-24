@@ -13,7 +13,7 @@ public class CommandFactoryImpl implements CommandFactory {
                                                 TaskManagementSystemRepository taskManagementSystemRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
         switch (commandType) {
-            case CREATEMEMBER:
+            case CREATENEWMEMBER:
                 return new CreateNewMember(taskManagementSystemRepository);
             case SHOWALLMEMBERS:
                 return new ShowAllMembers(taskManagementSystemRepository);
@@ -25,7 +25,7 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowAllTeams(taskManagementSystemRepository);
             case SHOWTEAMACTIVITY:
                 return new ShowTeamActivity(taskManagementSystemRepository);
-            case ADDPERSONTOTEAM:
+            case ADDMEMBERTOTEAM:
                 return new AddMemberToTeam(taskManagementSystemRepository);
             case SHOWALLTEAMMEMBERS:
                 return new ShowAllTeamMembers(taskManagementSystemRepository);
@@ -36,11 +36,11 @@ public class CommandFactoryImpl implements CommandFactory {
             case SHOWBOARDACTIVITY:
                 return new ShowBoardActivity(taskManagementSystemRepository);
             case CREATENEWBUG:
-                return new CreateNewBugInBoard(taskManagementSystemRepository);
+                return new CreateNewBug(taskManagementSystemRepository);
             case CREATENEWSTORY:
-                return new CreateNewStoryInBoard(taskManagementSystemRepository);
+                return new CreateNewStory(taskManagementSystemRepository);
             case CREATEFEEDBACK:
-                return new CreateNewFeedbackInBoard(taskManagementSystemRepository);
+                return new CreateNewFeedback(taskManagementSystemRepository);
             case CHANGEPRIORITYOFBUG:
                 return new ChangePriorityOfBug(taskManagementSystemRepository);
             case CHANGESTATUSOFBUG:
@@ -69,11 +69,11 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new FilterTasksByTitle(taskManagementSystemRepository);
             case SORTTASKSBYTITLE:
                 return new SortTasksByTitle(taskManagementSystemRepository);
-            case LISTBUGS:
+            case LISTALLBUGS:
                 return new ListAllBugs(taskManagementSystemRepository);
-            case LISTSTORIES:
+            case LISTALLSTORIES:
                 return new ListAllStories(taskManagementSystemRepository);
-            case LISTFEEDBACK:
+            case LISTALLFEEDBACK:
                 return new ListAllFeedback(taskManagementSystemRepository);
             case FILTERTASKBYSTATUSORANDASSIGNEE:
                 return new FilterTaskByStatusOrAndAssignee(taskManagementSystemRepository);
@@ -84,11 +84,11 @@ public class CommandFactoryImpl implements CommandFactory {
             case LISTTASKWITHASSIGNEESORTEDBYTITLE:
                 return new ListTasksWithAssigneeSortedByTitle(taskManagementSystemRepository);
             case SORTBUGBY:
-                return new SortBugByTitlePrioritySeverity(taskManagementSystemRepository);
+                return new SortBugByFields(taskManagementSystemRepository);
             case SORTSTORYBY:
-                return new SortStoryByTitlePrioritySize(taskManagementSystemRepository);
+                return new SortStoryByFields(taskManagementSystemRepository);
             case SORTFEEDBACKBY:
-                return new SortFeedbackByTitleRating(taskManagementSystemRepository);
+                return new SortFeedbackByFields(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException();
         }

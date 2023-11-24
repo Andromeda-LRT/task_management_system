@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.CreateNewStoryInBoard;
+import com.company.oop.taskmanagementsystem.commands.CreateNewStory;
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateNewStoryInBoardTests {
+public class CreateNewStoryTests {
 
     private Command command;
     private List<String> parameters;
@@ -23,7 +23,7 @@ public class CreateNewStoryInBoardTests {
     @BeforeEach
     public void initCreateStoryInBoardCommand(){
         taskManagementSystemRepository = new TaskManagementSystemRepositoryImpl();
-        command = new CreateNewStoryInBoard(taskManagementSystemRepository);
+        command = new CreateNewStory(taskManagementSystemRepository);
         parameters = new ArrayList<>();
         parameters.add(TestsConstants.VALID_TEAM_NAME);
         parameters.add(TestsConstants.VALID_BOARD_NAME);
@@ -40,7 +40,7 @@ public class CreateNewStoryInBoardTests {
 
         taskManagementSystemRepository.findTeamByName(parameters.get(0)).addBoard(board);
 
-        Assertions.assertEquals(String.format(CreateNewStoryInBoard.STORY_CREATED_SUCCESSFULLY,
+        Assertions.assertEquals(String.format(CreateNewStory.STORY_CREATED_SUCCESSFULLY,
                 TestsConstants.VALID_BOARD_NAME, TestsConstants.VALID_TEAM_NAME, TestsConstants.VALID_TITLE), command.execute(parameters));
     }
     @Test

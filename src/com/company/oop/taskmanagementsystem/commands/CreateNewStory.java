@@ -1,23 +1,21 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Board;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
-import com.company.oop.taskmanagementsystem.models.enums.Severity;
 import com.company.oop.taskmanagementsystem.models.enums.Size;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class CreateNewStoryInBoard extends CommandImpl {
+public class CreateNewStory extends CommandImpl {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
     public static final String STORY_CREATED_SUCCESSFULLY = "Board %s in Team %s added Story with title %s successfully";
 
-    public CreateNewStoryInBoard(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public CreateNewStory(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 

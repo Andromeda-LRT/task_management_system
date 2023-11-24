@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.SortBugByTitlePrioritySeverity;
+import com.company.oop.taskmanagementsystem.commands.SortBugByFields;
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class SortBugByTitlePrioritySeverityTests {
+public class SortBugByFieldsTests {
 
     private TaskManagementSystemRepository repository;
     private Command command;
@@ -30,7 +30,7 @@ public class SortBugByTitlePrioritySeverityTests {
     public void initSortBugByTitlePrioritySeverityCommand() {
 
         repository = new TaskManagementSystemRepositoryImpl();
-        command = new SortBugByTitlePrioritySeverity(repository);
+        command = new SortBugByFields(repository);
         parameters = new ArrayList<>();
         sb = new StringBuilder();
 
@@ -126,7 +126,7 @@ public class SortBugByTitlePrioritySeverityTests {
     public void SortBugByTitlePrioritySeverity_Should_Throw_AnException_When_ThereAreNoBugs(){
         parameters.add("Severity");
         repository = new TaskManagementSystemRepositoryImpl();
-        command = new SortBugByTitlePrioritySeverity(repository);
+        command = new SortBugByFields(repository);
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 command.execute(parameters));
     }

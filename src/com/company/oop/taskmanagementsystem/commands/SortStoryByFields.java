@@ -2,7 +2,6 @@ package com.company.oop.taskmanagementsystem.commands;
 
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
@@ -10,14 +9,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class SortStoryByTitlePrioritySize extends CommandImpl {
+public class SortStoryByFields extends CommandImpl {
     private static final String STORY_SORTED_BY_GIVEN_PARAMETER = "---STORY SORTED BY %S---";
     private static final String NO_STORIES_TO_SORT = "There are no added Stories";
     private static final String INVALID_SORT_OPERATION = "%s is not a valid sort operation, " +
             "please input either Title, Priority, or Size";
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
-    public SortStoryByTitlePrioritySize(TaskManagementSystemRepository taskManagementSystemRepository){
+    public SortStoryByFields(TaskManagementSystemRepository taskManagementSystemRepository){
         super(taskManagementSystemRepository);
     }
 

@@ -1,16 +1,11 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.SortBugByTitlePrioritySeverity;
-import com.company.oop.taskmanagementsystem.commands.SortFeedbackByTitleRating;
-import com.company.oop.taskmanagementsystem.commands.SortStoryByTitlePrioritySize;
+import com.company.oop.taskmanagementsystem.commands.SortFeedbackByFields;
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Feedback;
-import com.company.oop.taskmanagementsystem.models.enums.Priority;
-import com.company.oop.taskmanagementsystem.models.enums.Size;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class SortFeedbackByTitleRatingTests {
+public class SortFeedbackByFieldsTests {
 
     private TaskManagementSystemRepository repository;
     private Command command;
@@ -33,7 +28,7 @@ public class SortFeedbackByTitleRatingTests {
     public void initSortStoryByTitlePrioritySeverityCommand(){
 
         repository = new TaskManagementSystemRepositoryImpl();
-        command = new SortFeedbackByTitleRating(repository);
+        command = new SortFeedbackByFields(repository);
         parameters = new ArrayList<>();
         sb = new StringBuilder();
 
@@ -108,7 +103,7 @@ public class SortFeedbackByTitleRatingTests {
     public void SortFeedbackByTitleRating_Should_Throw_AnException_When_ThereAreNoFeedbacks(){
         parameters.add("Title");
         repository = new TaskManagementSystemRepositoryImpl();
-        command = new SortFeedbackByTitleRating(repository);
+        command = new SortFeedbackByFields(repository);
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 command.execute(parameters));
     }
