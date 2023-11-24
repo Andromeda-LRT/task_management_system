@@ -1,9 +1,8 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.ChangeRatingOfFeedback;
+import com.company.oop.taskmanagementsystem.commands.change.ChangeRatingOfFeedback;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.contracts.Feedback;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

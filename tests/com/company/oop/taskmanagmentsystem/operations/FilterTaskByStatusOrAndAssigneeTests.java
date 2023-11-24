@@ -1,7 +1,7 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.AssignTaskToMember;
-import com.company.oop.taskmanagementsystem.commands.FilterTaskByStatusOrAndAssignee;
+import com.company.oop.taskmanagementsystem.commands.assignAndUnassign.AssignTaskToMember;
+import com.company.oop.taskmanagementsystem.commands.filter.FilterTaskByStatusOrAndAssignee;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;

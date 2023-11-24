@@ -1,8 +1,22 @@
 package com.company.oop.taskmanagementsystem.core;
 
-import com.company.oop.taskmanagementsystem.commands.*;
+import com.company.oop.taskmanagementsystem.commands.add.AddCommentToTask;
+import com.company.oop.taskmanagementsystem.commands.add.AddMemberToTeam;
+import com.company.oop.taskmanagementsystem.commands.assignAndUnassign.AssignTaskToMember;
+import com.company.oop.taskmanagementsystem.commands.assignAndUnassign.UnassignTaskToMember;
+import com.company.oop.taskmanagementsystem.commands.change.*;
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
+import com.company.oop.taskmanagementsystem.commands.create.*;
 import com.company.oop.taskmanagementsystem.commands.enums.CommandType;
+import com.company.oop.taskmanagementsystem.commands.filter.FilterTaskByStatusOrAndAssignee;
+import com.company.oop.taskmanagementsystem.commands.filter.FilterTaskWithAssigneeByStatusAndOrAssignee;
+import com.company.oop.taskmanagementsystem.commands.filter.FilterTasksByTitle;
+import com.company.oop.taskmanagementsystem.commands.list.*;
+import com.company.oop.taskmanagementsystem.commands.show.*;
+import com.company.oop.taskmanagementsystem.commands.sort.SortBugByFields;
+import com.company.oop.taskmanagementsystem.commands.sort.SortFeedbackByFields;
+import com.company.oop.taskmanagementsystem.commands.sort.SortStoryByFields;
+import com.company.oop.taskmanagementsystem.commands.sort.SortTasksByTitle;
 import com.company.oop.taskmanagementsystem.core.contracts.CommandFactory;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;

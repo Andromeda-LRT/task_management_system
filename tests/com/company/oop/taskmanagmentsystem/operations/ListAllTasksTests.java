@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.ListAllTasks;
+import com.company.oop.taskmanagementsystem.commands.list.ListAllTasks;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;

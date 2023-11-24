@@ -1,11 +1,9 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.ChangePriorityOfBug;
-import com.company.oop.taskmanagementsystem.commands.ChangeSeverityOfBug;
+import com.company.oop.taskmanagementsystem.commands.change.ChangeSeverityOfBug;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
-import com.company.oop.taskmanagementsystem.models.enums.Priority;
 import com.company.oop.taskmanagementsystem.models.enums.Severity;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;

@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.ChangeStatusOfStory;
+import com.company.oop.taskmanagementsystem.commands.change.ChangeStatusOfStory;
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
