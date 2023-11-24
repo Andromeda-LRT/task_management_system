@@ -1,11 +1,9 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.AssignTaskToMember;
-import com.company.oop.taskmanagementsystem.commands.UnassignTaskToMember;
+import com.company.oop.taskmanagementsystem.commands.assignAndUnassign.AssignTaskToMember;
+import com.company.oop.taskmanagementsystem.commands.assignAndUnassign.UnassignTaskToMember;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.MemberImpl;
-import com.company.oop.taskmanagementsystem.models.StoryImpl;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
 import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;

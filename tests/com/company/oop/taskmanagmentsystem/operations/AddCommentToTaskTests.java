@@ -1,19 +1,15 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.AddCommentToTask;
-import com.company.oop.taskmanagementsystem.commands.CreateNewMember;
-import com.company.oop.taskmanagementsystem.commands.UnassignTaskToMember;
+import com.company.oop.taskmanagementsystem.commands.add.AddCommentToTask;
+import com.company.oop.taskmanagementsystem.commands.create.CreateNewMember;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.MemberImpl;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
-import com.company.oop.taskmanagementsystem.models.contracts.Member;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.sound.midi.MetaMessage;
 import java.util.ArrayList;
 import java.util.List;
 

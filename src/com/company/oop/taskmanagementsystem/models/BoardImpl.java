@@ -76,12 +76,7 @@ public class BoardImpl implements Board {
         logChange(String.format(TASK_ADDED, task.getTitle(), getName()));
     }
     @Override
-    /*
-       Made changes to this method by separating both for each loops into separate loops,
-       because if teamList was not empty we would enter the nested loop and unassign the task
-       from the member, however, since there was no break in the primary loop it would continue to
-       iterate through taskList and throw an exception.
-     */
+
     public void removeTask(Task task){
         for (Task taskLocal : taskList) {
             if (taskLocal == task) {
@@ -106,7 +101,7 @@ public class BoardImpl implements Board {
     }
     @Override
     public String showBoardActivity(){
-        StringBuilder output = new StringBuilder(toString());
+        StringBuilder output = new StringBuilder();
         if (activityHistory.isEmpty()){
             output.append(toString());
             output.append(Constants.NO_BOARD_ACTIVITY);
@@ -140,12 +135,6 @@ public class BoardImpl implements Board {
         }
        }
       }
-        // to have a for each loop for teamImpl list and to find the concrete member
-        // then to have it assigned
-        // add memberImpl as parameter to use teams list to look for the member
-        // in question.
-        // could throw an exception if teams list is empty
-        // throw exception if member does not exist in teams' list
     }
 
     @Override

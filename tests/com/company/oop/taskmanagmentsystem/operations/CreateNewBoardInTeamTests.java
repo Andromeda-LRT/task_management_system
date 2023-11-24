@@ -1,7 +1,7 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.CreateNewBoardInTeam;
-import com.company.oop.taskmanagementsystem.commands.CreateNewTeam;
+import com.company.oop.taskmanagementsystem.commands.create.CreateNewBoardInTeam;
+import com.company.oop.taskmanagementsystem.commands.create.CreateNewTeam;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Team;
