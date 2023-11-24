@@ -1,9 +1,7 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.TaskImpl;
 import com.company.oop.taskmanagementsystem.models.contracts.Board;
 import com.company.oop.taskmanagementsystem.models.contracts.Task;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
@@ -11,16 +9,15 @@ import com.company.oop.taskmanagementsystem.models.enums.Severity;
 import com.company.oop.taskmanagementsystem.utils.ParsingHelpers;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateNewBugInBoard extends CommandImpl {
+public class CreateNewBug extends CommandImpl {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
 
     public static final String BUG_CREATED_SUCCESSFULLY = "Board %s in Team %s added Bug with title %s successfully";
 
-    public CreateNewBugInBoard(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public CreateNewBug(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 

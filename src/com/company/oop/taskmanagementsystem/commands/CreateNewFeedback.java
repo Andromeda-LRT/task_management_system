@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagementsystem.commands;
 
-import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Board;
@@ -10,12 +9,12 @@ import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class CreateNewFeedbackInBoard extends CommandImpl {
+public class CreateNewFeedback extends CommandImpl {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 5;
     public static final String FEEDBACK_CREATED_SUCCESSFULLY = "Board %s in Team %s added Feedback with title %s successfully";
     public static final String NOT_STRING = "Rating should be a digit, not a string!";
 
-    public CreateNewFeedbackInBoard(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public CreateNewFeedback(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 

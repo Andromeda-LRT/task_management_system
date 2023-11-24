@@ -1,13 +1,10 @@
 package com.company.oop.taskmanagmentsystem.operations;
 
-import com.company.oop.taskmanagementsystem.commands.SortBugByTitlePrioritySeverity;
-import com.company.oop.taskmanagementsystem.commands.SortStoryByTitlePrioritySize;
+import com.company.oop.taskmanagementsystem.commands.SortStoryByFields;
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.taskmanagementsystem.models.contracts.Bug;
-import com.company.oop.taskmanagementsystem.models.contracts.Feedback;
 import com.company.oop.taskmanagementsystem.models.contracts.Story;
 import com.company.oop.taskmanagementsystem.models.enums.Priority;
 import com.company.oop.taskmanagementsystem.models.enums.Size;
@@ -18,10 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class SortStoryByTitlePrioritySizeTests {
+public class SortStoryByFieldsTests {
 
     private TaskManagementSystemRepository repository;
     private Command command;
@@ -33,7 +29,7 @@ public class SortStoryByTitlePrioritySizeTests {
     public void initSortStoryByTitlePrioritySeverityCommand(){
 
         repository = new TaskManagementSystemRepositoryImpl();
-        command = new SortStoryByTitlePrioritySize(repository);
+        command = new SortStoryByFields(repository);
         parameters = new ArrayList<>();
         sb = new StringBuilder();
 
@@ -144,7 +140,7 @@ public class SortStoryByTitlePrioritySizeTests {
     public void SortStoryByTitlePrioritySize_Should_Throw_AnException_When_ThereAreNoStories(){
         parameters.add("Priority");
         repository = new TaskManagementSystemRepositoryImpl();
-        command = new SortStoryByTitlePrioritySize(repository);
+        command = new SortStoryByFields(repository);
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 command.execute(parameters));
     }

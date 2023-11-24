@@ -3,21 +3,19 @@ package com.company.oop.taskmanagementsystem.commands;
 import com.company.oop.taskmanagementsystem.constants.Constants;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.taskmanagementsystem.models.contracts.Bug;
-import com.company.oop.taskmanagementsystem.models.contracts.Prioritizeable;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class SortBugByTitlePrioritySeverity extends CommandImpl {
+public class SortBugByFields extends CommandImpl {
     private static final String BUG_SORTED_BY_GIVEN_PARAMETER = "---BUG SORTED BY %S---";
     private static final String NO_BUGS_TO_SORT = "There are no added Bugs";
     private static final String INVALID_SORT_OPERATION = "%s is not a valid sort operation, " +
             "please input either Title, Priority, or Severity";
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
-    public SortBugByTitlePrioritySeverity(TaskManagementSystemRepository taskManagementSystemRepository){
+    public SortBugByFields(TaskManagementSystemRepository taskManagementSystemRepository){
         super(taskManagementSystemRepository);
     }
 
