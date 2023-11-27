@@ -43,8 +43,8 @@ public class ChangeTaskPriority extends CommandImpl {
                         .getPriority();
                 getTaskManagementSystemRepository().findBugByID(taskId).changePriority(priorityToChangeTo);
                 return String.format(Constants.PRIORITY_CHANGED, taskType, taskId, latestBugPriority, priorityToChangeTo);
+            default:
+                throw new IllegalArgumentException(Constants.INVALID_TASK_TYPE_WHEN_REQUIRED_STORY_BUG);
         }
-
-        throw new IllegalArgumentException(Constants.INVALID_TASK_TYPE_WHEN_REQUIRED_STORY_BUG);
     }
 }

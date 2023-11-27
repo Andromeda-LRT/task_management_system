@@ -28,18 +28,15 @@ public class ChangeStatusOfStory extends CommandImpl {
         int storyID = Integer.parseInt(parameters.get(0));
         String changeStatusOperation = parameters.get(1);
         Story story = getTaskManagementSystemRepository().findStoryById(storyID);
-//        Task task = getTaskManagementSystemRepository().findTaskById(storyID);
-//        if (!(task instanceof Story)){
-//            throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
-//        }
 
         switch (changeStatusOperation.toUpperCase()){
             case Constants.OPERATION_ADVANCE:
                 return storyAdvanceStatus(storyID, story);
             case Constants.OPERATION_REVERT:
                 return storyRevertStatus(storyID, story);
+            default:
+                throw new IllegalArgumentException(Constants.NO_SUCH_CHANGE_STATUS_OPERATION_ERR_MSG);
         }
-        throw new IllegalArgumentException(Constants.NO_SUCH_CHANGE_STATUS_OPERATION_ERR_MSG);
     }
 
     private String storyAdvanceStatus(int storyID, Story story){

@@ -39,8 +39,8 @@ public class ChangeTaskSize extends CommandImpl {
                         .getSize();
                 getTaskManagementSystemRepository().findStoryById(taskId).changeSize(sizeToChangeTo);
                 return String.format(Constants.SIZE_CHANGED, taskType, taskId, latestStorySize, sizeToChangeTo);
+            default:
+                throw new IllegalArgumentException(Constants.INVALID_TASK_TYPE_FOR_SIZE);
         }
-
-        throw new IllegalArgumentException(Constants.INVALID_TASK_TYPE_FOR_SIZE);
     }
 }
