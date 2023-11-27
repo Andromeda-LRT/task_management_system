@@ -19,12 +19,19 @@ public class CreateNewTeam extends CommandImpl {
 
     @Override
     public String execute(List<String> parameters) {
-       ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-       String teamName = parameters.get(0);
-       return createTeam(teamName);
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+        String teamName = parameters.get(0);
+        return createTeam(teamName);
     }
 
     private String createTeam(String teamName) {
+        ValidationHelpers.validateNameIsUniqueInMemberTeamBoard(
+                teamName,
+                getTaskManagementSystemRepository().getMembers(),
+                getTaskManagementSystemRepository().getTeams(),
+                getTaskManagementSystemRepository().getBoards()
+        );
+
         if (getTaskManagementSystemRepository().teamExist(teamName)) {
             throw new IllegalArgumentException(String.format(TEAM_ALREADY_EXISTS, teamName));
         }
