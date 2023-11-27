@@ -115,8 +115,8 @@ public class FilterTaskWithAssigneeByStatusAndOrAssignee extends CommandImpl {
         StringBuilder string = new StringBuilder();
         string.append(String.format(LISTING_FOR_ASSIGNEE, parameter))
                 .append(System.lineSeparator());
-        List<Bug> bugs = getTaskManagementSystemRepository().findAllBugsInTasks();
-        List<Story> stories = getTaskManagementSystemRepository().findAllStoriesInTasks();
+        List<Bug> bugs = getTaskManagementSystemRepository().getBugs();
+        List<Story> stories = getTaskManagementSystemRepository().getStories();
         if (!bugs.isEmpty()) {
             for (Bug bug : bugs) {
                 if (bug.getAssignee().getName().equals(parameter)) {

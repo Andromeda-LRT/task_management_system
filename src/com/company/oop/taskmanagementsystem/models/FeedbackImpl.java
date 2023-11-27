@@ -42,6 +42,20 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
+    public void changeStatus(Status statusToChangeTo) {
+        if (statusToChangeTo != Status.NEW && statusToChangeTo != Status.UNSCHEDULED
+                && statusToChangeTo != Status.SCHEDULED && statusToChangeTo != Status.DONE){
+            throw new IllegalArgumentException(Constants.INVALID_FEEDBACK_STATUS_ERROR_MSG);
+        }
+        if (super.getStatus() == statusToChangeTo){
+            throw new IllegalArgumentException(String.format(Constants.CANNOT_CHANGE_STATUS_ERR_MSG,
+                    Constants.FEEDBACK, super.getStatus()));
+        }
+        logChange(String.format(Constants.STATUS_CHANGED, Constants.FEEDBACK, super.getStatus(), statusToChangeTo));
+        setStatus(statusToChangeTo);
+    }
+
+    @Override
     public void advanceStatus() {
         switch (super.getStatus()){
             case NEW:

@@ -27,10 +27,6 @@ public class ChangeSizeOfStory extends CommandImpl {
         int storyID = Integer.parseInt(parameters.get(0));
         String changePriorityOperation = parameters.get(1);
         Story story = getTaskManagementSystemRepository().findStoryById(storyID);
-//        Task task = getTaskManagementSystemRepository().findTaskById(storyID);
-//        if (!(task instanceof Story)){
-//            throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
-//        }
 
         switch (changePriorityOperation.toUpperCase()){
             case Constants.OPERATION_INCREASE:

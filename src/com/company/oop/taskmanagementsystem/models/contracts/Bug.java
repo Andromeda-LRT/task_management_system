@@ -13,6 +13,7 @@ public interface Bug extends Identifiable, Printable, Prioritizeable, Task {
    void increaseSeverity();
 
    void lowerSeverity();
+   void changeSeverity(Severity severityToChangeTo);
 
    Member getAssignee();
 

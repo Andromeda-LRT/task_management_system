@@ -103,6 +103,14 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new SortStoryByFields(taskManagementSystemRepository);
             case SORTFEEDBACKBY:
                 return new SortFeedbackByFields(taskManagementSystemRepository);
+            case CHANGETASKSTATUS:
+                return new ChangeTaskStatus(taskManagementSystemRepository);
+            case CHANGETASKPRIORITY:
+                return new ChangeTaskPriority(taskManagementSystemRepository);
+            case CHANGETASKSEVERITY:
+                return new ChangeTaskSeverity(taskManagementSystemRepository);
+            case CHANGETASKSIZE:
+                return new ChangeTaskSize(taskManagementSystemRepository);
             default:
                 throw new IllegalArgumentException();
         }
