@@ -45,13 +45,6 @@ public interface TaskManagementSystemRepository {
 
     Task findTaskById(int id);
 
-    List<Bug> findAllBugsInTasks();
-
-
-    List<Story> findAllStoriesInTasks();
-
-    List<Feedback> findAllFeedbackInTasks();
-
     String listTasksWithAssignee();
 
     List<Task> listTasksWithAssigneeSortedByTitle();

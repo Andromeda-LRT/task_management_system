@@ -6,4 +6,5 @@ public interface Prioritizeable {
     Priority getPriority();
     void increasePriority();
     void lowerPriority();
+    void changePriority(Priority priorityToChangeTo);
 }

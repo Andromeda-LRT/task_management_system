@@ -54,6 +54,7 @@ public class StoryImpl extends TaskImpl implements Story {
         setAssignee(member);
     }
 
+
     public void setAssignee(Member assignee) {
         if (assignee.getName().equalsIgnoreCase(NOBODY.getName())) {
             logChange(String.format(Constants.NEW_ASSIGNEE, Constants.STORY, assignee.getName()));
@@ -66,6 +67,20 @@ public class StoryImpl extends TaskImpl implements Story {
     @Override
     public List<Comment> getComments() {
         return super.getComments();
+    }
+
+    @Override
+    public void changeStatus(Status statusToChangeTo) {
+        if (statusToChangeTo != Status.NOT_DONE && statusToChangeTo != Status.IN_PROGRESS
+        && statusToChangeTo != Status.DONE){
+            throw new IllegalArgumentException(Constants.INVALID_STORY_STATUS_ERROR_MSG);
+        }
+        if (super.getStatus() == statusToChangeTo){
+            throw new IllegalArgumentException(String.format(Constants.CANNOT_CHANGE_STATUS_ERR_MSG,
+                    Constants.STORY, super.getStatus()));
+        }
+        logChange(String.format(Constants.STATUS_CHANGED, Constants.STORY, super.getStatus(), statusToChangeTo));
+        setStatus(statusToChangeTo);
     }
 
     @Override
@@ -137,6 +152,16 @@ public class StoryImpl extends TaskImpl implements Story {
     }
 
     @Override
+    public void changePriority(Priority priorityToChangeTo) {
+        if (getPriority() == priorityToChangeTo){
+            throw new IllegalArgumentException(String.format(Constants.CANNOT_CHANGE_PRIORITY_ERR_MSG,
+                    Constants.STORY, getPriority()));
+        }
+        logChange(String.format(Constants.PRIORITY_CHANGED, Constants.STORY, getId(), getPriority(), priorityToChangeTo));
+        setPriority(priorityToChangeTo);
+    }
+
+    @Override
     public void increaseSize() {
         switch (getSize()) {
             case SMALL:
@@ -168,6 +193,15 @@ public class StoryImpl extends TaskImpl implements Story {
                 logChange(Constants.SIZE_ALREADY_SET_TO_SMALL);
                 break;
         }
+    }
+    @Override
+    public void changeSize(Size sizeToChangeTo) {
+        if (getSize() == sizeToChangeTo){
+            throw new IllegalArgumentException(String.format(Constants.CANNOT_CHANGE_SIZE_ERR_MSG,
+                    Constants.STORY, getSize()));
+        }
+        logChange(String.format(Constants.SIZE_CHANGED, Constants.STORY, getId(), getSize(), sizeToChangeTo));
+        setSize(sizeToChangeTo);
     }
 
     @Override

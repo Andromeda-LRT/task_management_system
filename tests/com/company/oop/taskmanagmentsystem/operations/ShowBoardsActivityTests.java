@@ -49,8 +49,8 @@ public class ShowBoardsActivityTests {
         }
         loggedEvents.append(Constants.LINE_DIVISOR);
 
-        Assertions.assertEquals(String.format("Board: %s%n" +
-                        Constants.ACTIVITY + "%n" + Constants.LINE_DIVISOR + "%n" + loggedEvents,
+        Assertions.assertEquals(String.format(
+                Constants.ACTIVITY + "%n" + Constants.LINE_DIVISOR + "%n" + loggedEvents,
                 taskManagementSystemRepository.findBoardByName(parameters.get(1)).getName(),
                 taskManagementSystemRepository.findBoardByName(parameters.get(1)).getName(),
                 taskManagementSystemRepository.findBoardByName(parameters.get(1)).getName()),

@@ -26,6 +26,7 @@ public class SortStoryByFields extends CommandImpl {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         List<Story> stories = getTaskManagementSystemRepository().getStories();
+
         if (stories.isEmpty()){
             throw new IllegalArgumentException(NO_STORIES_TO_SORT);
         }

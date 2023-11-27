@@ -1,11 +1,15 @@
 package com.company.oop.taskmanagementsystem.utils;
 
+
+import java.util.Arrays;
+import java.util.List;
+
 public class ParsingHelpers {
-    public static final String NO_SUCH_ENUM = "There is no %s in %ss.";
+    public static final String NO_SUCH_ENUM = "There is no %s in %s.";
 
     public static <E extends Enum<E>> E tryParseEnum(String valueToParse, Class<E> type) {
         try {
-            return Enum.valueOf(type, valueToParse.replace(" ", "_").toUpperCase());
+           return Enum.valueOf(type, valueToParse.replace(" ", "_").toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
         }
@@ -18,4 +22,5 @@ public class ParsingHelpers {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
 }

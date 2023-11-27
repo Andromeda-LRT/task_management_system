@@ -109,6 +109,16 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+    public void changePriority(Priority priorityToChangeTo) {
+        if (getPriority() == priorityToChangeTo){
+            throw new IllegalArgumentException(String.format(Constants.CANNOT_CHANGE_PRIORITY_ERR_MSG,
+                    Constants.BUG, getPriority()));
+        }
+        logChange(String.format(Constants.PRIORITY_CHANGED, Constants.BUG, getId(), getPriority(), priorityToChangeTo));
+        setPriority(priorityToChangeTo);
+    }
+
+    @Override
     public Severity getSeverity() {
         return severity;
     }
@@ -148,8 +158,31 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+    public void changeSeverity(Severity severityToChangeTo) {
+        if (getSeverity() == severityToChangeTo){
+            throw new IllegalArgumentException(String.format(Constants.CANNOT_CHANGE_SEVERITY_ERR_MSG,
+                    Constants.BUG, getSeverity()));
+        }
+        logChange(String.format(Constants.SEVERITY_CHANGED, Constants.BUG, getId(), getSeverity(), severityToChangeTo));
+        setSeverity(severityToChangeTo);
+    }
+
+    @Override
     public Member getAssignee() {
         return assignee;
+    }
+
+    @Override
+    public void changeStatus(Status statusToChangeTo) {
+        if (statusToChangeTo != Status.ACTIVE && statusToChangeTo != Status.DONE){
+            throw new IllegalArgumentException(Constants.INVALID_BUG_STATUS_ERROR_MSG);
+        }
+        if (super.getStatus() == statusToChangeTo){
+            throw new IllegalArgumentException(String.format(Constants.CANNOT_CHANGE_STATUS_ERR_MSG,
+                    Constants.BUG, super.getStatus()));
+        }
+        logChange(String.format(Constants.STATUS_CHANGED, Constants.BUG, super.getStatus(), statusToChangeTo));
+        setStatus(statusToChangeTo);
     }
 
     @Override
