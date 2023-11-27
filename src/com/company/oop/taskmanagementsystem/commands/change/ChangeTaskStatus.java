@@ -19,7 +19,7 @@ public class ChangeTaskStatus extends CommandImpl {
 
     @Override
     public String execute(List<String> parameters) {
-        ParsingHelpers.tryConcatinateEnum(parameters);
+        tryConcatinateEnum(parameters);
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         ValidationHelpers.validateIntIsNotNegative(Integer.parseInt(parameters.get(1)),
                 ValidationHelpers.NEGATIVE_NUMBER_ERR_MSG);
@@ -37,5 +37,18 @@ public class ChangeTaskStatus extends CommandImpl {
         getTaskManagementSystemRepository().findTaskById(taskId).changeStatus(statusToChangeTo);
 
         return String.format(Constants.STATUS_CHANGED_MSG, taskType, taskId, latestStatus, statusToChangeTo);
+    }
+
+    public static List<String> tryConcatinateEnum(List<String> parameters){
+        StringBuilder sb = new StringBuilder();
+        if (parameters.size() == 4){
+            sb.append(parameters.get(2)).append(" ").append(parameters.get(3));
+            parameters.remove(3);
+            parameters.remove(2);
+            parameters.add(sb.toString());
+            return parameters;
+        }
+
+        return parameters;
     }
 }
