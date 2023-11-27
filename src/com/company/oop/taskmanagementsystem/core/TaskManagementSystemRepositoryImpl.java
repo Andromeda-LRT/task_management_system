@@ -278,5 +278,41 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Bug> filterBugByAssignee(String target) {
+
+        return bugsList
+                .stream()
+                .filter(element -> element.getAssignee().getName().equals(target))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Story> filterStoryByAssignee(String target) {
+
+        return storiesList
+                .stream()
+                .filter(element -> element.getAssignee().getName().equals(target))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Bug> filterBugByStatus(String target) {
+
+        return bugsList
+                .stream()
+                .filter(element -> element.getStatus().toString().equalsIgnoreCase(target))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Story> filterStoryByStatus(String target) {
+
+        return storiesList
+                .stream()
+                .filter(element -> element.getStatus().toString().equalsIgnoreCase(target))
+                .collect(Collectors.toList());
+    }
+
 
 }
