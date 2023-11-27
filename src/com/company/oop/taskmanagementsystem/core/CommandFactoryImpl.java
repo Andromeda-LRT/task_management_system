@@ -8,9 +8,7 @@ import com.company.oop.taskmanagementsystem.commands.change.*;
 import com.company.oop.taskmanagementsystem.commands.contracts.Command;
 import com.company.oop.taskmanagementsystem.commands.create.*;
 import com.company.oop.taskmanagementsystem.commands.enums.CommandType;
-import com.company.oop.taskmanagementsystem.commands.filter.FilterTaskByStatusOrAndAssignee;
-import com.company.oop.taskmanagementsystem.commands.filter.FilterTaskWithAssigneeByStatusAndOrAssignee;
-import com.company.oop.taskmanagementsystem.commands.filter.FilterTasksByTitle;
+import com.company.oop.taskmanagementsystem.commands.filter.*;
 import com.company.oop.taskmanagementsystem.commands.list.*;
 import com.company.oop.taskmanagementsystem.commands.show.*;
 import com.company.oop.taskmanagementsystem.commands.sort.SortBugByFields;
@@ -81,6 +79,14 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListAllTasks(taskManagementSystemRepository);
             case FILTERTASKSBYTITLE:
                 return new FilterTasksByTitle(taskManagementSystemRepository);
+            case FILTERTASKSBYASSIGNEE:
+                return new FilterTasksByAssignee(taskManagementSystemRepository);
+            case FILTERTASKSBYSTATUS:
+                return new FilterTasksByStatus(taskManagementSystemRepository);
+            case FILTERTASKSBYSTATUSANDASSIGNEE:
+                return new FilterTasksByStatusAndAssignee(taskManagementSystemRepository);
+            case FILTERTASKSWITHASSIGNEEBYSTATUS:
+                return new FilterTasksWithAssigneeByStatus(taskManagementSystemRepository);
             case SORTTASKSBYTITLE:
                 return new SortTasksByTitle(taskManagementSystemRepository);
             case LISTALLBUGS:
@@ -89,10 +95,6 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListAllStories(taskManagementSystemRepository);
             case LISTALLFEEDBACK:
                 return new ListAllFeedback(taskManagementSystemRepository);
-            case FILTERTASKBYSTATUSORANDASSIGNEE:
-                return new FilterTaskByStatusOrAndAssignee(taskManagementSystemRepository);
-            case FILTERTASKWITHASSIGNEEBYSTATUSANDORASSIGNEE:
-                return new FilterTaskWithAssigneeByStatusAndOrAssignee(taskManagementSystemRepository);
             case LISTTASKSWITHASSIGNEE:
                 return new ListTasksWithAssignee(taskManagementSystemRepository);
             case LISTTASKWITHASSIGNEESORTEDBYTITLE:
