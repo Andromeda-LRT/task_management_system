@@ -117,13 +117,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public boolean teamExist(String teamName) {
-//        for (Team team : getTeams()) {
-//            if (team.getName().equalsIgnoreCase(teamName)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
+
        return getTeams()
                 .stream()
                 .anyMatch(team -> team.getName().equalsIgnoreCase(teamName));
@@ -131,12 +125,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public boolean memberExist(String memberName) {
-//        for (Member member : getMembers()) {
-//            if (member.getName().equalsIgnoreCase(memberName)) {
-//                return true;
-//            }
-//        }
-//        return false;
+
        return  getMembers()
                  .stream()
                  .anyMatch(member -> member.getName().equalsIgnoreCase(memberName));
@@ -144,13 +133,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Team findTeamByName(String teamName) {
-//        for (Team team : getTeams()) {
-//            if (team.getName().equalsIgnoreCase(teamName)) {
-//                return team;
-//            }
-//        }
-//
-//        throw new IllegalArgumentException(String.format(TEAM_DOES_NOT_EXIST, teamName));
 
       return getTeams()
                 .stream()
@@ -162,13 +144,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Member findMemberByName(String memberName) {
-//        for (Member member : getMembers()) {
-//            if (member.getName().equalsIgnoreCase(memberName)) {
-//                return member;
-//            }
-//        }
-//
-//        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXIST, memberName));
+
       return getMembers()
                 .stream()
                 .filter(member -> member.getName().equalsIgnoreCase(memberName))
@@ -178,12 +154,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Task findTaskById(int id) {
-//        for (Task task : tasks) {
-//            if (task.getId() == id) {
-//                return task;
-//            }
-//        }
-//        throw new IllegalArgumentException(String.format(TASK_DOES_NOT_EXIST, id));
+
         return tasks
                 .stream()
                 .filter(task -> task.getId() == id)
@@ -193,13 +164,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Board findBoardByName(String boardName) {
-//        for (Board board : getBoards()) {
-//            if (board.getName().equalsIgnoreCase(boardName)) {
-//                return board;
-//            }
-//        }
-//
-//        throw new IllegalArgumentException(String.format(BOARD_DOES_NOT_EXIST, boardName));
+
         return getBoards()
                 .stream()
                 .filter(board -> board.getName().equalsIgnoreCase(boardName))
@@ -209,12 +174,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Feedback findFeedbackById(int id) {
-//        for (Feedback feedbackLocal : feedbackList) {
-//            if (feedbackLocal.getId() == id) {
-//                return feedbackLocal;
-//            }
-//        }
-//        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_FEEDBACK);
+
       return feedbackList
                 .stream()
                 .filter(feedback -> feedback.getId() == id)
@@ -224,27 +184,18 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Story findStoryById(int id) {
-//        for (Story storyLocal : storiesList) {
-//            if (storyLocal.getId() == id){
-//                return storyLocal;
-//            }
-//        }
+
        return storiesList
                .stream()
                .filter(storyLocal -> storyLocal.getId() == id)
                .findAny()
                .orElseThrow(() -> new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY));
 
-        //throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
     }
 
     @Override
     public Bug findBugByID(int id) {
-//        for (Bug bugLocal : bugsList) {
-//            if (bugLocal.getId() == id)
-//                return bugLocal;
-//        }
-//        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_BUG);
+
        return bugsList
                 .stream()
                 .filter(bugLocal -> bugLocal.getId() == id)
