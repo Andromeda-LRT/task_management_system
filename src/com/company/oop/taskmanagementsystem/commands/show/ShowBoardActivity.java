@@ -36,5 +36,6 @@ public class ShowBoardActivity extends CommandImpl {
             }
         }
         throw new IllegalArgumentException(String.format(Constants.BOARD_NOT_FOUND_ERR_MSG, boardName, teamName));
+
     }
 }
