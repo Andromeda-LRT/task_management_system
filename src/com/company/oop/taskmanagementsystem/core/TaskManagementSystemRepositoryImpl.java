@@ -18,7 +18,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String MEMBER_DOES_NOT_EXIST = "Member %s does not exist!";
     private static final String BOARD_DOES_NOT_EXIST = "Board %s does not exist!";
     private static final String TASK_DOES_NOT_EXIST = "Task with id %d does not exist!";
-
     private int nextId;
     private final List<Member> members = new ArrayList<>();
     private final List<Team> teams = new ArrayList<>();
@@ -117,126 +116,139 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public boolean teamExist(String teamName) {
-        for (Team team : getTeams()) {
-            if (team.getName().equalsIgnoreCase(teamName)) {
-                return true;
-            }
-        }
-
-        return false;
+//        for (Team team : getTeams()) {
+//            if (team.getName().equalsIgnoreCase(teamName)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+       return getTeams()
+                .stream()
+                .anyMatch(team -> team.getName().equalsIgnoreCase(teamName));
     }
 
     @Override
     public boolean memberExist(String memberName) {
-        for (Member member : getMembers()) {
-            if (member.getName().equalsIgnoreCase(memberName)) {
-                return true;
-            }
-        }
-        return false;
+//        for (Member member : getMembers()) {
+//            if (member.getName().equalsIgnoreCase(memberName)) {
+//                return true;
+//            }
+//        }
+//        return false;
+       return  getMembers()
+                 .stream()
+                 .anyMatch(member -> member.getName().equalsIgnoreCase(memberName));
     }
 
     @Override
     public Team findTeamByName(String teamName) {
-        for (Team team : getTeams()) {
-            if (team.getName().equalsIgnoreCase(teamName)) {
-                return team;
-            }
-        }
+//        for (Team team : getTeams()) {
+//            if (team.getName().equalsIgnoreCase(teamName)) {
+//                return team;
+//            }
+//        }
+//
+//        throw new IllegalArgumentException(String.format(TEAM_DOES_NOT_EXIST, teamName));
 
-        throw new IllegalArgumentException(String.format(TEAM_DOES_NOT_EXIST, teamName));
+      return getTeams()
+                .stream()
+                .filter(team -> team.getName().equalsIgnoreCase(teamName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(TEAM_DOES_NOT_EXIST, teamName)));
+
     }
 
     @Override
     public Member findMemberByName(String memberName) {
-        for (Member member : getMembers()) {
-            if (member.getName().equalsIgnoreCase(memberName)) {
-                return member;
-            }
-        }
-
-        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXIST, memberName));
+//        for (Member member : getMembers()) {
+//            if (member.getName().equalsIgnoreCase(memberName)) {
+//                return member;
+//            }
+//        }
+//
+//        throw new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXIST, memberName));
+      return getMembers()
+                .stream()
+                .filter(member -> member.getName().equalsIgnoreCase(memberName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(MEMBER_DOES_NOT_EXIST, memberName)));
     }
 
     @Override
     public Task findTaskById(int id) {
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                return task;
-            }
-        }
-        throw new IllegalArgumentException(String.format(TASK_DOES_NOT_EXIST, id));
-
+//        for (Task task : tasks) {
+//            if (task.getId() == id) {
+//                return task;
+//            }
+//        }
+//        throw new IllegalArgumentException(String.format(TASK_DOES_NOT_EXIST, id));
+        return tasks
+                .stream()
+                .filter(task -> task.getId() == id)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(TASK_DOES_NOT_EXIST, id)));
     }
 
     @Override
     public Board findBoardByName(String boardName) {
-        for (Board board : getBoards()) {
-            if (board.getName().equalsIgnoreCase(boardName)) {
-                return board;
-            }
-        }
-
-        throw new IllegalArgumentException(String.format(BOARD_DOES_NOT_EXIST, boardName));
-    }
-
-    @Override
-    public List<Bug> findAllBugsInTasks() {
-        List<Bug> bugs = getTasks().stream()
-                .filter(task -> task instanceof Bug)
-                .map(task -> (Bug) task)
-                .collect(Collectors.toList());
-
-        return bugs;
-    }
-
-    @Override
-    public List<Story> findAllStoriesInTasks() {
-        List<Story> stories = tasks.stream()
-                .filter(task -> task instanceof Story)
-                .map(task -> (Story) task)
-                .collect(Collectors.toList());
-
-        return stories;
-    }
-
-    @Override
-    public List<Feedback> findAllFeedbackInTasks() {
-        List<Feedback> feedbackList = tasks.stream()
-                .filter(task -> task instanceof Feedback)
-                .map(task -> (Feedback) task)
-                .collect(Collectors.toList());
-
-        return feedbackList;
+//        for (Board board : getBoards()) {
+//            if (board.getName().equalsIgnoreCase(boardName)) {
+//                return board;
+//            }
+//        }
+//
+//        throw new IllegalArgumentException(String.format(BOARD_DOES_NOT_EXIST, boardName));
+        return getBoards()
+                .stream()
+                .filter(board -> board.getName().equalsIgnoreCase(boardName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(BOARD_DOES_NOT_EXIST, boardName)));
     }
 
     @Override
     public Feedback findFeedbackById(int id) {
-        for (Feedback feedbackLocal : feedbackList) {
-            if (feedbackLocal.getId() == id) {
-                return feedbackLocal;
-            }
-        }
-        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_FEEDBACK);
+//        for (Feedback feedbackLocal : feedbackList) {
+//            if (feedbackLocal.getId() == id) {
+//                return feedbackLocal;
+//            }
+//        }
+//        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_FEEDBACK);
+      return feedbackList
+                .stream()
+                .filter(feedback -> feedback.getId() == id)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_FEEDBACK));
     }
 
     @Override
     public Story findStoryById(int id) {
-        for (Story storyLocal : storiesList) {
-            if (storyLocal.getId() == id){
-                return storyLocal;
-            }
-        }
-        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
+//        for (Story storyLocal : storiesList) {
+//            if (storyLocal.getId() == id){
+//                return storyLocal;
+//            }
+//        }
+       return storiesList
+               .stream()
+               .filter(storyLocal -> storyLocal.getId() == id)
+               .findAny()
+               .orElseThrow(() -> new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY));
+
+        //throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_STORY);
     }
 
     @Override
     public Bug findBugByID(int id) {
-        for (Bug bugLocal : bugsList) {
-            if (bugLocal.getId() == id)
-                return bugLocal;
-        }
-        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_BUG);
+//        for (Bug bugLocal : bugsList) {
+//            if (bugLocal.getId() == id)
+//                return bugLocal;
+//        }
+//        throw new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_BUG);
+       return bugsList
+                .stream()
+                .filter(bugLocal -> bugLocal.getId() == id)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(Constants.ID_DOES_NOT_BELONG_TO_BUG));
     }
 
 
@@ -277,6 +289,5 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .filter(element -> element.getTitle().contains(target))
                 .collect(Collectors.toList());
     }
-
 
 }
