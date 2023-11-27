@@ -57,7 +57,10 @@ public interface TaskManagementSystemRepository {
     List<Task> listTasksWithAssigneeSortedByTitle();
 
     List<Task> filterTaskByTitle(String target);
-
+    List<Bug> filterBugByAssignee(String target);
+    List<Story> filterStoryByAssignee(String target);
+    List<Story> filterStoryByStatus(String target);
+    List<Bug> filterBugByStatus(String target);
     List<Bug> getBugs();
 
     List<Story> getStories();
@@ -67,4 +70,6 @@ public interface TaskManagementSystemRepository {
     Feedback findFeedbackById(int id);
     Story findStoryById(int id);
     Bug findBugByID(int id);
+
+
 }
