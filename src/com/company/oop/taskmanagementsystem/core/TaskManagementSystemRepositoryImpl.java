@@ -94,7 +94,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Member createMember(String name) {
-        ValidationHelpers.validateNameIsUniqueInMemberTeamBoard(name, members, teams, boards);
         Member member = new MemberImpl(name);
         members.add(member);
         return member;
@@ -109,7 +108,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Team createTeam(String name) {
-        ValidationHelpers.validateNameIsUniqueInMemberTeamBoard(name, members, teams, boards);
         Team team = new TeamImpl(name);
         teams.add(team);
         return team;
