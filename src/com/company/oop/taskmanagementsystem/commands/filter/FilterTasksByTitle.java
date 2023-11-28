@@ -34,9 +34,10 @@ public class FilterTasksByTitle extends CommandImpl {
         sb.append(String.format(FILTERED_TITLES, parameters.get(0))).append(System.lineSeparator());
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
-        for (Task filteredTask : tasksFilteredByTitle) {
-            sb.append(filteredTask.printMainInformation()).append(System.lineSeparator());
-        }
+        tasksFilteredByTitle
+                .stream()
+                .forEach(task -> sb.append(task.printMainInformation()).append(System.lineSeparator()));
+
         sb.append(Constants.LINE_DIVISOR).append(System.lineSeparator());
 
         return sb.toString();

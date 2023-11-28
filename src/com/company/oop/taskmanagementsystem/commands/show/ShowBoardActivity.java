@@ -9,6 +9,7 @@ import com.company.oop.taskmanagementsystem.models.contracts.Team;
 import com.company.oop.taskmanagementsystem.utils.ValidationHelpers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShowBoardActivity extends CommandImpl {
 
@@ -30,10 +31,13 @@ public class ShowBoardActivity extends CommandImpl {
 
     private String showBoardActivity(String teamName, String boardName){
 
-        for (Board boardLocal : getTaskManagementSystemRepository().findTeamByName(teamName).getBoards()) {
-            if (boardLocal.getName().equals(boardName)){
-                return boardLocal.showBoardActivity();
-            }
+        String result = getTaskManagementSystemRepository().findTeamByName(teamName).getBoards()
+                .stream()
+                .filter(board -> board.getName().equals(boardName))
+                .map(Board::showBoardActivity)
+                .collect(Collectors.joining());
+        if (!result.isEmpty()){
+            return result;
         }
         throw new IllegalArgumentException(String.format(Constants.BOARD_NOT_FOUND_ERR_MSG, boardName, teamName));
 
