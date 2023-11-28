@@ -35,8 +35,9 @@ public class SortFeedbackByFields extends CommandImpl {
                 return sortFeedbacksByTitle(sb, parameters.get(0), feedbacks);
             case"RATING":
                 return sortFeedbacksByRating(sb, parameters.get(0), feedbacks);
+            default:
+                throw new IllegalArgumentException(String.format(INVALID_SORT_OPERATION, parameters.get(0)));
         }
-        throw new IllegalArgumentException(String.format(INVALID_SORT_OPERATION, parameters.get(0)));
     }
 
     private String sortFeedbacksByTitle(StringBuilder sb, String sortOperation, List<Feedback> feedbacks){

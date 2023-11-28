@@ -37,8 +37,9 @@ public class SortBugByFields extends CommandImpl {
                 return sortBugsByPriority(sb, parameters.get(0), bugs);
             case "SEVERITY":
                 return sortBugsBySeverity(sb, parameters.get(0), bugs);
+            default:
+                throw new IllegalArgumentException(String.format(INVALID_SORT_OPERATION, parameters.get(0)));
         }
-        throw new IllegalArgumentException(String.format(INVALID_SORT_OPERATION, parameters.get(0)));
     }
 
     private String sortBugsByTitle(StringBuilder sb, String sortOperation, List<Bug> bugs){

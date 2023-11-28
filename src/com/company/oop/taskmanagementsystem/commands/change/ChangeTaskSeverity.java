@@ -38,7 +38,8 @@ public class ChangeTaskSeverity extends CommandImpl {
                 Severity latestBugSeverity = getTaskManagementSystemRepository().findBugByID(taskId)
                         .getSeverity();
                 getTaskManagementSystemRepository().findBugByID(taskId).changeSeverity(severityToChangeTo);
-                return String.format(Constants.SEVERITY_CHANGED, taskType, taskId, latestBugSeverity, severityToChangeTo);
+                return String.format
+                        (Constants.SEVERITY_CHANGED, taskType, taskId, latestBugSeverity, severityToChangeTo);
             default:
                 throw new IllegalArgumentException(Constants.INVALID_TASK_TYPE_FOR_SEVERITY);
         }

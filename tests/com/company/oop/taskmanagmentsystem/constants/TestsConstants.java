@@ -34,4 +34,8 @@ public class TestsConstants {
     public static final String FEEDBACK_SORTED_BY_GIVEN_PARAMETER = "---FEEDBACK SORTED BY %S---";
     public static final String STORY_SORTED_BY_GIVEN_PARAMETER = "---STORY SORTED BY %S---";
     public static final String VALID_TEAM_NAME_2 = "TestTeam2";
+    public static final String TEST_NAME_FOR_OBJECT_CREATION = "xxxxxxxxxx";
+    public static final int VALID_ID_2 = 2;
+    public static final int VALID_ID_3 = 3;
+    public static final int VALID_ID_4 = 4;
 }

@@ -39,8 +39,9 @@ public class SortStoryByFields extends CommandImpl {
                 return sortStoriesByPriority(sb, parameters.get(0), stories);
             case "SIZE":
                 return sortStoriesBySize(sb, parameters.get(0), stories);
+            default:
+                throw new IllegalArgumentException(String.format(INVALID_SORT_OPERATION, parameters.get(0)));
         }
-        throw new IllegalArgumentException(String.format(INVALID_SORT_OPERATION, parameters.get(0)));
     }
 
     private String sortStoriesByTitle(StringBuilder sb, String sortOperation, List<Story> stories){

@@ -3,6 +3,7 @@ package com.company.oop.taskmanagmentsystem.core;
 import com.company.oop.taskmanagementsystem.commands.assignAndUnassign.AssignTaskToMember;
 import com.company.oop.taskmanagementsystem.core.TaskManagementSystemRepositoryImpl;
 import com.company.oop.taskmanagementsystem.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.taskmanagementsystem.models.*;
 import com.company.oop.taskmanagementsystem.models.contracts.*;
 import com.company.oop.taskmanagmentsystem.constants.TestsConstants;
 import org.junit.jupiter.api.Assertions;
@@ -28,14 +29,17 @@ public class TaskManagementSystemRepositoryTests {
     public void setUp() {
         repository = new TaskManagementSystemRepositoryImpl();
         parameters = new ArrayList<>();
+        // bug is with ID 1
         bug = repository.createBug(TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
                 TestsConstants.STEPS_TO_REPRODUCE,
                 TestsConstants.VALID_PRIORITY,
                 TestsConstants.VALID_SEVERITY);
+        // story is with ID 2
         story = repository.createStory(TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION, TestsConstants.TEST_PRIORITY,
                 TestsConstants.TEST_SIZE);
+        // feedback is with ID 3
         feedback = repository.createFeedback(TestsConstants.VALID_TITLE,
                 TestsConstants.VALID_DESCRIPTION,
                 TestsConstants.VALID_RATING);
@@ -85,6 +89,141 @@ public class TaskManagementSystemRepositoryTests {
     @Test
     public void teamExist_Should_ReturnFalse_WhenTeamDoesNotExist() {
         Assertions.assertFalse(repository.teamExist(INVALID_NAME));
+    }
+
+    @Test
+    public void memberExist_Should_ReturnTrue_WhenMemberExists(){
+        Assertions.assertTrue(repository.memberExist(TestsConstants.VALID_MEMBER_NAME));
+    }
+    @Test
+    public void memberExist_Should_ReturnFalse_WhenMemberDoesNotExist(){
+        Assertions.assertFalse(repository.memberExist(INVALID_NAME));
+    }
+
+    @Test
+    public void findTeamByName_Should_ReturnTeam_When_ArgumentsValid(){
+        Team expectedTeam = new TeamImpl(TestsConstants.TEST_NAME_FOR_OBJECT_CREATION);
+        for (Team teamLocal : repository.getTeams()) {
+            if (teamLocal.getName().equalsIgnoreCase(TestsConstants.VALID_TEAM_NAME)){
+                expectedTeam = teamLocal;
+            }
+        }
+                Assertions.assertEquals(expectedTeam, repository.findTeamByName(TestsConstants
+                        .VALID_TEAM_NAME));
+    }
+    @Test
+    public void findTeamByName_Should_Throw_Exception_When_TeamDoesNotExist(){
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> repository.findTeamByName(INVALID_NAME));
+    }
+
+    @Test
+    public void findMemberByName_Should_ReturnMember_When_ArgumentsValid(){
+        Member expectedMember = new MemberImpl(TestsConstants.TEST_NAME_FOR_OBJECT_CREATION);
+        for (Member memberLocal : repository.getMembers()) {
+            if (memberLocal.getName().equalsIgnoreCase(TestsConstants.VALID_MEMBER_NAME)){
+                expectedMember = memberLocal;
+            }
+        }
+        Assertions.assertEquals(expectedMember, repository.findMemberByName(TestsConstants
+                .VALID_MEMBER_NAME));
+    }
+
+    @Test
+    public void findMemberByName_Should_Throw_Exception_When_MemberDoesNotExist(){
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> repository.findMemberByName(INVALID_NAME));
+    }
+    @Test
+    public void findTaskById_Should_ReturnTask_When_ArgumentsValid(){
+        Task expectedTask = new FeedbackImpl(TestsConstants.VALID_ID_4, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.VALID_RATING);
+        for (Task taskLocal : repository.getTasks()) {
+            if (taskLocal.getId() == TestsConstants.VALID_ID_3){
+                expectedTask = taskLocal;
+            }
+        }
+        Assertions.assertEquals(expectedTask, repository.findTaskById(TestsConstants.VALID_ID_3));
+    }
+    @Test
+    public void findTaskById_Should_ThrowException_When_TaskDoesNotExist(){
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> repository.findTaskById(TestsConstants.VALID_ID_4));
+    }
+    @Test
+    public void findBoardByName_Should_ReturnBoard_When_ArgumentsValid(){
+        Board expectedBoard = new BoardImpl(TestsConstants.TEST_NAME_FOR_OBJECT_CREATION);
+        for (Board boardLocal : repository.getBoards()) {
+            if (boardLocal.getName().equalsIgnoreCase(TestsConstants.VALID_BOARD_NAME)){
+                expectedBoard = boardLocal;
+            }
+        }
+        Assertions.assertEquals(expectedBoard, repository.findBoardByName(TestsConstants
+                .VALID_BOARD_NAME));
+    }
+    @Test
+    public void findBoardByName_Should_ThrowException_When_BoardDoesNotExist(){
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> repository.findBoardByName(INVALID_NAME));
+    }
+
+    @Test
+    public void findFeedbackById_Should_ReturnFeedback_When_ArgumentsValid(){
+        Feedback expectedFeedback = new FeedbackImpl(TestsConstants.VALID_ID_4, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.VALID_RATING);
+
+        for (Feedback feedbackLocal : repository.getFeedback()) {
+            if (feedbackLocal.getId() == TestsConstants.VALID_ID_3){
+                expectedFeedback = feedbackLocal;
+            }
+        }
+        Assertions.assertEquals(expectedFeedback, repository
+                .findFeedbackById(TestsConstants.VALID_ID_3));
+    }
+
+    @Test
+    public void findFeedbackById_Should_ThrowException_WhenIdDoesNotBelongToFeedback(){
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> repository.findFeedbackById(TestsConstants.VALID_ID_2));
+    }
+
+    @Test
+    public void findStoryById_Should_ReturnStory_When_ArgumentsValid(){
+        Story expectedStory = new StoryImpl(TestsConstants.VALID_ID_4, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.TEST_PRIORITY,
+                TestsConstants.TEST_SIZE);
+
+        for (Story storyLocal : repository.getStories()) {
+            if (storyLocal.getId() == TestsConstants.VALID_ID_2){
+                expectedStory = storyLocal;
+            }
+        }
+        Assertions.assertEquals(expectedStory, repository.findStoryById(TestsConstants.VALID_ID_2));
+    }
+
+    @Test
+    public void findStoryById_Should_ThrowException_WhenIdDoesNotBelongToStory(){
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> repository.findStoryById(TestsConstants.VALID_ID));
+    }
+
+    @Test
+    public void findBugById_Should_ReturnBug_When_ArgumentsValid(){
+        Bug expectedBug = new BugImpl(TestsConstants.VALID_ID_4, TestsConstants.VALID_TITLE,
+                TestsConstants.VALID_DESCRIPTION, TestsConstants.STEPS_TO_REPRODUCE,
+                TestsConstants.TEST_PRIORITY, TestsConstants.VALID_SEVERITY);
+
+        for (Bug bugLocal : repository.getBugs()) {
+            if (bugLocal.getId() == TestsConstants.VALID_ID){
+                expectedBug = bugLocal;
+            }
+        }
+        Assertions.assertEquals(expectedBug, repository.findBugByID(TestsConstants.VALID_ID));
+    }
+    @Test
+    public void findBugById_Should_ThrowException_WhenIdDoesNotBelongToBug(){
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> repository.findBugByID(TestsConstants.VALID_ID_2));
     }
 
     @Test
